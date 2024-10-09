@@ -1,0 +1,164 @@
+/* Container Styling */
+.all-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+  background-image: url('../images/pexels-molnartamasphotography-25635758.webp');
+  background-size: cover; 
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-bottom: -60px;
+}
+
+.login-section {
+  width: 100%;
+  max-width: 600px;
+  background-color: #fff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 2rem;
+  transition: transform 0.3s ease;
+}
+
+
+/* Form Container */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+h1 {
+  text-align: center;
+  color: #457B9D;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Input Styles */
+.inputbox {
+  position: relative;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.inputbox input {
+  width: 100%; 
+  padding: 15px; 
+  padding-left: 50px;
+  font-size: 1.1rem;
+  color: #333;
+  border: 2px solid #457B9D;
+  border-radius: 5px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.inputbox input:focus {
+  border-color: #1d3557;
+}
+
+.inputbox ion-icon {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  color: #457B9D;
+  font-size: 1.2rem;
+}
+
+.inputbox label {
+  position: absolute;
+  top: -10px;
+  left: 50px;
+  background-color: #fff;
+  padding: 0 5px;
+  color: #457B9D;
+  font-size: 0.85rem;
+}
+
+/* Buttons */
+.button-container {
+  margin-top: 1.5rem ;
+  width: 100% ; 
+}
+
+#theloginbtn {
+  width: 100% !important;  
+  padding: 15px !important;  
+  border: none !important;
+  border-radius: 5px !important;
+  background-color: #457B9D !important ;
+  color: white !important;
+  font-size: 1.2rem !important;
+  cursor: pointer !important;
+  transition: background-color 0.3s ease !important;
+}
+
+#theloginbtn:hover {
+  background-color: #1d3557 !important;
+}
+
+button {
+  width: 100% ;  
+  padding: 15px ;  
+  border: none ;
+  border-radius: 5px ;
+  background-color: #457B9D ;
+  color: white ;
+  font-size: 1.2rem ;
+  cursor: pointer ;
+  transition: background-color 0.3s ease ;
+}
+
+button:hover {
+  background-color: #1d3557 ;
+}
+
+.home-button {
+  background-color: #a8dadc;
+  margin-top: 10px;
+}
+
+.home-button:hover {
+  background-color: #457B9D;
+  color: #fff;
+}
+
+/* Links */
+.forget {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  color: #457B9D;
+}
+
+.forget a {
+  color: #1d3557;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.forget a:hover {
+  color: #457B9D;
+}
+
+/* Register */
+.register {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.register a {
+  color: #1d3557;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.register a:hover {
+  color: #457B9D;
+}

@@ -1,0 +1,101 @@
+.Vehicles-header {
+    display: flex;
+    align-items: center;
+    padding: 30px 20px;
+}
+
+.Vehicles-title {
+    font-size: 2.5rem;
+    color: #96c9ab;
+    font-weight: 600;
+    margin: 0;
+    text-align: left;
+}
+
+#car-animation {
+    margin-left: 10px;
+    width: 120px;
+}
+
+.Vehicles-filters {
+    display: flex;
+    gap: 15px;
+    margin-left: auto;
+}
+
+.Vehicles-search {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 300px;
+    font-size: 1rem;
+}
+
+.Vehicles-filter {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+
+/* grid */
+.Vehicles-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; 
+    padding: 20px;
+    padding-top: 40px; 
+  }
+  
+  .Vehicles-card {
+    flex-basis: calc(25% - 20px); 
+    max-width: 100%; 
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+  }
+  
+  
+  .Vehicles-card-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .Vehicles-card-image:hover {
+    transform: scale(1.1);
+  }
+  
+  .Vehicles-card-content {
+    padding: 15px;
+    padding-top: 40px; 
+    text-align: center;
+  }
+  
+  .Vehicles-card-content h3 {
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  .Vehicles-card-content p {
+    font-size: 1rem;
+    color: #666;
+    margin-top: 10px;
+  }
+  
+  /* Responsive Design for Smaller Screens */
+  @media (max-width: 1024px) {
+    .Vehicles-card {
+      flex-basis: calc(50% - 20px); /* 2 cards per row */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .Vehicles-card {
+      flex-basis: 100%; /* 1 card per row */
+    }
+  }
+  

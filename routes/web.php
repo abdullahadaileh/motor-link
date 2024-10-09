@@ -1,0 +1,105 @@
+<?php
+
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('landingpage.landing');
+});
+
+
+// Landing Page Routs
+
+Route::get('/motor-link', function () {
+    return view('landingpage.landing');
+})->name('motor-link');
+
+Route::get('/motor-link-about', function () {
+    return view('landingpage.pages.about');
+})->name('motor-link-about');
+
+Route::get('/motor-link-contact', function () {
+    return view('landingpage.pages.contactUs');
+})->name('motor-link-contact');
+
+Route::get('/motor-link-vehicles', function () {
+    return view('landingpage.pages.vehicles');
+})->name('motor-link-vehicles');
+
+
+// Dashboard Page Routs
+
+
+Route::get('/motor-link-dashboard', function () {
+    return view('dashboard.dashboard');
+})->name('motor-link-dashboard');
+
+
+
+// user controller
+
+Route::get('/motor-link-dashboard-addUser', function () {
+    return view('dashboard.pages.addUser');
+})->name('motor-link-dashboard-addUser');
+
+
+Route::get('/motor-link-dashboard-editUser', function () {
+    return view('dashboard.pages.editUser');
+})->name('motor-link-dashboard-editUser');
+
+
+
+Route::get('/motor-link-dashboard-users', function () {
+    return view('dashboard.pages.users');
+})->name('motor-link-dashboard-users');
+
+
+
+Route::get('/motor-link-dashboard-users', [UserController::class, 'index'])->name('motor-link-dashboard-users');
+
+Route::get('users/create', [UserController::class, 'create'])->name('users.create');
+
+Route::post('users', [UserController::class, 'store'])->name('users.store');
+
+Route::get('users/{id}/edit', [UserController::class, 'edit'])->name('motor-link-dashboard-editUser');
+
+Route::put('users/{id}', [UserController::class, 'update'])->name('users.update');
+
+Route::delete('users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+
+Route::get('users/trashed', [UserController::class, 'trashed'])->name('users.trashed');
+
+Route::patch('users/{id}/restore', [UserController::class, 'restore'])->name('users.restore');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/motor-link');
+})->name('logout');
+
+Auth::routes();
+
