@@ -79,5 +79,16 @@
         </div>
     </div>
     <!-- #/ container -->
+    <script>
+                @if(session('success'))
+            Swal.fire({
+                title: 'Success!',
+                text: '{{ session('success') }}',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        @endif
+
+    </script>
 
 @endsection

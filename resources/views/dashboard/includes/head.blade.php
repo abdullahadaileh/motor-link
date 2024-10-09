@@ -16,21 +16,23 @@
     <!-- Custom Stylesheet -->
     <link rel="stylesheet" href="{{ asset('dashboard/css/style.css') }}">
     <link href="{{asset('dashboard/plugins/tables/css/datatable/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
-    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
+    <!-- SweetAlert JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 </head>
 
 <body>
-    <div id="preloader">
+    {{-- <div id="preloader">
         <div class="loader">
             <svg class="circular" viewBox="25 25 50 50">
                 <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
             </svg>
         </div>
-    </div>
+    </div> --}}
 
     <div id="main-wrapper">
 

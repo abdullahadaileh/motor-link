@@ -53,18 +53,13 @@ Route::get('/motor-link-dashboard-addUser', function () {
     return view('dashboard.pages.addUser');
 })->name('motor-link-dashboard-addUser');
 
-
 Route::get('/motor-link-dashboard-editUser', function () {
     return view('dashboard.pages.editUser');
 })->name('motor-link-dashboard-editUser');
 
-
-
 Route::get('/motor-link-dashboard-users', function () {
     return view('dashboard.pages.users');
 })->name('motor-link-dashboard-users');
-
-
 
 Route::get('/motor-link-dashboard-users', [UserController::class, 'index'])->name('motor-link-dashboard-users');
 

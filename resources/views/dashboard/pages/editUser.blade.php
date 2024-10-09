@@ -18,7 +18,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Edit User</h4>
 
-                        <form action="{{ route('users.update', $user->id) }}" method="POST">
+                        <form id="editUserForm" action="{{ route('users.update', $user->id) }}" method="POST">
                             @csrf
                             @method('PUT') 
                             <div class="form-group">
@@ -36,11 +36,40 @@
                                 <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ old('phone_number', $user->phone_number) }}">
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Update User</button>
+                            <!-- Button to trigger SweetAlert -->
+                            <button type="button" class="btn btn-primary" id="confirmEdit">
+                                Update User
+                            </button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- SweetAlert2 script -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- JavaScript for SweetAlert confirmation -->
+    <script>
+        document.getElementById('confirmEdit').addEventListener('click', function() {
+            // Trigger SweetAlert confirmation
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You are about to update this user's details.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, update it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Submit the form if confirmed
+                    document.getElementById('editUserForm').submit();
+                }
+            });
+        });
+
+        // Check if there's a success message in the session and show SweetAlert
+    </script>
 @endsection

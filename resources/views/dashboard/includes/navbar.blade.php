@@ -1,7 +1,7 @@
 
 <div class="nav-header">
             <div class="brand-logo">
-                <a href="index.html">
+                <a href="{{ route('motor-link-dashboard') }}">
                     <b class="logo-abbr"><img src="{{asset('landing/assets/images/icons/whiteLogo.png')}}" alt="logo"> </b>
                     <span class="logo-compact"><img src="{{ asset('landing/assets/images/motorlink-high-resolution-logo-transparent (1).png') }}" alt=""></span>
                     <span class="brand-title">
@@ -50,7 +50,7 @@
                                     <ul>
                                         <li class="notification-unread">
                                             <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="dashboard/images/avatar/1.jpg" alt="">
+                                                <img class="float-left mr-3 avatar-img" src="{{asset('dashboard/images/avatar/1.jpg')}}" alt="">
                                                 <div class="notification-content">
                                                     <div class="notification-heading">Saiful Islam</div>
                                                     <div class="notification-timestamp">08 Hours ago</div>
@@ -60,7 +60,7 @@
                                         </li>
                                         <li class="notification-unread">
                                             <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="dashboard/images/avatar/2.jpg" alt="">
+                                                <img class="float-left mr-3 avatar-img" src="{{asset('dashboard/images/avatar/1.jpg')}}" alt="">
                                                 <div class="notification-content">
                                                     <div class="notification-heading">Adam Smith</div>
                                                     <div class="notification-timestamp">08 Hours ago</div>
@@ -70,7 +70,7 @@
                                         </li>
                                         <li>
                                             <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="dashboard/images/avatar/3.jpg" alt="">
+                                                <img class="float-left mr-3 avatar-img" src="{{asset('dashboard/images/avatar/1.jpg')}}" alt="">
                                                 <div class="notification-content">
                                                     <div class="notification-heading">Barak Obama</div>
                                                     <div class="notification-timestamp">08 Hours ago</div>
@@ -80,7 +80,7 @@
                                         </li>
                                         <li>
                                             <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="dashboard/images/avatar/4.jpg" alt="">
+                                                <img class="float-left mr-3 avatar-img" src="{{asset('dashboard/images/avatar/1.jpg')}}" alt="">
                                                 <div class="notification-content">
                                                     <div class="notification-heading">Hilari Clinton</div>
                                                     <div class="notification-timestamp">08 Hours ago</div>
@@ -163,13 +163,13 @@
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
                                 <span class="activity active"></span>
-                                <img src="dashboard/images/user/1.png" height="40" width="40" alt="">
+                                <img src="{{asset('dashboard/images/user/1.png')}}" height="40" width="40" alt="">
                             </div>
                             <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
                                 <div class="dropdown-content-body">
                                     <ul>
                                         <li>
-                                            <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
+                                            <a href="#"><i class="icon-user"></i> <span>Profile</span></a>
                                         </li>
                                         <li>
                                             <a href="javascript:void()">
