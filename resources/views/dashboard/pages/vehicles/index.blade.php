@@ -16,8 +16,10 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
+                    <div class="d-flex justify-content-between">
                     <h4 class="card-title">Vehicles List</h4>
-                    <a href="{{ route('motor-link-dashboard-vehicles-create') }}" class="btn btn-primary mb-3">Add New Vehicle</a>
+                    <a style="background-color: #457B9D;" href="{{ route('motor-link-dashboard-vehicles-create') }}" class="btn btn-primary mt-3">Add New Vehicle</a>
+                </div>
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered zero-configuration">
                             <thead>
@@ -27,7 +29,7 @@
                                     <th>Model</th>
                                     <th>Year</th>
                                     <th>Type</th>
-                                    <th>Actions</th>
+                                    <th style="width: 23%;">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -17,7 +17,10 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Users List</h4>
+                        <div class="d-flex justify-content-between">
+                        <h4 class="card-title">Users List</h4>                        
+                        <a style="background-color: #457B9D;" href="{{ route('motor-link-dashboard-addUser') }}" class="btn btn-primary">Add User</a> 
+                        </div>
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered zero-configuration">
                                 <thead>
@@ -26,7 +29,7 @@
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Phone Number</th>
-                                        <th>Actions</th>
+                                        <th style="width: 17%;">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -54,7 +57,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <a href="{{ route('motor-link-dashboard-addUser') }}" class="btn btn-primary">Add User</a> 
+                        {{-- <a href="{{ route('motor-link-dashboard-addUser') }}" class="btn btn-primary">Add User</a>  --}}
                     </div>
                 </div>
             </div>

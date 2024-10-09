@@ -50,8 +50,7 @@
                                     <input type="password" name="password_confirmation" class="form-control input-default" placeholder="Confirm password" required>
                                 </div>
 
-                                <!-- Trigger SweetAlert for confirmation -->
-                                <button type="button" class="btn btn-primary" id="addUserButton">
+                                <button style="background-color: #457B9D;" type="button" class="btn btn-primary" id="addUserButton">
                                     Add User
                                 </button>
                             </form>
