@@ -12,13 +12,29 @@
         <select class="Vehicles-filter">
             <option value="all">All</option>
             <option value="Economical car">Economical car</option>
-            <option value="jeep car">jeep car</option>
+            <option value="Jeep car">Jeep car</option>
             <option value="Luxury car">Luxury car</option>
-            <option value="Pickup Turk">Pickup Turk</option>
-            <option value="sport car">sport car</option>
+            <option value="Pickup Truck">Pickup Truck</option>
+            <option value="Sport car">Sport car</option>
+            <option value="Sedan">Sedan</option>
+            <option value="Hatchback">Hatchback</option>
+            <option value="Coupe">Coupe</option>
+            <option value="Convertible">Convertible</option>
+            <option value="Station Wagon">Station Wagon</option>
+            <option value="Minivan">Minivan</option>
+            <option value="SUV">SUV</option>
+            <option value="Crossover">Crossover</option>
+            <option value="MPV">MPV</option>
+            <option value="Van">Van</option>
+            <option value="Compact car">Compact car</option>
+            <option value="Luxury SUV">Luxury SUV</option>
+            <option value="Off-road vehicle">Off-road vehicle</option>
+            <option value="Electric car">Electric car</option>
+            <option value="Hybrid car">Hybrid car</option>
+            <option value="Microcar">Microcar</option>
         </select>
     </div>
-</div>
+    </div>
 
 {{-- grid --}}
 <div class="Vehicles-container">

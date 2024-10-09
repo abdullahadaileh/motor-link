@@ -23,12 +23,43 @@
                         <!-- Form to add vehicle -->
                         <form id="addVehicleForm" method="POST" action="{{ route('motor-link-dashboard-vehicles-store') }}">
                             @csrf <!-- CSRF Token for form security -->
-
-                            <div class="form-group">
-                                <label for="make">Make</label>
-                                <input type="text" name="make" class="form-control input-default" placeholder="Enter vehicle make" required>
+                            @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
                             </div>
-
+                        @endif
+                        <div class="form-group">
+                            <label for="make">Make</label>
+                            <select name="make" class="form-control input-default" required>
+                                <option value="">Select vehicle make</option>
+                                <option value="Toyota">Toyota</option>
+                                <option value="Honda">Honda</option>
+                                <option value="Nissan">Nissan</option>
+                                <option value="Kia">Kia</option>
+                                <option value="Hyundai">Hyundai</option>
+                                <option value="Ford">Ford</option>
+                                <option value="Chevrolet">Chevrolet</option>
+                                <option value="Mitsubishi">Mitsubishi</option>
+                                <option value="Subaru">Subaru</option>
+                                <option value="Mazda">Mazda</option>
+                                <option value="Volkswagen">Volkswagen</option>
+                                <option value="Renault">Renault</option>
+                                <option value="Peugeot">Peugeot</option>
+                                <option value="Mercedes-Benz">Mercedes-Benz</option>
+                                <option value="BMW">BMW</option>
+                                <option value="Land Rover">Land Rover</option>
+                                <option value="Dodge">Dodge</option>
+                                <option value="Jeep">Jeep</option>
+                                <option value="Lexus">Lexus</option>
+                                <option value="Chrysler">Chrysler</option>
+                                <option value="Buick">Buick</option>
+                            </select>
+                        </div>
+                        
                             <div class="form-group">
                                 <label for="model">Model</label>
                                 <input type="text" name="model" class="form-control input-default" placeholder="Enter vehicle model" required>
@@ -36,14 +67,45 @@
 
                             <div class="form-group">
                                 <label for="year">Year</label>
-                                <input type="number" name="year" class="form-control input-default" placeholder="Enter vehicle year" required>
+                                <select name="year" class="form-control input-default" required>
+                                    <option value="">Select year</option>
+                                    <?php
+                                    $currentYear = date("Y");
+                                    for ($year = 1980; $year <= $currentYear; $year++) {
+                                        echo "<option value=\"$year\">$year</option>";
+                                    }
+                                    ?>
+                                </select>
                             </div>
-
+                            
                             <div class="form-group">
                                 <label for="type">Type</label>
-                                <input type="text" name="type" class="form-control input-default" placeholder="Enter vehicle type" required>
+                                <select name="type" class="form-control input-default" required>
+                                    <option value="">Select vehicle type</option>
+                                    <option value="Economical car">Economical car</option>
+                                    <option value="Jeep car">Jeep car</option>
+                                    <option value="Luxury car">Luxury car</option>
+                                    <option value="Pickup Truck">Pickup Truck</option>
+                                    <option value="Sport car">Sport car</option>
+                                    <option value="Sedan">Sedan</option>
+                                    <option value="Hatchback">Hatchback</option>
+                                    <option value="Coupe">Coupe</option>
+                                    <option value="Convertible">Convertible</option>
+                                    <option value="Station Wagon">Station Wagon</option>
+                                    <option value="Minivan">Minivan</option>
+                                    <option value="SUV">SUV</option>
+                                    <option value="Crossover">Crossover</option>
+                                    <option value="MPV">MPV</option>
+                                    <option value="Van">Van</option>
+                                    <option value="Compact car">Compact car</option>
+                                    <option value="Luxury SUV">Luxury SUV</option>
+                                    <option value="Off-road vehicle">Off-road vehicle</option>
+                                    <option value="Electric car">Electric car</option>
+                                    <option value="Hybrid car">Hybrid car</option>
+                                    <option value="Microcar">Microcar</option>
+                                </select>
                             </div>
-
+                                                        
                             <div class="form-group">
                                 <label for="price_per_day">Price Per Day</label>
                                 <input type="number" name="price_per_day" class="form-control input-default" placeholder="Enter price per day" required>
@@ -51,9 +113,17 @@
 
                             <div class="form-group">
                                 <label for="fuel_type">Fuel Type</label>
-                                <input type="text" name="fuel_type" class="form-control input-default" placeholder="Enter fuel type" required>
+                                <select name="fuel_type" class="form-control input-default" required>
+                                    <option value="" disabled selected>Select fuel type</option>
+                                    <option value="Petrol">Petrol</option>
+                                    <option value="Diesel">Diesel</option>
+                                    <option value="Electric">Electric</option>
+                                    <option value="Hybrid">Hybrid</option>
+                                    <option value="CNG">CNG</option>
+                                    <option value="LPG">LPG</option>
+                                </select>
                             </div>
-
+                            
                             <div class="form-group">
                                 <label for="status">Status</label>
                                 <input type="text" name="status" class="form-control input-default" placeholder="Enter vehicle status" required>
