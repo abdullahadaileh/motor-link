@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VehicleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -81,6 +82,17 @@ Route::patch('users/{id}/restore', [UserController::class, 'restore'])->name('us
 
 
 
+
+
+
+Route::get('motor-link-dashboard-vehicles', [VehicleController::class, 'index'])->name('motor-link-dashboard-vehicles-index');
+
+Route::get('motor-link-dashboard-vehicles/create', [VehicleController::class, 'create'])->name('motor-link-dashboard-vehicles-create');
+Route::post('motor-link-dashboard-vehicles', [VehicleController::class, 'store'])->name('motor-link-dashboard-vehicles-store');
+Route::get('motor-link-dashboard-vehicles/{vehicle}', [VehicleController::class, 'show'])->name('motor-link-dashboard-vehicles-show');
+Route::get('motor-link-dashboard-vehicles/{vehicle}/edit', [VehicleController::class, 'edit'])->name('motor-link-dashboard-vehicles-edit');
+Route::put('motor-link-dashboard-vehicles/{vehicle}', [VehicleController::class, 'update'])->name('motor-link-dashboard-vehicles-update');
+Route::delete('motor-link-dashboard-vehicles/{vehicle}', [VehicleController::class, 'destroy'])->name('motor-link-dashboard-vehicles-destroy');
 
 
 

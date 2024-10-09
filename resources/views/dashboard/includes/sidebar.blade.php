@@ -29,6 +29,15 @@
                             <li><a href="{{ route('motor-link-dashboard-users') }}" aria-expanded="false">Users</a></li>
                         </ul>
                     </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-note menu-icon"></i><span class="nav-text">Vehicles</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{ route('motor-link-dashboard-vehicles-create') }}">Add vehicles</a></li>
+                            <li><a href="{{ route('motor-link-dashboard-vehicles-index') }}" aria-expanded="false">Vehicles</a></li>
+                        </ul>
+                    </li>
 
                     <li class="nav-label">Table</li>
                     <li>
