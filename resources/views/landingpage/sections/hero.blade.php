@@ -3,7 +3,7 @@
       <div class="moto-hero-content">
         <h1>Welcome to MotorLink</h1>
         <p>MotorLink simplifies vehicle rentals with easy booking, flexible options, and 24/7 support.</p>
-        <a href="#" class="moto-cta-btn">Book Now</a>
+        <a href="{{route('motor-link-vehicles')}}" class="moto-cta-btn">Book Now</a>
       </div>
       <!-- Selection bar inside hero section -->
       <div class="selection-bar">
