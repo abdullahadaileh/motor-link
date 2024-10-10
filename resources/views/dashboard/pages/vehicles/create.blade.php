@@ -130,8 +130,11 @@
                             </div>
 
                             <!-- Trigger SweetAlert for confirmation -->
-                            <button type="button" class="btn btn-primary" id="addVehicleButton">
+                            <button style="background-color: #457B9D; border:none" type="button" class="btn btn-primary" id="addVehicleButton">
                                 Add Vehicle
+                            </button>
+                            <button style="background-color: #8FBBA1; border:none" href="{{ route('motor-link-dashboard-vehicles-index') }}" type="button" class="btn btn-primary" id="addVehicleButton">
+                                Back
                             </button>
                         </form>
                     </div>

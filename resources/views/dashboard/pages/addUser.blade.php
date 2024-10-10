@@ -50,7 +50,7 @@
                                     <input type="password" name="password_confirmation" class="form-control input-default" placeholder="Confirm password" required>
                                 </div>
 
-                                <button style="background-color: #457B9D;" type="button" class="btn btn-primary" id="addUserButton">
+                                <button style="background-color: #457B9D;border:none" type="button" class="btn btn-primary" id="addUserButton">
                                     Add User
                                 </button>
                             </form>
@@ -64,7 +64,7 @@
     <!-- JavaScript to handle SweetAlert confirmation -->
     <script>
         document.getElementById('addUserButton').addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent form submission
+            event.preventDefault();
 
             Swal.fire({
                 title: 'Are you sure?',
@@ -76,7 +76,6 @@
                 confirmButtonText: 'Yes, add user!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Show a success message and submit the form
                     Swal.fire(
                         'User Added!',
                         'The user has been added successfully.',

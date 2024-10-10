@@ -14709,3 +14709,15 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
       color: #fff; }
 
 /*# sourceMappingURL=style.css.map */
+
+
+/* position fixed sidebar & navbar */
+.fixed-sidebar {
+  position: fixed;
+  z-index: 1000; 
+  overflow-y: auto; 
+}
+.fixed-header {
+  position: fixed;
+  z-index: 1001;
+}

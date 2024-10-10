@@ -37,7 +37,7 @@
                             </div>
 
                             <!-- Button to trigger SweetAlert -->
-                            <button type="button" class="btn btn-primary" id="confirmEdit">
+                            <button style="background-color: #457B9D;border:none" type="button" class="btn btn-primary" id="confirmEdit">
                                 Update User
                             </button>
                         </form>

@@ -18,7 +18,7 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                     <h4 class="card-title">Vehicles List</h4>
-                    <a style="background-color: #457B9D;" href="{{ route('motor-link-dashboard-vehicles-create') }}" class="btn btn-primary mt-3">Add New Vehicle</a>
+                    <a style="background-color: #457B9D; border:none"  href="{{ route('motor-link-dashboard-vehicles-create') }}" class="btn btn-primary mt-3">Add New Vehicle</a>
                 </div>
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered zero-configuration">
@@ -41,8 +41,8 @@
                                         <td>{{ $vehicle->year }}</td>
                                         <td>{{ $vehicle->type }}</td>
                                         <td>
-                                            <a href="{{ route('motor-link-dashboard-vehicles-show', $vehicle->id) }}" class="btn btn-info">View</a>
-                                            <a href="{{ route('motor-link-dashboard-vehicles-edit', $vehicle->id) }}" class="btn btn-warning">Edit</a>
+                                            <a style="background-color: #8FBBA1; border:none"  href="{{ route('motor-link-dashboard-vehicles-show', $vehicle->id) }}" class="btn btn-info">View</a>
+                                            <a style="background-color: #457B9D; border:none; color:white"  href="{{ route('motor-link-dashboard-vehicles-edit', $vehicle->id) }}" class="btn btn-warning">Edit</a>
                                             
                                             <button type="button" class="btn btn-danger" onclick="confirmDelete('{{ $vehicle->id }}')">
                                                 Delete

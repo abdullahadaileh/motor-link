@@ -19,7 +19,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                         <h4 class="card-title">Users List</h4>                        
-                        <a style="background-color: #457B9D;" href="{{ route('motor-link-dashboard-addUser') }}" class="btn btn-primary">Add User</a> 
+                        <a style="background-color: #457B9D;border:none" href="{{ route('motor-link-dashboard-addUser') }}" class="btn btn-primary">Add User</a> 
                         </div>
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered zero-configuration">
@@ -41,9 +41,9 @@
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->phone_number }}</td>
                                             <td>
-                                                <a href="{{ route('motor-link-dashboard-editUser', $user->id) }}" class="btn btn-warning">Edit</a>
+                                                <a style="background-color: #8FBBA1; border:none; color:white" href="{{ route('motor-link-dashboard-editUser', $user->id) }}" class="btn btn-warning">Edit</a>
                                                 
-                                                <button type="button" class="btn btn-danger" onclick="confirmDelete('{{ $user->id }}')">
+                                                <button style="border: none" type="button" class="btn btn-danger" onclick="confirmDelete('{{ $user->id }}')">
                                                     Delete
                                                 </button>
 

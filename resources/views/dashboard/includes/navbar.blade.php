@@ -1,15 +1,19 @@
 
-<div style="background-color: #457B9D;" class="nav-header">
-            <div class="brand-logo">
-                <a href="{{ route('motor-link-dashboard') }}">
-                    <b class="logo-abbr"><img src="{{asset('landing/assets/images/icons/whiteLogo.png')}}" style="width: 200px; margin-left:-10px" alt="logo"> </b>
-                    <span class="logo-compact"><img src="{{ asset('landing/assets/images/motorlink-high-resolution-logo-transparent (1).png') }}" alt=""></span>
-                    <span class="brand-title">
-                        <img src="{{ asset('landing/assets/images/motorlink-high-resolution-logo-white-transparent.png') }}" style="width: 200px; margin-left:-10px" alt="">
-                    </span>
-                </a>
-            </div>
-        </div>
+<div style="background-color: #457B9D;" class="nav-header fixed-header">
+    <div class="brand-logo">
+        <a href="{{ route('motor-link-dashboard') }}">
+            <b class="logo-abbr">
+                <img src="{{asset('landing/assets/images/icons/whiteLogo.png')}}" style="width: 200px; margin-left:-10px" alt="logo"> 
+            </b>
+            <span class="logo-compact">
+                <img src="{{ asset('landing/assets/images/motorlink-high-resolution-logo-transparent (1).png') }}" alt="">
+            </span>
+            <span class="brand-title">
+                <img src="{{ asset('landing/assets/images/motorlink-high-resolution-logo-white-transparent.png') }}" style="width: 200px; margin-left:-10px" alt="">
+            </span>
+        </a>
+    </div>
+</div>
 
 
         <div class="header">    
