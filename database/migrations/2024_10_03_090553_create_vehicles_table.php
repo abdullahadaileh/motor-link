@@ -16,8 +16,14 @@ return new class extends Migration
             $table->unsignedBigInteger('owner_id')->nullable(); 
             $table->string('make');
             $table->string('model');
+            $table->string('image')->nullable();
             $table->year('year');
-            $table->string('type');
+            $table->enum('type', [
+                'Economical car', 'Jeep car', 'Luxury car', 'Pickup Truck',
+                'Sport car', 'SUV', 'Hatchback', 'Sedan', 'Minivan',
+                'Crossover', 'Coupe', 'Convertible', 'Station Wagon',
+                'Electric car', 'Hybrid car'
+            ]);
             $table->decimal('price_per_day', 10, 2);
             $table->string('fuel_type');
             $table->text('description')->nullable();

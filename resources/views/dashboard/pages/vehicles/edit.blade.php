@@ -17,7 +17,7 @@
                 <div class="card-body">
                     <h4 class="card-title">Edit Vehicle</h4>
 
-                    <form id="editVehicleForm" action="{{ route('motor-link-dashboard-vehicles-update', $vehicle->id) }}" method="POST"> <!-- Updated route -->
+                    <form id="editVehicleForm" action="{{ route('motor-link-dashboard-vehicles-update', $vehicle->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="mb-3">
@@ -48,8 +48,21 @@
                             <label for="status" class="form-label">Status</label>
                             <input type="text" class="form-control" id="status" name="status" value="{{ old('status', $vehicle->status) }}" required>
                         </div>
+
+                        <div class="form-group">
+                            <label for="image">Vehicle Image</label>
+                            
+                            <!-- Input for the image -->
+                            <input type="file" name="image" class="form-control input-default" id="imageUpload" placeholder="Upload vehicle image" accept="image/*">
+                        
+                            <!-- Display current image or default image -->
+                            <div class="mt-2">
+                                <img id="previewImage" src="{{ asset($vehicle->image) }}" alt="Vehicle Image" class="img-thumbnail" style="max-height: 150px; object-fit: cover;">
+                            </div>
+                        </div>                              
+
                         <!-- Button to trigger SweetAlert -->
-                        <button type="button" class="btn btn-primary" id="confirmEdit">
+                        <button  style="background-color: #457B9D; border:none; type="button" class="btn btn-primary" id="confirmEdit">
                             Update Vehicle
                         </button>
                     </form>
@@ -64,23 +77,23 @@
 
 <!-- JavaScript for SweetAlert confirmation -->
 <script>
-    document.getElementById('confirmEdit').addEventListener('click', function() {
-        // Trigger SweetAlert confirmation
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You are about to update this vehicle's details.",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, update it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Submit the form if confirmed
-                document.getElementById('editVehicleForm').submit();
+    // Listen for the input change event
+    document.getElementById('imageUpload').addEventListener('change', function(event) {
+        const file = event.target.files[0]; // Get the selected file
+        if (file) {
+            const reader = new FileReader(); // Create a FileReader to read the file
+            reader.onload = function(e) {
+                // Set the preview image src to the file's content
+                document.getElementById('previewImage').src = e.target.result;
             }
-        });
+            reader.readAsDataURL(file); // Read the file as a data URL
+        }
     });
+
+    document.getElementById('confirmEdit').addEventListener('click', function() {
+    // Submit the form directly without any confirmation or messages
+    document.getElementById('editVehicleForm').submit();
+});
 </script>
 
 @endsection

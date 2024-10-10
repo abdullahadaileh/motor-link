@@ -29,7 +29,8 @@
                                     <th>Model</th>
                                     <th>Year</th>
                                     <th>Type</th>
-                                    <th style="width: 23%;">Actions</th>
+                                    <th>Image</th>
+                                    <th style="width: 25%;">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -41,6 +42,14 @@
                                         <td>{{ $vehicle->year }}</td>
                                         <td>{{ $vehicle->type }}</td>
                                         <td>
+                                            @if($vehicle->image)
+                                                <img src="{{ asset($vehicle->image) }}" alt="Image" style="height: 70px;" />
+                                            @else
+                                                <img src="{{ asset('path/to/default/image.jpg') }}" alt="Image" style="height: 70px;" />
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <div class="d-flex justify-content-between">
                                             <a style="background-color: #8FBBA1; border:none"  href="{{ route('motor-link-dashboard-vehicles-show', $vehicle->id) }}" class="btn btn-info">View</a>
                                             <a style="background-color: #457B9D; border:none; color:white"  href="{{ route('motor-link-dashboard-vehicles-edit', $vehicle->id) }}" class="btn btn-warning">Edit</a>
                                             
@@ -52,6 +61,7 @@
                                                 @csrf
                                                 @method('DELETE')
                                             </form>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach

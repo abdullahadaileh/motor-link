@@ -21,8 +21,8 @@
 
                     <div class="basic-form">
                         <!-- Form to add vehicle -->
-                        <form id="addVehicleForm" method="POST" action="{{ route('motor-link-dashboard-vehicles-store') }}">
-                            @csrf <!-- CSRF Token for form security -->
+                        <form id="addVehicleForm" method="POST" action="{{ route('motor-link-dashboard-vehicles-store') }}" enctype="multipart/form-data">
+                            @csrf 
                             @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
@@ -82,30 +82,14 @@
                                 <label for="type">Type</label>
                                 <select name="type" class="form-control input-default" required>
                                     <option value="">Select vehicle type</option>
-                                    <option value="Economical car">Economical car</option>
-                                    <option value="Jeep car">Jeep car</option>
-                                    <option value="Luxury car">Luxury car</option>
-                                    <option value="Pickup Truck">Pickup Truck</option>
-                                    <option value="Sport car">Sport car</option>
-                                    <option value="Sedan">Sedan</option>
-                                    <option value="Hatchback">Hatchback</option>
-                                    <option value="Coupe">Coupe</option>
-                                    <option value="Convertible">Convertible</option>
-                                    <option value="Station Wagon">Station Wagon</option>
-                                    <option value="Minivan">Minivan</option>
-                                    <option value="SUV">SUV</option>
-                                    <option value="Crossover">Crossover</option>
-                                    <option value="MPV">MPV</option>
-                                    <option value="Van">Van</option>
-                                    <option value="Compact car">Compact car</option>
-                                    <option value="Luxury SUV">Luxury SUV</option>
-                                    <option value="Off-road vehicle">Off-road vehicle</option>
-                                    <option value="Electric car">Electric car</option>
-                                    <option value="Hybrid car">Hybrid car</option>
-                                    <option value="Microcar">Microcar</option>
+                                    @foreach($vehicleTypes as $type)
+                                        <option value="{{ $type }}" {{ isset($vehicle) && $vehicle->type == $type ? 'selected' : '' }}>
+                                            {{ $type }}
+                                        </option>
+                                    @endforeach
                                 </select>
                             </div>
-                                                        
+                                                                                    
                             <div class="form-group">
                                 <label for="price_per_day">Price Per Day</label>
                                 <input type="number" name="price_per_day" class="form-control input-default" placeholder="Enter price per day" required>
@@ -127,6 +111,12 @@
                             <div class="form-group">
                                 <label for="status">Status</label>
                                 <input type="text" name="status" class="form-control input-default" placeholder="Enter vehicle status" required>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="status">Vehicle Image</label>
+                                <input type="file" name="image" class="form-control input-default" placeholder="Enter vehicle status" required>
                             </div>
 
                             <!-- Trigger SweetAlert for confirmation -->

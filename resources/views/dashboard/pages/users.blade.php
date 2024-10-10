@@ -29,7 +29,7 @@
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Phone Number</th>
-                                        <th style="width: 17%;">Actions</th>
+                                        <th style="width: 17.5%;">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -41,6 +41,7 @@
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->phone_number }}</td>
                                             <td>
+                                                <div class="d-flex justify-content-between">
                                                 <a style="background-color: #8FBBA1; border:none; color:white" href="{{ route('motor-link-dashboard-editUser', $user->id) }}" class="btn btn-warning">Edit</a>
                                                 
                                                 <button style="border: none" type="button" class="btn btn-danger" onclick="confirmDelete('{{ $user->id }}')">
@@ -51,6 +52,7 @@
                                                     @csrf
                                                     @method('DELETE')
                                                 </form>
+                                                </div>
                                             </td>                                                                                    
                                         </tr>
                                     @endforeach

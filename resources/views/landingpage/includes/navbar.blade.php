@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">
+  <a class="navbar-brand" href="{{ route('motor-link') }}">
       <img src="{{ asset('landing/assets/images/motorlink-high-resolution-logo-transparent (1).png') }}" alt="Brand Logo" height="40">
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"

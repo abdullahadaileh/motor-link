@@ -34,9 +34,12 @@ Route::get('/motor-link-contact', function () {
     return view('landingpage.pages.contactUs');
 })->name('motor-link-contact');
 
+// vehicles page
 Route::get('/motor-link-vehicles', function () {
     return view('landingpage.pages.vehicles');
 })->name('motor-link-vehicles');
+
+Route::get('/motor-link-vehicles', [VehicleController::class, 'landingPage'])->name('motor-link-vehicles');
 
 
 // Dashboard Page Routs
