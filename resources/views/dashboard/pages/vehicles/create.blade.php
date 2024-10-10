@@ -24,42 +24,42 @@
                         <form id="addVehicleForm" method="POST" action="{{ route('motor-link-dashboard-vehicles-store') }}" enctype="multipart/form-data">
                             @csrf 
                             @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            <div class="form-group">
+                                <label for="make">Make</label>
+                                <select name="make" class="form-control input-default" required>
+                                    <option value="">Select vehicle make</option>
+                                    <option value="Toyota">Toyota</option>
+                                    <option value="Honda">Honda</option>
+                                    <option value="Nissan">Nissan</option>
+                                    <option value="Kia">Kia</option>
+                                    <option value="Hyundai">Hyundai</option>
+                                    <option value="Ford">Ford</option>
+                                    <option value="Chevrolet">Chevrolet</option>
+                                    <option value="Mitsubishi">Mitsubishi</option>
+                                    <option value="Subaru">Subaru</option>
+                                    <option value="Mazda">Mazda</option>
+                                    <option value="Volkswagen">Volkswagen</option>
+                                    <option value="Renault">Renault</option>
+                                    <option value="Peugeot">Peugeot</option>
+                                    <option value="Mercedes-Benz">Mercedes-Benz</option>
+                                    <option value="BMW">BMW</option>
+                                    <option value="Land Rover">Land Rover</option>
+                                    <option value="Dodge">Dodge</option>
+                                    <option value="Jeep">Jeep</option>
+                                    <option value="Lexus">Lexus</option>
+                                    <option value="Chrysler">Chrysler</option>
+                                    <option value="Buick">Buick</option>
+                                </select>
                             </div>
-                        @endif
-                        <div class="form-group">
-                            <label for="make">Make</label>
-                            <select name="make" class="form-control input-default" required>
-                                <option value="">Select vehicle make</option>
-                                <option value="Toyota">Toyota</option>
-                                <option value="Honda">Honda</option>
-                                <option value="Nissan">Nissan</option>
-                                <option value="Kia">Kia</option>
-                                <option value="Hyundai">Hyundai</option>
-                                <option value="Ford">Ford</option>
-                                <option value="Chevrolet">Chevrolet</option>
-                                <option value="Mitsubishi">Mitsubishi</option>
-                                <option value="Subaru">Subaru</option>
-                                <option value="Mazda">Mazda</option>
-                                <option value="Volkswagen">Volkswagen</option>
-                                <option value="Renault">Renault</option>
-                                <option value="Peugeot">Peugeot</option>
-                                <option value="Mercedes-Benz">Mercedes-Benz</option>
-                                <option value="BMW">BMW</option>
-                                <option value="Land Rover">Land Rover</option>
-                                <option value="Dodge">Dodge</option>
-                                <option value="Jeep">Jeep</option>
-                                <option value="Lexus">Lexus</option>
-                                <option value="Chrysler">Chrysler</option>
-                                <option value="Buick">Buick</option>
-                            </select>
-                        </div>
-                        
+                            
                             <div class="form-group">
                                 <label for="model">Model</label>
                                 <input type="text" name="model" class="form-control input-default" placeholder="Enter vehicle model" required>
@@ -83,9 +83,7 @@
                                 <select name="type" class="form-control input-default" required>
                                     <option value="">Select vehicle type</option>
                                     @foreach($vehicleTypes as $type)
-                                        <option value="{{ $type }}" {{ isset($vehicle) && $vehicle->type == $type ? 'selected' : '' }}>
-                                            {{ $type }}
-                                        </option>
+                                        <option value="{{ $type }}">{{ $type }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -113,17 +111,19 @@
                                 <input type="text" name="status" class="form-control input-default" placeholder="Enter vehicle status" required>
                             </div>
 
-
                             <div class="form-group">
-                                <label for="status">Vehicle Image</label>
-                                <input type="file" name="image" class="form-control input-default" placeholder="Enter vehicle status" required>
+                                <label for="image">Vehicle Image</label>
+                                <input type="file" name="image" class="form-control input-default" id="imageUpload" accept="image/*" required>
+                                <div class="mt-2">
+                                    <img id="previewImage" src="" alt="Vehicle Image" class="img-thumbnail" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; display: none;">
+                                </div>
                             </div>
 
                             <!-- Trigger SweetAlert for confirmation -->
                             <button style="background-color: #457B9D; border:none" type="button" class="btn btn-primary" id="addVehicleButton">
                                 Add Vehicle
                             </button>
-                            <button style="background-color: #8FBBA1; border:none" href="{{ route('motor-link-dashboard-vehicles-index') }}" type="button" class="btn btn-primary" id="addVehicleButton">
+                            <button style="background-color: #8FBBA1; border:none" href="{{ route('motor-link-dashboard-vehicles-index') }}" type="button" class="btn btn-primary" id="backButton">
                                 Back
                             </button>
                         </form>
@@ -134,8 +134,23 @@
     </div>
 </div>
 
-<!-- JavaScript to handle SweetAlert confirmation -->
+<!-- JavaScript to handle SweetAlert confirmation and Image Preview -->
 <script>
+    // Preview Image functionality
+    document.getElementById('imageUpload').addEventListener('change', function(event) {
+        const file = event.target.files[0]; 
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const preview = document.getElementById('previewImage');
+                preview.src = e.target.result;
+                preview.style.display = 'block'; // Show the preview image
+            }
+            reader.readAsDataURL(file); 
+        }
+    });
+
+    // Handle SweetAlert confirmation before submitting the form
     document.getElementById('addVehicleButton').addEventListener('click', function(event) {
         event.preventDefault(); // Prevent form submission
 
@@ -153,6 +168,11 @@
             }
         });
     });
+
+    // Handle Back button action
+    document.getElementById('backButton').addEventListener('click', function() {
+        window.location.href = '{{ route("motor-link-dashboard-vehicles-index") }}';
+    });
 </script>
 
-@endsection
+@endsection  

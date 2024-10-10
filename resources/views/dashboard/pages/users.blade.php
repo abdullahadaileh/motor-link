@@ -29,6 +29,7 @@
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Phone Number</th>
+                                        <th>image</th>
                                         <th style="width: 17.5%;">Actions</th>
                                     </tr>
                                 </thead>
@@ -40,6 +41,13 @@
                                             <td>{{ $user->name }}</td>
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->phone_number }}</td>
+                                            <td>                                            
+                                                @if($user->image)
+                                                <img src="{{ asset($user->image) }}" alt="Image" style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover;" />
+                                                @else
+                                                <img src="{{ asset('dashboard/images/imgs/image.png') }}" alt="Image" style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover;" />
+                                            @endif
+                                        </td>
                                             <td>
                                                 <div class="d-flex justify-content-between">
                                                 <a style="background-color: #8FBBA1; border:none; color:white" href="{{ route('motor-link-dashboard-editUser', $user->id) }}" class="btn btn-warning">Edit</a>

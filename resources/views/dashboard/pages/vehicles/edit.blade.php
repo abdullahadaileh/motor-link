@@ -72,27 +72,25 @@
     </div>
 </div>
 
-<!-- SweetAlert script -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- JavaScript for SweetAlert confirmation -->
 <script>
     // Listen for the input change event
     document.getElementById('imageUpload').addEventListener('change', function(event) {
-        const file = event.target.files[0]; // Get the selected file
+        const file = event.target.files[0];
         if (file) {
-            const reader = new FileReader(); // Create a FileReader to read the file
+            const reader = new FileReader(); 
             reader.onload = function(e) {
-                // Set the preview image src to the file's content
+
                 document.getElementById('previewImage').src = e.target.result;
             }
-            reader.readAsDataURL(file); // Read the file as a data URL
+            reader.readAsDataURL(file); 
         }
     });
 
     document.getElementById('confirmEdit').addEventListener('click', function() {
-    // Submit the form directly without any confirmation or messages
-    document.getElementById('editVehicleForm').submit();
+
+        document.getElementById('editVehicleForm').submit();
 });
 </script>
 

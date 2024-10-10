@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -15,58 +16,95 @@ class UserController extends Controller
         return view('dashboard.pages.users', compact('users'));
     }
 
-    // Show the form for creating a new user
+    // Show
     public function create()
     {
         return view('users.create');
     }
 
-    // Store a newly created user in storage
+    // Store
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedUser = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'phone_number' => 'nullable|string',
+            'image' => 'nullable|mimes:png,jpg,svg,jpeg,webp',
         ]);
-
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'phone_number' => $request->phone_number,
-        ]);
-
+    
+        $imagePath = null;
+    
+        if ($request->has('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $path = 'dashboard/images/uploads/users';
+            $file->move($path, $filename);
+            $imagePath = $path . '/' . $filename; 
+        }
+    
+        if ($imagePath) {
+            $validatedUser['image'] = $imagePath;
+        }
+    
+        // حفظ المستخدم الجديد
+        User::create($validatedUser);
+    
+        // تسجيل رسالة النجاح
+        \Log::info('Success message sent to session: User created successfully.');
+    
+        // إعادة توجيه مع رسالة النجاح
         return redirect()->route('motor-link-dashboard-users')->with('success', 'User created successfully.');
     }
+    
 
-    // Show the form for editing the specified user
     public function edit($id)
     {
         $user = User::findOrFail($id);
         return view('dashboard.pages.editUser', compact('user'));
     }
 
-    // Update the specified user in storage
+    // Update
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $id,
             'phone_number' => 'nullable|string',
+            'image' => 'nullable|mimes:png,jpg,svg,jpeg,webp',
         ]);
-
+    
         $user = User::findOrFail($id);
-        $user->update([
+    
+        $userData = [
             'name' => $request->name,
             'email' => $request->email,
             'phone_number' => $request->phone_number,
-        ]);
+        ];
+    
+        if ($request->has('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $path = 'dashboard/images/uploads/users';
+            $file->move($path, $filename);
+            $imagePath = $path . '/' . $filename;
+    
 
-        return redirect()->route('motor-link-dashboard-users')->with('success', 'User updated successfully.');
+            if (File::exists(public_path($user->image))) {
+                File::delete(public_path($user->image));
+            }
+    
+            $userData['image'] = $imagePath;
+        }
+
+        $user->update($userData);
+
+        return redirect()->route('motor-link-dashboard-users')
+                         ->with('success', 'User updated successfully.');
     }
-
+    
     // Soft delete the specified user
     public function destroy($id)
     {

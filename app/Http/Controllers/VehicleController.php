@@ -56,9 +56,9 @@ public function store(Request $request)
         $file = $request->file('image');
         $extension = $file->getClientOriginalExtension();
         $filename = time().'.'.$extension;
-        $path = 'dashboard/images/uploads/';
+        $path = 'dashboard/images/uploads/vehicles';
         $file->move($path, $filename);
-        $imagePath = $path . $filename; 
+        $imagePath = $path . '/' . $filename; 
     }
 
     if ($imagePath) {
@@ -105,14 +105,14 @@ public function store(Request $request)
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
             $filename = time().'.'.$extension;
-            $path = 'dashboard/images/uploads/';
+            $path = 'dashboard/images/uploads/vehicles';
             $file->move($path, $filename);
-            $imagePath = $path . $filename;
+            $imagePath = $path . '/' . $filename;
     
-            if (File::exists($vehicle->image)) {
-                File::delete($vehicle->image);
+            if (File::exists(public_path($vehicle->image))) {
+                File::delete(public_path($vehicle->image));
             }
-    
+                
             $validatedData['image'] = $imagePath;
         }
     

@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="row page-titles mx-0">
+    <div class="row page-tiles mx-0">
         <div class="col p-md-0">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('motor-link-dashboard') }}">Dashboard</a></li>
@@ -22,7 +22,7 @@
 
                         <div class="basic-form">
                             <!-- Form to add user -->
-                            <form id="addUserForm" method="POST" action="{{ route('users.store') }}">
+                            <form id="addUserForm" method="POST" action="{{ route('users.store') }}" enctype="multipart/form-data">
                                 @csrf <!-- CSRF Token for form security -->
 
                                 <div class="form-group">
@@ -49,10 +49,21 @@
                                     <label for="password_confirmation">Confirm Password</label>
                                     <input type="password" name="password_confirmation" class="form-control input-default" placeholder="Confirm password" required>
                                 </div>
+                                
+                                <div class="form-group">
+                                    <label>User Image</label>
+                                    <input type="file" name="image" class="form-control input-default" id="imageUpload" accept="image/*">
+                                    <div class="mt-2">
+                                        <img id="previewImage" alt="User Image" class="img-thumbnail" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; display: none;">
+                                    </div>
+                                </div>
 
-                                <button style="background-color: #457B9D;border:none" type="button" class="btn btn-primary" id="addUserButton">
+                                <button style="background-color: #457B9D;border:none" type="submit" class="btn btn-primary">
                                     Add User
                                 </button>
+                                <button style="background-color: #8FBBA1; border:none" href="{{ route('motor-link-dashboard-users') }}" type="button" class="btn btn-primary" id="backButton">
+                                    Back
+                                </button>    
                             </form>
                         </div>
                     </div>
@@ -61,32 +72,40 @@
         </div>
     </div>
 
-    <!-- JavaScript to handle SweetAlert confirmation -->
+    <!-- SweetAlert Success Message -->
     <script>
-        document.getElementById('addUserButton').addEventListener('click', function(event) {
-            event.preventDefault();
-
+        @if(session('success'))
+            console.log("Session found: {{ session('success') }}"); // Debugging
             Swal.fire({
-                title: 'Are you sure?',
-                text: "Do you want to add this user?",
-                icon: 'warning',
-                showCancelButton: true,
+                title: 'Success!',
+                text: "{{ session('success') }}",
+                icon: 'success',
                 confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, add user!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire(
-                        'User Added!',
-                        'The user has been added successfully.',
-                        'success'
-                    ).then(() => {
-                        document.getElementById('addUserForm').submit();
-                    });
-                }
+                confirmButtonText: 'OK'
             });
+        @else
+            console.log("No session found.");
+        @endif
+
+        // JavaScript for Image Preview
+        document.getElementById('imageUpload').addEventListener('change', function(event) {
+            const file = event.target.files[0]; 
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const previewImage = document.getElementById('previewImage');
+                    previewImage.src = e.target.result;
+                    previewImage.style.display = 'block'; // Show the image preview
+                }
+                reader.readAsDataURL(file); 
+            }
         });
-        
+
+            // Handle Back button action
+    document.getElementById('backButton').addEventListener('click', function() {
+        window.location.href = '{{ route("motor-link-dashboard-users") }}';
+    });
+
     </script>
 
 @endsection
