@@ -43,9 +43,9 @@
                                         <td>{{ $vehicle->type }}</td>
                                         <td>
                                             @if($vehicle->image)
-                                                <img src="{{ asset($vehicle->image) }}" alt="Image" style="height: 70px;" />
+                                                <img src="{{ asset($vehicle->image) }}" alt="Image" style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover;" />
                                             @else
-                                                <img src="{{ asset('path/to/default/image.jpg') }}" alt="Image" style="height: 70px;" />
+                                                <img src="{{ asset('path/to/default/image.jpg') }}" alt="Image" style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover;" />
                                             @endif
                                         </td>
                                         <td>

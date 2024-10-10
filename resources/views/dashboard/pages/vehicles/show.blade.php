@@ -17,19 +17,32 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Vehicle Details</h4>
-                    <p><strong>Make:</strong> {{ $vehicle->make }}</p>
-                    <p><strong>Model:</strong> {{ $vehicle->model }}</p>
-                    <p><strong>Year:</strong> {{ $vehicle->year }}</p>
-                    <p><strong>Type:</strong> {{ $vehicle->type }}</p>
-                    <p><strong>Price Per Day:</strong> {{ $vehicle->price_per_day }}</p>
-                    <p><strong>Fuel Type:</strong> {{ $vehicle->fuel_type }}</p>
-                    <p><strong>Status:</strong> {{ $vehicle->status }}</p>
-                    
-                    <a href="{{ route('motor-link-dashboard-vehicles-index') }}" class="btn btn-primary">Back to Vehicles</a>
-                    <a href="{{ route('motor-link-dashboard-vehicles-edit', $vehicle->id) }}" class="btn btn-primary">Edit vehicle</a>
+                    <br>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            @if($vehicle->image)
+                                <img src="{{ asset($vehicle->image) }}" alt="Image" style="width: 300px; height: 300px; border-radius: 20%; object-fit: cover;" />
+                            @else
+                                <img src="{{ asset('path/to/default/image.jpg') }}" alt="Image" style="width: 300px; height: 300px; border-radius: 20%; object-fit: cover;" />
+                            @endif
+                        </div>
+                        <div class="col-md-8">
+                            <p><strong>Make:</strong> {{ $vehicle->make }}</p>
+                            <p><strong>Model:</strong> {{ $vehicle->model }}</p>
+                            <p><strong>Year:</strong> {{ $vehicle->year }}</p>
+                            <p><strong>Type:</strong> {{ $vehicle->type }}</p>
+                            <p><strong>Price Per Day:</strong> {{ $vehicle->price_per_day }}</p>
+                            <p><strong>Fuel Type:</strong> {{ $vehicle->fuel_type }}</p>
+                            <p><strong>Status:</strong> {{ $vehicle->status }}</p>
+                            
+                            <a href="{{ route('motor-link-dashboard-vehicles-index') }}" class="btn btn-primary">Back to Vehicles</a>
+                            <a href="{{ route('motor-link-dashboard-vehicles-edit', $vehicle->id) }}" class="btn btn-primary">Edit Vehicle</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-@endsection
+@endsection  
