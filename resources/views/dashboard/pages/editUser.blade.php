@@ -52,7 +52,11 @@
                                 </div>
                             
                                 <div class="mt-2">
+                                    @if($user->image)
                                     <img id="previewImage" src="{{ asset($user->image) }}" alt="User Image" class="img-thumbnail" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+                                    @else
+                                    <img id="previewImage" src="{{ asset('dashboard/images/imgs/image.png') }}" alt="Default Profile Image" class="img-thumbnail" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+                                @endif    
                                 </div>
                             </div>
                             

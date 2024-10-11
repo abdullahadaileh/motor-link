@@ -69,6 +69,10 @@ Route::get('/motor-link-dashboard-users-trashed', [UserController::class, 'trash
     ->name('motor-link-dashboard-users-trashed');
 
 
+Route::get('/dashboard/profile', [UserController::class, 'profile'])->name('motor-link-dashboard-profile');
+
+
+
 Route::get('/motor-link-dashboard-users', [UserController::class, 'index'])->name('motor-link-dashboard-users');
 
 Route::get('users/create', [UserController::class, 'create'])->name('users.create');

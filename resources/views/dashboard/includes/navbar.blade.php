@@ -167,13 +167,18 @@
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
                                 <span class="activity active"></span>
-                                <img src="{{asset('dashboard/images/user/1.png')}}" height="40" width="40" alt="">
+                                <img src="{{ Auth::user()->image ? asset(Auth::user()->image) : asset('dashboard/images/imgs/image.png') }}" 
+                                alt="{{ Auth::user()->name }}" 
+                                class="img-thumbnail"
+                                height="40" 
+                                width="40" 
+                                style="border-radius: 50%; object-fit: cover;">                                                      
                             </div>
                             <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
                                 <div class="dropdown-content-body">
                                     <ul>
                                         <li>
-                                            <a href="#"><i class="icon-user"></i> <span>Profile</span></a>
+                                            <a href="{{ route('motor-link-dashboard-profile') }}"><i class="icon-user"></i> <span>Profile</span></a>
                                         </li>
                                         <li>
                                             <a href="javascript:void()">

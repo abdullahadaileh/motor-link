@@ -51,7 +51,7 @@
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label>User Image</label>
+                                    <label for="image">User Image</label>
                                 
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
@@ -64,10 +64,12 @@
                                     </div>
                                 
                                     <div class="mt-2">
-                                        <img id="previewImage" alt="User Image" class="img-thumbnail" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; display: none;">
+                                        <img id="previewImage" src="{{ asset('dashboard/images/imgs/image.png') }}" 
+                                             alt="Default Profile Image" 
+                                             class="img-thumbnail" 
+                                             style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
                                     </div>
-                                </div>
-                                
+                                </div>                                
                                 <button style="background-color: #457B9D;border:none" type="submit" class="btn btn-primary">
                                     Add User
                                 </button>
@@ -97,19 +99,24 @@
             console.log("No session found.");
         @endif
 
-        // JavaScript for Image Preview
-        document.getElementById('imageUpload').addEventListener('change', function(event) {
-            const file = event.target.files[0]; 
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const previewImage = document.getElementById('previewImage');
-                    previewImage.src = e.target.result;
-                    previewImage.style.display = 'block'; // Show the image preview
-                }
-                reader.readAsDataURL(file); 
-            }
-        });
+// JavaScript for Image Preview
+document.getElementById('imageUpload').addEventListener('change', function(event) {
+    const file = event.target.files[0]; 
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const previewImage = document.getElementById('previewImage');
+            previewImage.src = e.target.result;
+            previewImage.style.display = 'block'; // Show the image preview
+        }
+        reader.readAsDataURL(file); 
+    }
+});
+
+// Handle Back button action
+document.getElementById('backButton').addEventListener('click', function() {
+    window.location.href = '{{ route("motor-link-dashboard-users") }}';
+});
 
             // Handle Back button action
     document.getElementById('backButton').addEventListener('click', function() {

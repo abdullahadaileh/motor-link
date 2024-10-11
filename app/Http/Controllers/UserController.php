@@ -23,6 +23,16 @@ class UserController extends Controller
     return view('dashboard.pages.showUser', compact('user'));
 }
 
+public function profile()
+{
+    if (!auth()->check()) {
+        return redirect()->route('login')->with('error', 'You need to log in first.');
+    }
+
+    $user = auth()->user();
+    return view('dashboard.pages.profile', compact('user'));
+}
+
     public function create()
     {
         return view('users.create');
