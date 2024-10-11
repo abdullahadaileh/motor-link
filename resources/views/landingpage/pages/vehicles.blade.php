@@ -38,14 +38,12 @@
 {{-- Vehicle Cards --}}
 <div class="Vehicles-container" id="vehiclesContainer">
     @forelse ($vehicles as $vehicle)
-        <div class="Vehicles-card" data-make="{{ $vehicle->make }}" data-type="{{ $vehicle->type }}">
-            {{-- <img src="landing/assets/images/pexels-molnartamasphotography-25635758.webp" alt="{{ $vehicle->make }} Image" class="Vehicles-card-image"> --}}
-            
+        <div class="Vehicles-card" data-make="{{ $vehicle->make }}" data-type="{{ $vehicle->type }}">            
 
             @if($vehicle->image)
-            <img src="{{ asset($vehicle->image) }}" alt="Image" class="Vehicles-card-image" />
+            <img src="{{ asset($vehicle->image) }}" alt="Image" style=" height: 200px; object-fit: cover;" class="Vehicles-card-image" />
         @else
-            <img src="{{ asset('path/to/default/image.jpg') }}" alt="Image" class="Vehicles-card-image" />
+            <img src="{{ asset('landing/assets/images/carsilhouette.jpg') }}" alt="Image" style=" height: 200px; object-fit: cover;" class="Vehicles-card-image" />
         @endif
 
 

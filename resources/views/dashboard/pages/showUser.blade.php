@@ -21,9 +21,9 @@
                     <div class="row">
                         <div class="col-md-4 text-center">
                             @if($user->image)
-                                <img src="{{ asset($user->image) }}" alt="User Image" style="width: 300px; height: 300px; border-radius: 20%; object-fit: cover;" />
+                                <img id="userImage" src="{{ asset($user->image) }}" alt="User Image" style="width: 300px; height: 300px; border-radius: 20%; object-fit: cover;" />
                             @else
-                                <img src="{{ asset('path/to/default/image.jpg') }}" alt="User Image" style="width: 300px; height: 300px; border-radius: 20%; object-fit: cover;" />
+                                <img id="userImage" src="{{ asset('path/to/default/image.jpg') }}" alt="User Image" style="width: 300px; height: 300px; border-radius: 20%; object-fit: cover;" />
                             @endif
                         </div>
                         <div class="col-md-8">
@@ -42,4 +42,35 @@
         </div>
     </div>
 </div>
+
+<!-- Modal Structure -->
+<div id="imageModal" class="image-modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modalImage">
+</div>
+
+<!-- JavaScript -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const image = document.getElementById('userImage');
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const closeModal = document.querySelector('.close');
+
+        image.addEventListener('click', function () {
+            modal.style.display = 'flex';
+            modalImage.src = this.src;
+        });
+
+        closeModal.addEventListener('click', function () {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', function (e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    });
+</script>
 @endsection

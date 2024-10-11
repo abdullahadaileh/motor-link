@@ -21,12 +21,12 @@
                     <div class="row">
                         <div class="col-md-4">
                             @if($user->image)
-                                <img src="{{ asset($user->image) }}" alt="Profile Image" class="img-thumbnail" style="width: 280px; height: 280px; border-radius: 50%; object-fit: cover;">
+                            <img id="profileImage" src="{{ asset($user->image) }}" alt="Profile Image" class="img-thumbnail profile-img" style="width: 280px; height: 280px; border-radius: 50%; object-fit: cover;">
                             @else
-                                <img src="{{ asset('dashboard/images/imgs/image.png') }}" alt="Default Profile Image" class="img-thumbnail" style="width: 280px; height: 280px; border-radius: 50%; object-fit: cover;">
+                            <img id="profileImage" src="{{ asset('dashboard/images/imgs/image.png') }}" alt="Default Profile Image" class="img-thumbnail profile-img" style="width: 280px; height: 280px; border-radius: 50%; object-fit: cover;">
                             @endif
                         </div>
-                        
+
                         <div class="col-md-8">
                             <br>
                             <br>
@@ -39,6 +39,12 @@
                             <a style="background-color: #8FBBA1; border:none" href="{{ route('motor-link-dashboard-editUser', $user->id) }}" class="btn btn-primary mt-3">Edit my info</a>
                         </div>
                     </div>
+                    <div id="imageModal" class="image-modal">
+                        <span class="close">&times;</span>
+                        <img class="modal-content" id="modalImage">
+                    </div>
+
+
 
                 </div>
             </div>
@@ -46,3 +52,32 @@
     </div>
 </div>
 @endsection
+
+<script>
+    // JavaScript for Image Modal
+document.addEventListener('DOMContentLoaded', function() {
+    var modal = document.getElementById("imageModal");
+    var img = document.getElementById("profileImage");
+    var modalImg = document.getElementById("modalImage");
+    var closeBtn = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on the image, open the modal
+    img.onclick = function() {
+        modal.style.display = "flex";
+        modalImg.src = this.src; // Set the modal image to the clicked image's source
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    closeBtn.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // Close the modal if the user clicks outside the image
+    modal.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+});
+
+</script>
