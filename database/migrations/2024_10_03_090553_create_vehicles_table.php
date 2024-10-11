@@ -14,16 +14,11 @@ return new class extends Migration
         Schema::create('vehicles', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('owner_id')->nullable(); 
+            $table->unsignedBigInteger('type_id'); 
             $table->string('make');
             $table->string('model');
             $table->string('image')->nullable();
             $table->year('year');
-            $table->enum('type', [
-                'Economical car', 'Jeep car', 'Luxury car', 'Pickup Truck',
-                'Sport car', 'SUV', 'Hatchback', 'Sedan', 'Minivan',
-                'Crossover', 'Coupe', 'Convertible', 'Station Wagon',
-                'Electric car', 'Hybrid car'
-            ]);
             $table->decimal('price_per_day', 10, 2);
             $table->string('fuel_type');
             $table->text('description')->nullable();
@@ -31,11 +26,11 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes(); 
 
+            // تعريف المفاتيح الخارجية
             $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('type_id')->references('id')->on('vehicle_types')->onDelete('cascade'); 
         });
     }
-
-
 
     public function down(): void
     {

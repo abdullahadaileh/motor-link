@@ -32,7 +32,7 @@
                             <p><strong>Make:</strong> {{ $vehicle->make }}</p>
                             <p><strong>Model:</strong> {{ $vehicle->model }}</p>
                             <p><strong>Year:</strong> {{ $vehicle->year }}</p>
-                            <p><strong>Type:</strong> {{ $vehicle->type }}</p>
+                            <p><strong>Type:</strong> {{ $vehicle->type->name ?? 'N/A' }}</p>
                             <p><strong>Price Per Day:</strong> {{ $vehicle->price_per_day }}</p>
                             <p><strong>Fuel Type:</strong> {{ $vehicle->fuel_type }}</p>
                             <p><strong>Status:</strong> {{ $vehicle->status }}</p>

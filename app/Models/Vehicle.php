@@ -12,6 +12,11 @@ class Vehicle extends Model
     
     protected $guarded = [];
 
+public function type()
+{
+    return $this->belongsTo(VehicleType::class);
+}
+
     public function owner()
     {
         return $this->belongsTo(User::class, 'owner_id');

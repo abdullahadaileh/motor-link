@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleController;
+use App\Http\Controllers\VehicleTypeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -106,7 +107,14 @@ Route::put('motor-link-dashboard-vehicles/{vehicle}', [VehicleController::class,
 Route::delete('motor-link-dashboard-vehicles/{vehicle}', [VehicleController::class, 'destroy'])->name('motor-link-dashboard-vehicles-destroy');
 
 
-
+// Vehicle Types Routes
+Route::get('motor-link-dashboard-vehicle-types', [VehicleTypeController::class, 'index'])->name('motor-link-dashboard-vehicle-types');
+Route::get('motor-link-dashboard-vehicle-types/create', [VehicleTypeController::class, 'create'])->name('motor-link-dashboard-vehicle-types-create');
+Route::post('motor-link-dashboard-vehicle-types', [VehicleTypeController::class, 'store'])->name('motor-link-dashboard-vehicle-types-store');
+Route::get('motor-link-dashboard-vehicle-types/{type}', [VehicleTypeController::class, 'show'])->name('motor-link-dashboard-vehicle-types-show');
+Route::get('motor-link-dashboard-vehicle-types/{type}/edit', [VehicleTypeController::class, 'edit'])->name('motor-link-dashboard-vehicle-types-edit');
+Route::put('/motor-link-dashboard-vehicle-types/{type}', [VehicleTypeController::class, 'update'])->name('motor-link-dashboard-vehicle-types-update');
+Route::delete('motor-link-dashboard-vehicle-types/{type}', [VehicleTypeController::class, 'destroy'])->name('motor-link-dashboard-vehicle-types-destroy');
 
 
 

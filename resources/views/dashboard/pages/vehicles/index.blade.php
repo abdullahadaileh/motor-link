@@ -17,9 +17,9 @@
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
-                    <h4 class="card-title">Vehicles List</h4>
-                    <a style="background-color: #457B9D; border:none"  href="{{ route('motor-link-dashboard-vehicles-create') }}" class="btn btn-primary mt-3">Add New Vehicle</a>
-                </div>
+                        <h4 class="card-title">Vehicles List</h4>
+                        <a style="background-color: #457B9D; border:none"  href="{{ route('motor-link-dashboard-vehicles-create') }}" class="btn btn-primary mt-3">Add New Vehicle</a>
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered zero-configuration">
                             <thead>
@@ -40,7 +40,7 @@
                                         <td>{{ $vehicle->make }}</td>
                                         <td>{{ $vehicle->model }}</td>
                                         <td>{{ $vehicle->year }}</td>
-                                        <td>{{ $vehicle->type }}</td>
+                                        <td>{{ $vehicle->type->name ?? 'N/A' }}</td> <!-- Adjusted to display the vehicle type -->
                                         <td>
                                             @if($vehicle->image)
                                                 <img src="{{ asset($vehicle->image) }}" alt="Image" style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover;" />
@@ -50,17 +50,17 @@
                                         </td>
                                         <td>
                                             <div class="d-flex justify-content-between">
-                                            <a style="background-color: #8FBBA1; border:none"  href="{{ route('motor-link-dashboard-vehicles-show', $vehicle->id) }}" class="btn btn-info">View</a>
-                                            <a style="background-color: #457B9D; border:none; color:white"  href="{{ route('motor-link-dashboard-vehicles-edit', $vehicle->id) }}" class="btn btn-warning">Edit</a>
-                                            
-                                            <button type="button" class="btn btn-danger" onclick="confirmDelete('{{ $vehicle->id }}')">
-                                                Delete
-                                            </button>
+                                                <a style="background-color: #8FBBA1; border:none" href="{{ route('motor-link-dashboard-vehicles-show', $vehicle->id) }}" class="btn btn-info">View</a>
+                                                <a style="background-color: #457B9D; border:none; color:white" href="{{ route('motor-link-dashboard-vehicles-edit', $vehicle->id) }}" class="btn btn-warning">Edit</a>
+                                                
+                                                <button type="button" class="btn btn-danger" onclick="confirmDelete('{{ $vehicle->id }}')">
+                                                    Delete
+                                                </button>
 
-                                            <form id="deleteForm{{ $vehicle->id }}" action="{{ route('motor-link-dashboard-vehicles-destroy', $vehicle->id) }}" method="POST" style="display: none;">
-                                                @csrf
-                                                @method('DELETE')
-                                            </form>
+                                                <form id="deleteForm{{ $vehicle->id }}" action="{{ route('motor-link-dashboard-vehicles-destroy', $vehicle->id) }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
                                             </div>
                                         </td>
                                     </tr>
