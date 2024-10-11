@@ -40,19 +40,30 @@
                             <!-- Image Upload and Preview -->
                             <div class="form-group">
                                 <label for="image">User Image</label>
-
-                                <input type="file" name="image" class="form-control input-default" id="imageUpload" placeholder="Upload user image" accept="image/*">
-
+                                
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Upload</span>
+                                    </div>
+                                    <div class="custom-file">
+                                        <input type="file" name="image" class="custom-file-input" id="imageUpload" accept="image/*">
+                                        <label class="custom-file-label" for="imageUpload">Choose file</label>
+                                    </div>
+                                </div>
+                            
                                 <div class="mt-2">
                                     <img id="previewImage" src="{{ asset($user->image) }}" alt="User Image" class="img-thumbnail" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
                                 </div>
                             </div>
-
+                            
                             <!-- Button to trigger SweetAlert -->
                             <button style="background-color: #457B9D; border:none" type="button" class="btn btn-primary" id="confirmEdit">
                                 Update User
                             </button>
-                        </form>
+                            <button style="background-color: #8FBBA1; border:none" href="{{ route('motor-link-dashboard-users') }}" type="button" class="btn btn-primary" id="backButton">
+                                Back
+                            </button>    
+                    </form>
                     </div>
                 </div>
             </div>
@@ -123,5 +134,9 @@
                 }
             });
         });
+        document.getElementById('backButton').addEventListener('click', function() {
+        window.location.href = '{{ route("motor-link-dashboard-users") }}';
+    });
+
     </script>
 @endsection

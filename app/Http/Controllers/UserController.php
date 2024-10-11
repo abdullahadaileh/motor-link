@@ -17,6 +17,12 @@ class UserController extends Controller
     }
 
     // Show
+    public function show($id)
+{
+    $user = User::findOrFail($id);
+    return view('dashboard.pages.showUser', compact('user'));
+}
+
     public function create()
     {
         return view('users.create');
@@ -47,14 +53,8 @@ class UserController extends Controller
         if ($imagePath) {
             $validatedUser['image'] = $imagePath;
         }
-    
-        // حفظ المستخدم الجديد
         User::create($validatedUser);
-    
-        // تسجيل رسالة النجاح
         \Log::info('Success message sent to session: User created successfully.');
-    
-        // إعادة توجيه مع رسالة النجاح
         return redirect()->route('motor-link-dashboard-users')->with('success', 'User created successfully.');
     }
     

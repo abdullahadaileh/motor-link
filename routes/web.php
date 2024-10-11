@@ -71,6 +71,9 @@ Route::get('users/create', [UserController::class, 'create'])->name('users.creat
 
 Route::post('users', [UserController::class, 'store'])->name('users.store');
 
+Route::get('/users/{id}', [UserController::class, 'show'])->name('motor-link-dashboard-showUser');
+
+
 Route::get('users/{id}/edit', [UserController::class, 'edit'])->name('motor-link-dashboard-editUser');
 
 Route::put('users/{id}', [UserController::class, 'update'])->name('users.update');

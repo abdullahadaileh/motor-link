@@ -28,6 +28,7 @@
                             @endif
                         </div>
                         <div class="col-md-8">
+                            <br>
                             <p><strong>Make:</strong> {{ $vehicle->make }}</p>
                             <p><strong>Model:</strong> {{ $vehicle->model }}</p>
                             <p><strong>Year:</strong> {{ $vehicle->year }}</p>
@@ -36,8 +37,8 @@
                             <p><strong>Fuel Type:</strong> {{ $vehicle->fuel_type }}</p>
                             <p><strong>Status:</strong> {{ $vehicle->status }}</p>
                             
-                            <a href="{{ route('motor-link-dashboard-vehicles-index') }}" class="btn btn-primary">Back to Vehicles</a>
-                            <a href="{{ route('motor-link-dashboard-vehicles-edit', $vehicle->id) }}" class="btn btn-primary">Edit Vehicle</a>
+                            <a style="background-color: #457B9D; border:none" href="{{ route('motor-link-dashboard-vehicles-index') }}" class="btn btn-primary">Back to Vehicles</a>
+                            <a style="background-color: #8FBBA1; border:none" href="{{ route('motor-link-dashboard-vehicles-edit', $vehicle->id) }}" class="btn btn-primary">Edit Vehicle</a>
                         </div>
                     </div>
                 </div>
