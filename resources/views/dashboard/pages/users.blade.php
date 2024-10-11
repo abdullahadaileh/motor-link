@@ -40,7 +40,7 @@
                                             <td>{{ $user->id }}</td>
                                             <td>{{ $user->name }}</td>
                                             <td>{{ $user->email }}</td>
-                                            <td>{{ $user->phone_number }}</td>
+                                            <td>{{ $user->phone_number ?? 'N/A' }}</td>
                                             <td>                                            
                                                 @if($user->image)
                                                 <img src="{{ asset($user->image) }}" alt="Image" style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover;" />

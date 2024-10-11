@@ -24,8 +24,9 @@
                     <i class="icon-note menu-icon"></i><span class="nav-text">Users</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="{{ route('motor-link-dashboard-addUser') }}">Add user</a></li>
-                    <li><a href="{{ route('motor-link-dashboard-users') }}" aria-expanded="false">Users</a></li>
+                    <li><a href="{{ route('motor-link-dashboard-addUser') }}">Add new user</a></li>
+                    <li><a href="{{ route('motor-link-dashboard-users') }}" aria-expanded="false">Manage users</a></li>
+                    <li><a href="{{ route('motor-link-dashboard-users-trashed') }}" aria-expanded="false">Restore users</a></li>
                 </ul>
             </li>
             <li>

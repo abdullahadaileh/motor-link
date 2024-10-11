@@ -115,18 +115,17 @@ class UserController extends Controller
     }
 
     // Restore a soft deleted user
-    public function restore($id)
-    {
-        $user = User::withTrashed()->findOrFail($id);
-        $user->restore();
-
-        return redirect()->route('motor-link-dashboard-users')->with('success', 'User restored successfully.');
-    }
-
-    // Display a listing of soft deleted users
     public function trashed()
     {
         $users = User::onlyTrashed()->get();
-        return view('users.trashed', compact('users'));
+        return view('dashboard.pages.trashedUsers', compact('users'));
     }
-}
+    
+    public function restore($id)
+    {
+
+        $user = User::withTrashed()->findOrFail($id);
+        $user->restore();
+    
+        return redirect()->route('motor-link-dashboard-users')->with('success', 'User restored successfully.');
+    }}

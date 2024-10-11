@@ -65,6 +65,10 @@ Route::get('/motor-link-dashboard-users', function () {
     return view('dashboard.pages.users');
 })->name('motor-link-dashboard-users');
 
+Route::get('/motor-link-dashboard-users-trashed', [UserController::class, 'trashed'])
+    ->name('motor-link-dashboard-users-trashed');
+
+
 Route::get('/motor-link-dashboard-users', [UserController::class, 'index'])->name('motor-link-dashboard-users');
 
 Route::get('users/create', [UserController::class, 'create'])->name('users.create');
@@ -73,23 +77,20 @@ Route::post('users', [UserController::class, 'store'])->name('users.store');
 
 Route::get('/users/{id}', [UserController::class, 'show'])->name('motor-link-dashboard-showUser');
 
-
 Route::get('users/{id}/edit', [UserController::class, 'edit'])->name('motor-link-dashboard-editUser');
 
 Route::put('users/{id}', [UserController::class, 'update'])->name('users.update');
 
 Route::delete('users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 
-Route::get('users/trashed', [UserController::class, 'trashed'])->name('users.trashed');
-
-Route::patch('users/{id}/restore', [UserController::class, 'restore'])->name('users.restore');
+Route::post('/users/restore/{id}', [UserController::class, 'restore'])->name('motor-link-dashboard-users-restore');
 
 
 
 
 
 
-
+// Vehicles
 
 Route::get('motor-link-dashboard-vehicles', [VehicleController::class, 'index'])->name('motor-link-dashboard-vehicles-index');
 
