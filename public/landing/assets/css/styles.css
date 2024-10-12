@@ -587,7 +587,10 @@ body {
     /* Scroll to Top Button end */  
 
 
-    /* meet the feeld */
+
+
+
+/* meet the feeld */
 .section2_h2 {
   font-weight: 600;
   font-size: x-large;
@@ -601,7 +604,6 @@ body {
     margin-top: 50px;
   }
 }
-
 
 main {
   position: relative;
@@ -621,8 +623,8 @@ main {
 }
 
 .swiper-slide {
-  width: 18.75rem;
-  height: 35rem;
+  width: 100px; 
+  height: 420px;
   display: flex;
   flex-direction: column;
   justify-content: end;
@@ -640,7 +642,7 @@ main {
   height: 100%;
   overflow: hidden;
   line-height: 0;
-  border-radius: 0.5rem;
+  /* border-radius: 0.5rem; */
 }
 
 .swiper-slide-img img {
@@ -692,6 +694,7 @@ main {
   align-items: center;
   justify-content: center;
   background: #24aad9;
+  color: white;
   border-radius: 50%;
   box-shadow: 0px 0.125rem 0.875rem #24aad96b;
   margin-top: 1em;
@@ -707,6 +710,7 @@ main {
 
 .swiper-slide-content .show-more:hover {
   background: #1184ac;
+  text-decoration: none;
 }
 
 @media screen and (min-width: 93.75rem) {

@@ -15,6 +15,15 @@ class VehicleTypeController extends Controller
         return view('dashboard.pages.vehicleTypes.index', compact('types'));
     }
 
+    public function showFleet()
+    {
+        // Retrieve vehicle types from the database
+        $vehicleTypes = VehicleType::all(); // Get all vehicle types without the 'vehicles' relationship
+    
+        return view('landingpage.landing', compact('vehicleTypes'));
+    }
+
+    
     // Show the form for creating a new vehicle type
     public function create()
     {
@@ -26,7 +35,7 @@ public function store(Request $request)
 {
     $validatedData = $request->validate([
         'name' => 'required|string|unique:vehicle_types,name',
-        'image' => 'nullable|mimes:png,jpg,svg,jpeg,webp', // Validate image file
+        'image' => 'nullable|image',    
     ]);
 
     $imagePath = null;
@@ -70,7 +79,7 @@ public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'image' => 'nullable|mimes:png,jpg,svg,jpeg,webp', // Validate image file
+            'image' => 'nullable|image',    
         ]);
 
         $vehicleType = VehicleType::findOrFail($id);
