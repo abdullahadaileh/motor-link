@@ -1,11 +1,10 @@
 @extends('dashboard.layouts.master')
 
 @section('content')
-<div class="row page-tiles mx-0">
+<div class="row page-titles mx-0">
     <div class="col p-md-0">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('motor-link-dashboard') }}">Dashboard</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('motor-link-dashboard-vehicle-types') }}">Vehicle Types</a></li>
             <li class="breadcrumb-item active"><a href="javascript:void(0)">Add Vehicle Type</a></li>
         </ol>
     </div>
@@ -37,7 +36,11 @@
                                 <label for="name">Vehicle Type Name</label>
                                 <input type="text" name="name" id="name" class="form-control" required>
                             </div>
-                        
+                            <!-- Vehicle Type Description Input -->
+                            <div class="form-group">
+                                <label for="description">Vehicle Type Description</label>
+                                <textarea name="description" id="description" class="form-control" rows="4" placeholder="Enter description (optional)"></textarea>
+                            </div>                        
                             <!-- Image Upload Input -->
                             <div class="form-group">
                                 <label for="image">Vehicle Type Image</label>

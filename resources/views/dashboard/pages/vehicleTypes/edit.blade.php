@@ -35,7 +35,16 @@
                                 <div class="alert alert-danger mt-2">{{ $message }}</div>
                             @enderror
                         </div>
-                    
+
+
+                        <div class="form-group">
+                            <label for="description">Vehicle Type Description</label>
+                            <textarea name="description" id="description" class="form-control" rows="4">{{ old('description', $vehicleType->description) }}</textarea>
+                            @error('description')
+                                <div class="alert alert-danger mt-2">{{ $message }}</div>
+                            @enderror
+                        </div>
+
                         <div class="form-group">
                             <label for="image">Vehicle Type Image</label>
                             <div class="input-group mb-3">
@@ -58,6 +67,7 @@
                                 <div class="alert alert-danger mt-2">{{ $message }}</div>
                             @enderror
                         </div>
+                        
                         <!-- Button to trigger SweetAlert -->
                         <button style="background-color: #457B9D; border: none;" type="button" class="btn btn-primary" id="confirmEdit">
                             Update Vehicle Type

@@ -3,45 +3,8 @@
 @section('content')
 <div class="all-login">
 <section class="login-section">
-    <div id="login-form" class="form-container">
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
-            <h1>Login</h1>
-            <div class="inputbox">
-                <ion-icon name="mail-outline"></ion-icon>
-                <input type="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                <label for="">Email</label>
-                @error('email')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-            <div class="inputbox">
-                <ion-icon name="lock-closed-outline"></ion-icon>
-                <input type="password" name="password" required autocomplete="current-password">
-                <label for="">Password</label>
-                @error('password')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-            <div class="forget">
-                <label for=""><input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>Remember Me</label>
-                <a href="#" onclick="toggleForm()">Forget Password</a>
-            </div>
-            <div class="button-container">
-                <button type="submit">Log in</button>
-                <button type="button" class="home-button" onclick="location.href='{{ route('motor-link') }}'">Home</button>
-            </div>
-            <div class="register">
-                <p>Don't have an account? <a href="#" onclick="toggleForm()">Register</a></p>
-            </div>
-        </form>
-    </div>
-    
-    <div id="register-form" class="form-container" style="display: none;">
+    <!-- Register Form is now displayed by default -->
+    <div id="register-form" class="form-container">
         <form method="POST" action="{{ route('register') }}">
             @csrf
             <h1>Register</h1>
@@ -86,6 +49,45 @@
             </div>
             <div class="register">
                 <p>Already have an account? <a href="#" onclick="toggleForm()">Login</a></p>
+            </div>
+        </form>
+    </div>
+
+    <!-- Login Form is hidden by default -->
+    <div id="login-form" class="form-container" style="display: none;">
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
+            <h1>Login</h1>
+            <div class="inputbox">
+                <ion-icon name="mail-outline"></ion-icon>
+                <input type="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                <label for="">Email</label>
+                @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+            <div class="inputbox">
+                <ion-icon name="lock-closed-outline"></ion-icon>
+                <input type="password" name="password" required autocomplete="current-password">
+                <label for="">Password</label>
+                @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+            <div class="forget">
+                <label for=""><input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>Remember Me</label>
+                <a href="#" onclick="toggleForm()">Forget Password</a>
+            </div>
+            <div class="button-container">
+                <button type="submit">Log in</button>
+                <button type="button" class="home-button" onclick="location.href='{{ route('motor-link') }}'">Home</button>
+            </div>
+            <div class="register">
+                <p>Don't have an account? <a href="#" onclick="toggleForm()">Register</a></p>
             </div>
         </form>
     </div>

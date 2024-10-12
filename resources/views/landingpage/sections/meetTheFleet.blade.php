@@ -13,7 +13,7 @@
         </div>
         <div class="swiper-slide-content">
           <h2>{{ $type->name }}</h2>
-          <p>"Save on fuel without compromising on comfort with our economical cars."</p>
+          <p>{{ $type->description ?? 'Discover our selection of vehicles.' }}</p> <!-- Default description if none exists -->
           <a href="{{ route('motor-link-vehicles') }}" class="show-more">More</a> <!-- Show more button -->
         </div>
       </div>
@@ -21,4 +21,3 @@
     </div>
   </div>
 </main>
-

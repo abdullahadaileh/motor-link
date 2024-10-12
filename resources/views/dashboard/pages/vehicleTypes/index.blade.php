@@ -32,7 +32,8 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Type Name</th>
-                                    <th style="width: 15%;">Image</th> <!-- New column for images -->
+                                    <th>Description</th>
+                                    <th style="width: 15%;">Image</th> 
                                     <th style="width: 15.5%;">Actions</th>
                                 </tr>
                             </thead>
@@ -41,6 +42,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $type->name }}</td>
+                                        <td>{{ $type->description }}</td>
                                         <td>
                                             @if($type->image)
                                             <img src="{{ asset($type->image) }}" alt="{{ $type->name }}" style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover;" />

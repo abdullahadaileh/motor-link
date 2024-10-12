@@ -35,7 +35,8 @@ public function store(Request $request)
 {
     $validatedData = $request->validate([
         'name' => 'required|string|unique:vehicle_types,name',
-        'image' => 'nullable|image',    
+        'image' => 'nullable|image',
+        'description' => 'nullable|string',     
     ]);
 
     $imagePath = null;
@@ -79,7 +80,8 @@ public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'image' => 'nullable|image',    
+            'image' => 'nullable|image',
+            'description' => 'nullable|string',    
         ]);
 
         $vehicleType = VehicleType::findOrFail($id);
@@ -101,6 +103,7 @@ public function store(Request $request)
         }
 
         $vehicleType->name = $request->input('name');
+        $vehicleType->description = $request->input('description');
         $vehicleType->save();
 
         return redirect()->route('motor-link-dashboard-vehicle-types')
