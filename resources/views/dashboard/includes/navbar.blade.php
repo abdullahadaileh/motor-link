@@ -165,16 +165,25 @@
                             </div>
                         </li>
                         <li class="icons dropdown">
-                            <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
+                            <div class="user-img c-pointer position-relative" data-toggle="dropdown">
                                 <span class="activity active"></span>
-                                <img src="{{ Auth::user()->image ? asset(Auth::user()->image) : asset('dashboard/images/imgs/image.png') }}" 
-                                alt="{{ Auth::user()->name }}" 
-                                class="img-thumbnail"
-                                height="40" 
-                                width="40" 
-                                style="border-radius: 50%; object-fit: cover;">                                                      
+                                @if (Auth::check() && Auth::user()->image)
+                                    <img src="{{ asset(Auth::user()->image) }}"
+                                         alt="{{ Auth::user()->name }}"
+                                         class="img-thumbnail"
+                                         height="40"
+                                         width="40"
+                                         style="border-radius: 50%; object-fit: cover;">
+                                @else
+                                    <img src="{{ asset('dashboard/images/imgs/image.png') }}"
+                                         alt="Default Image"
+                                         class="img-thumbnail"
+                                         height="40"
+                                         width="40"
+                                         style="border-radius: 50%; object-fit: cover;">
+                                @endif
                             </div>
-                            <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
+                                                        <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
                                 <div class="dropdown-content-body">
                                     <ul>
                                         <li>

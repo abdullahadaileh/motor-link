@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Vehicle;
-use App\Models\VehicleType; // Add this to access VehicleType model
+use App\Models\VehicleType; // للوصول إلى نموذج نوع المركبات
 use File;
 use Illuminate\Http\Request;
 
@@ -17,7 +17,7 @@ class VehicleController extends Controller
 
     public function create()
     {
-        $vehicleTypes = VehicleType::all(); // Fetch all types dynamically
+        $vehicleTypes = VehicleType::all(); // جلب جميع الأنواع ديناميكيًا
         return view('dashboard.pages.vehicles.create', compact('vehicleTypes'));
     }
 
@@ -28,7 +28,7 @@ class VehicleController extends Controller
             'model' => 'required|string',
             'year' => 'required|integer',
             'image' => 'nullable|mimes:png,jpg,svg,jpeg,webp',
-            'type_id' => 'required|exists:vehicle_types,id', // Reference to the new vehicle types table
+            'type_id' => 'required|exists:vehicle_types,id', // الإشارة إلى جدول الأنواع الجديد
             'price_per_day' => 'required|numeric',
             'fuel_type' => 'required|string',
             'description' => 'nullable|string',
@@ -37,7 +37,7 @@ class VehicleController extends Controller
 
         $imagePath = null;
 
-        // Handle image upload logic as before
+        // التعامل مع منطق رفع الصورة
         if ($request->has('image')) {
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
@@ -71,7 +71,6 @@ class VehicleController extends Controller
         $vehicleTypes = VehicleType::all(); 
         return view('dashboard.pages.vehicles.edit', compact('vehicle', 'vehicleTypes'));
     }
-
     public function update(Request $request, Vehicle $vehicle)
     {
         $validatedData = $request->validate([
@@ -79,37 +78,42 @@ class VehicleController extends Controller
             'model' => 'required|string',
             'year' => 'required|integer',
             'image' => 'nullable|mimes:png,jpg,svg,jpeg,webp',
-            'type_id' => 'required|exists:vehicle_types,id', // Reference to the new vehicle types table
+            'type_id' => 'required|exists:vehicle_types,id', // الإشارة إلى جدول الأنواع الجديد
             'price_per_day' => 'required|numeric',
             'fuel_type' => 'required|string',
             'description' => 'nullable|string',
             'status' => 'required|string',
         ]);
 
+        $imagePath = $vehicle->image; // الاحتفاظ بالصورة القديمة إذا لم يتم رفع صورة جديدة
+
+        // التعامل مع منطق رفع الصورة
         if ($request->has('image')) {
+            // حذف الصورة القديمة إذا كانت موجودة
+            if ($imagePath) {
+                File::delete($imagePath);
+            }
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
             $filename = time().'.'.$extension;
             $path = 'dashboard/images/uploads/vehicles';
             $file->move($path, $filename);
-            $imagePath = $path . '/' . $filename;
-
-            // Delete the old image
-            if (File::exists(public_path($vehicle->image))) {
-                File::delete(public_path($vehicle->image));
-            }
-                
-            $validatedData['image'] = $imagePath;
+            $imagePath = $path . '/' . $filename; 
         }
 
-        $vehicle->update($validatedData);
+        $validatedData['image'] = $imagePath;
 
-        return redirect()->route('motor-link-dashboard-vehicles-index')
-                         ->with('success', 'Vehicle updated successfully.');
+        // تحديث البيانات
+        $vehicle->update($validatedData);
+        return redirect()->route('motor-link-dashboard-vehicles-index')->with('success', 'Vehicle updated successfully.');
     }
 
     public function destroy(Vehicle $vehicle)
     {
+        // حذف الصورة من التخزين
+        if ($vehicle->image) {
+            File::delete($vehicle->image);
+        }
         $vehicle->delete();
         return redirect()->route('motor-link-dashboard-vehicles-index')->with('success', 'Vehicle deleted successfully.');
     }

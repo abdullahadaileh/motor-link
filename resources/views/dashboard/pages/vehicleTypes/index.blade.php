@@ -32,6 +32,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Type Name</th>
+                                    <th style="width: 15%;">Image</th> <!-- New column for images -->
                                     <th style="width: 15.5%;">Actions</th>
                                 </tr>
                             </thead>
@@ -40,6 +41,13 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $type->name }}</td>
+                                        <td>
+                                            @if($type->image)
+                                            <img src="{{ asset($type->image) }}" alt="{{ $type->name }}" style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover;" />
+                                        @else
+                                            <img src="{{ asset('path/to/default/image.jpg') }}" alt="No Image" style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover;" />
+                                        @endif
+                                                                                </td>
                                         <td>
                                             <div class="d-flex justify-content-between">
                                                 <a style="background-color: #8FBBA1; border:none" href="{{ route('motor-link-dashboard-vehicle-types-edit', $type->id) }}" class="btn btn-warning">Edit</a>

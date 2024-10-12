@@ -80,14 +80,14 @@
                             
                             <div class="form-group">
                                 <label for="type">Type</label>
-                                <select name="type" class="form-control input-default" required>
+                                <select name="type_id" class="form-control input-default" required>
                                     <option value="">Select vehicle type</option>
                                     @foreach($vehicleTypes as $type)
-                                        <option value="{{ $type }}">{{ $type }}</option>
+                                        <option value="{{ $type->id }}">{{ $type->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                                                                                    
+                                                                                                                 
                             <div class="form-group">
                                 <label for="price_per_day">Price Per Day</label>
                                 <input type="number" name="price_per_day" class="form-control input-default" placeholder="Enter price per day" required>
@@ -108,12 +108,16 @@
                             
                             <div class="form-group">
                                 <label for="status">Status</label>
-                                <input type="text" name="status" class="form-control input-default" placeholder="Enter vehicle status" required>
+                                <select name="status" class="form-control input-default" required>
+                                    <option value="" disabled selected>Select vehicle status</option>
+                                    <option value="available">Available</option>
+                                    <option value="unavailable">Unavailable</option>
+                                    <option value="maintenance">Under Maintenance</option>
+                                </select>
                             </div>
-
+                            
                             <div class="form-group">
                                 <label for="image">Vehicle Image</label>
-                            
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Upload</span>
@@ -123,7 +127,6 @@
                                         <label class="custom-file-label" for="imageUpload">Choose file</label>
                                     </div>
                                 </div>
-                            
                                 <div class="mt-2">
                                     <img id="previewImage" src="" alt="Vehicle Image" class="img-thumbnail" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; display: none;">
                                 </div>
@@ -133,7 +136,7 @@
                             <button style="background-color: #457B9D; border:none" type="button" class="btn btn-primary" id="addVehicleButton">
                                 Add Vehicle
                             </button>
-                            <button style="background-color: #8FBBA1; border:none" href="{{ route('motor-link-dashboard-vehicles-index') }}" type="button" class="btn btn-primary" id="backButton">
+                            <button style="background-color: #8FBBA1; border:none" type="button" class="btn btn-primary" id="backButton">
                                 Back
                             </button>
                         </form>

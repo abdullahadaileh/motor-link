@@ -24,7 +24,7 @@
                         </div>
                     @endif
 
-                    <form id="editVehicleTypeForm" action="{{ route('motor-link-dashboard-vehicle-types-update', $vehicleType->id) }}" method="POST">
+                    <form id="editVehicleTypeForm" action="{{ route('motor-link-dashboard-vehicle-types-update', $vehicleType->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                     
@@ -36,6 +36,28 @@
                             @enderror
                         </div>
                     
+                        <div class="form-group">
+                            <label for="image">Vehicle Type Image</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Upload</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" name="image" class="custom-file-input" id="imageUpload" accept="image/*">
+                                    <label class="custom-file-label" for="imageUpload">Choose file</label>
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <img id="previewImage" 
+                                     src="{{ $vehicleType->image ? asset($vehicleType->image) : asset('path/to/default/image.jpg') }}" 
+                                     alt="Vehicle Type Image" 
+                                     class="img-thumbnail" 
+                                     style="max-height: 150px; object-fit: cover;">
+                            </div>
+                            @error('image')
+                                <div class="alert alert-danger mt-2">{{ $message }}</div>
+                            @enderror
+                        </div>
                         <!-- Button to trigger SweetAlert -->
                         <button style="background-color: #457B9D; border: none;" type="button" class="btn btn-primary" id="confirmEdit">
                             Update Vehicle Type
@@ -43,7 +65,7 @@
                         <button style="background-color: #8FBBA1; border: none;" type="button" class="btn btn-primary" id="backButton">
                             Back
                         </button>
-                    </form>
+                    </form>                                    
                 </div>
             </div>
         </div>
@@ -72,6 +94,18 @@
     document.getElementById('backButton').addEventListener('click', function() {
         window.location.href = '{{ route("motor-link-dashboard-vehicle-types") }}';
     });
+
+    document.getElementById('imageUpload').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader(); 
+        reader.onload = function(e) {
+            document.getElementById('previewImage').src = e.target.result;
+        }
+        reader.readAsDataURL(file); 
+    }
+});
+
 </script>
 
 @endsection

@@ -1,7 +1,7 @@
 @extends('dashboard.layouts.master')
 
 @section('content')
-<div class="row page-titles mx-0">
+<div class="row page-tiles mx-0">
     <div class="col p-md-0">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('motor-link-dashboard') }}">Dashboard</a></li>
@@ -20,7 +20,7 @@
                     <p class="text-muted m-b-15 f-s-12">Fill in the details below to create a new vehicle type.</p>
 
                     <div class="basic-form">
-                        <form action="{{ route('motor-link-dashboard-vehicle-types-store') }}" method="POST">
+                        <form id="addVehicleTypeForm" action="{{ route('motor-link-dashboard-vehicle-types-store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @if ($errors->any())
                                 <div class="alert alert-danger">
@@ -31,18 +31,80 @@
                                     </ul>
                                 </div>
                             @endif
+                            
+                            <!-- Vehicle Type Name Input -->
                             <div class="form-group">
-                                <label for="name">Type Name</label>
-                                <input type="text" class="form-control input-default" id="name" name="name" placeholder="Enter vehicle type name" required>
+                                <label for="name">Vehicle Type Name</label>
+                                <input type="text" name="name" id="name" class="form-control" required>
+                            </div>
+                        
+                            <!-- Image Upload Input -->
+                            <div class="form-group">
+                                <label for="image">Vehicle Type Image</label>
+                                
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Upload</span>
+                                    </div>
+                                    <div class="custom-file">
+                                        <input type="file" name="image" class="custom-file-input" id="imageUpload" accept="image/*" required>
+                                        <label class="custom-file-label" for="imageUpload">Choose file</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-2">
+                                    <img id="previewImage" src="" alt="Vehicle Type Image" class="img-thumbnail" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; display: none;">
+                                </div>
                             </div>
                             
-                            <button style="background-color: #457B9D; border:none" type="submit" class="btn btn-primary">Add Vehicle Type</button>
-                            <a href="{{ route('motor-link-dashboard-vehicle-types') }}" style="background-color: #8FBBA1; border:none" class="btn btn-secondary">Back</a>
+                            <!-- Submit Button with SweetAlert Confirmation -->
+                            <button style="background-color: #457B9D; border:none" type="button" class="btn btn-primary" id="addVehicleTypeButton">
+                                Create Vehicle Type
+                            </button>
+                            <button style="background-color: #8FBBA1; border:none" href="{{ route('motor-link-dashboard-vehicle-types') }}" type="button" class="btn btn-primary" id="backButton">
+                                Back
+                            </button>
                         </form>
                     </div>
                 </div>
             </div>
-        </div>            
+        </div>
     </div>
 </div>
+
+<!-- JavaScript for Image Preview and SweetAlert Confirmation -->
+<script>
+    // Preview Image functionality
+    document.getElementById('imageUpload').addEventListener('change', function(event) {
+        const file = event.target.files[0]; 
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const preview = document.getElementById('previewImage');
+                preview.src = e.target.result;
+                preview.style.display = 'block'; // Show the preview image
+            }
+            reader.readAsDataURL(file); 
+        }
+    });
+
+    // Handle SweetAlert confirmation before submitting the form
+    document.getElementById('addVehicleTypeButton').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent form submission
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you want to add this vehicle type?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, create vehicle type!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('addVehicleTypeForm').submit();
+            }
+        });
+    });
+</script>
 @endsection
