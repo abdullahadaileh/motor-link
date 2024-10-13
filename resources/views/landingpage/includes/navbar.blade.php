@@ -24,33 +24,46 @@
 
       <!-- User Authentication Links -->
       @if (Route::has('login'))
-          <div class="ml-auto">
-              @auth
-                  <!-- Dropdown for User -->
-                  <div class="dropdown">
-                      <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          {{ Auth::user()->name }}
-                      </button>
-                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                          <a class="dropdown-item" href="">User Profile</a>
-                          <a class="dropdown-item" href="{{ route('motor-link-dashboard') }}">Admin Dashboard</a>
-                          <a class="dropdown-item" href="{{ route('logout') }}" 
-                          onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                          Logout
-                       </a>
-                       
-                       <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                          @csrf
-                       </form>                      
-                      </div>
+      <div class="ml-auto">
+          @auth
+              <!-- Dropdown for User -->
+              <div class="dropdown">
+                  <div class="img-thumbnail rounded-circle" data-toggle="dropdown">
+                      <span class="activity active"></span>
+                      @if (Auth::check() && Auth::user()->image)
+                          <img src="{{ asset(Auth::user()->image) }}"
+                               alt="{{ Auth::user()->name }}"
+                               height="40"
+                               width="40"
+                               style="border-radius: 50%; object-fit: cover;">
+                      @else
+                          <img src="{{ asset('dashboard/images/imgs/image.png') }}"
+                               alt="Default Image"
+                               height="40"
+                               width="40"
+                               style="border-radius: 50%; object-fit: cover;">
+                      @endif
                   </div>
-              @else
-                  <a href="{{ route('login') }}" class="btn btn-outline-secondary">Log in</a>
-                  @if (Route::has('register'))
-                      <a href="{{ route('register') }}" class="btn btn-outline-secondary ml-2">Register</a>
-                  @endif
-              @endauth
-          </div>
-      @endif
-  </div>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                      <a class="dropdown-item" href="">User Profile</a>
+                      <a class="dropdown-item" href="{{ route('motor-link-dashboard') }}">Admin Dashboard</a>
+                      <a class="dropdown-item" href="{{ route('logout') }}" 
+                      onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                      Logout
+                      </a>
+                      
+                      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                          @csrf
+                      </form>                      
+                  </div>
+              </div>
+          @else
+              <a href="{{ route('login') }}" class="btn btn-outline-secondary">Log in</a>
+              @if (Route::has('register'))
+                  <a href="{{ route('register') }}" class="btn btn-outline-secondary ml-2">Register</a>
+              @endif
+          @endauth
+      </div>
+  @endif
+    </div>
 </nav>

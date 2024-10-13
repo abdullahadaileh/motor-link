@@ -99,3 +99,40 @@
     }
   }
   
+  .clamped-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* عدد الأسطر: 1.5 */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+ /* .Vehicles-card-content {
+  position: relative;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  height: 100%; 
+}  */
+
+.Vehicles-view-button {
+  display: inline-block;
+  padding: 10px 15px;
+  color: #457B9D!important;
+  text-decoration: none;
+  border-radius: 10%;
+  margin-top: auto; 
+  align-self: flex-end; 
+}
+
+.Vehicles-view-button:hover {
+  text-decoration: none;
+  color: #6a8b9d; 
+}
+
+
+/* 
+colors
+6a8b9d
+457B9D
+*/

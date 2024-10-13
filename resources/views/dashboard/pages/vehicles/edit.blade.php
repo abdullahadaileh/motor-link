@@ -46,6 +46,22 @@
                                 <option value="Lexus" {{ $vehicle->make == 'Lexus' ? 'selected' : '' }}>Lexus</option>
                                 <option value="Chrysler" {{ $vehicle->make == 'Chrysler' ? 'selected' : '' }}>Chrysler</option>
                                 <option value="Buick" {{ $vehicle->make == 'Buick' ? 'selected' : '' }}>Buick</option>
+                                <option value="Volvo" {{ $vehicle->make == 'Volvo' ? 'selected' : '' }}>Volvo</option>
+                                <option value="Fiat" {{ $vehicle->make == 'Fiat' ? 'selected' : '' }}>Fiat</option>
+                                <option value="Tesla" {{ $vehicle->make == 'Tesla' ? 'selected' : '' }}>Tesla</option>
+                                <option value="Infiniti" {{ $vehicle->make == 'Infiniti' ? 'selected' : '' }}>Infiniti</option>
+                                <option value="Acura" {{ $vehicle->make == 'Acura' ? 'selected' : '' }}>Acura</option>
+                                <option value="Lincoln" {{ $vehicle->make == 'Lincoln' ? 'selected' : '' }}>Lincoln</option>
+                                <option value="Mini" {{ $vehicle->make == 'Mini' ? 'selected' : '' }}>Mini</option>
+                                <option value="Porsche" {{ $vehicle->make == 'Porsche' ? 'selected' : '' }}>Porsche</option>
+                                <option value="Jaguar" {{ $vehicle->make == 'Jaguar' ? 'selected' : '' }}>Jaguar</option>
+                                <option value="Aston Martin" {{ $vehicle->make == 'Aston Martin' ? 'selected' : '' }}>Aston Martin</option>
+                                <option value="Alfa Romeo" {{ $vehicle->make == 'Alfa Romeo' ? 'selected' : '' }}>Alfa Romeo</option>
+                                <option value="Genesis" {{ $vehicle->make == 'Genesis' ? 'selected' : '' }}>Genesis</option>
+                                <option value="Scion" {{ $vehicle->make == 'Scion' ? 'selected' : '' }}>Scion</option>
+                                <option value="Saab" {{ $vehicle->make == 'Saab' ? 'selected' : '' }}>Saab</option>
+                                <option value="Lotus" {{ $vehicle->make == 'Lotus' ? 'selected' : '' }}>Lotus</option>
+                                <option value="Pagani" {{ $vehicle->make == 'Pagani' ? 'selected' : '' }}>Pagani</option>
                             </select>
                         </div>
 

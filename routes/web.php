@@ -36,6 +36,7 @@ Route::get('/motor-link-contact', function () {
 })->name('motor-link-contact');
 Route::get('/motor-link', [VehicleTypeController::class, 'showFleet'])->name('motor-link');
 
+
 // vehicles page
 Route::get('/motor-link-vehicles', function () {
     return view('landingpage.pages.vehicles');
@@ -43,9 +44,13 @@ Route::get('/motor-link-vehicles', function () {
 
 Route::get('/motor-link-vehicles', [VehicleController::class, 'landingPage'])->name('motor-link-vehicles');
 
+Route::get('/motor-link-vehicles/{vehicle}', [VehicleController::class, 'showLandingPage'])->name('motor-link-vehicle-details');
+
+
+
+
 
 // Dashboard Page Routs
-
 
 Route::get('/motor-link-dashboard', function () {
     return view('dashboard.dashboard');

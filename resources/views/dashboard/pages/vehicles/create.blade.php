@@ -57,6 +57,22 @@
                                     <option value="Lexus">Lexus</option>
                                     <option value="Chrysler">Chrysler</option>
                                     <option value="Buick">Buick</option>
+                                    <option value="Volvo">Volvo</option>
+                                    <option value="Fiat">Fiat</option>
+                                    <option value="Tesla">Tesla</option>
+                                    <option value="Infiniti">Infiniti</option>
+                                    <option value="Acura">Acura</option>
+                                    <option value="Lincoln">Lincoln</option>
+                                    <option value="Mini">Mini</option>
+                                    <option value="Porsche">Porsche</option>
+                                    <option value="Jaguar">Jaguar</option>
+                                    <option value="Aston Martin">Aston Martin</option>
+                                    <option value="Alfa Romeo">Alfa Romeo</option>
+                                    <option value="Genesis">Genesis</option>
+                                    <option value="Scion">Scion</option>
+                                    <option value="Saab">Saab</option>
+                                    <option value="Lotus">Lotus</option>
+                                    <option value="Pagani">Pagani</option>
                                 </select>
                             </div>
                             

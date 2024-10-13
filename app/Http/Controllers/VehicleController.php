@@ -60,6 +60,10 @@ class VehicleController extends Controller
         $vehicles = Vehicle::all(); 
         return view('landingpage.pages.vehicles', compact('vehicles'));
     }
+    public function showLandingPage(Vehicle $vehicle) // New method for the single vehicle landing page
+    {
+        return view('landingpage.pages.vehicleShow', compact('vehicle'));
+    }
     
     public function show(Vehicle $vehicle)
     {

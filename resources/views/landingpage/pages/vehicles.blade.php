@@ -8,49 +8,25 @@
 
     <div class="Vehicles-filters">
         <input type="text" class="Vehicles-search" id="searchInput" placeholder="Search vehicles...">
-        {{-- <select class="Vehicles-filter" id="filterSelect">
-            <option value="all">All</option>
-            <option value="Economical car">Economical car</option>
-            <option value="Jeep car">Jeep car</option>
-            <option value="Luxury car">Luxury car</option>
-            <option value="Pickup Truck">Pickup Truck</option>
-            <option value="Sport car">Sport car</option>
-            <option value="Sedan">Sedan</option>
-            <option value="Hatchback">Hatchback</option>
-            <option value="Coupe">Coupe</option>
-            <option value="Convertible">Convertible</option>
-            <option value="Station Wagon">Station Wagon</option>
-            <option value="Minivan">Minivan</option>
-            <option value="SUV">SUV</option>
-            <option value="Crossover">Crossover</option>
-            <option value="MPV">MPV</option>
-            <option value="Van">Van</option>
-            <option value="Compact car">Compact car</option>
-            <option value="Luxury SUV">Luxury SUV</option>
-            <option value="Off-road vehicle">Off-road vehicle</option>
-            <option value="Electric car">Electric car</option>
-            <option value="Hybrid car">Hybrid car</option>
-            <option value="Microcar">Microcar</option>
-        </select> --}}
     </div>
 </div>
 
 {{-- Vehicle Cards --}}
 <div class="Vehicles-container" id="vehiclesContainer">
     @forelse ($vehicles as $vehicle)
-        <div class="Vehicles-card" data-make="{{ $vehicle->make }}" data-type="{{ $vehicle->type }}">            
+        <div class="Vehicles-card" data-make="{{ $vehicle->make }}" data-type="{{ $vehicle->type }}">
 
             @if($vehicle->image)
-            <img src="{{ asset($vehicle->image) }}" alt="Image" style=" height: 200px; object-fit: cover;" class="Vehicles-card-image" />
-        @else
-            <img src="{{ asset('landing/assets/images/carsilhouette.jpg') }}" alt="Image" style=" height: 200px; object-fit: cover;" class="Vehicles-card-image" />
-        @endif
-
+                <img src="{{ asset($vehicle->image) }}" alt="Image" style=" height: 200px; object-fit: cover;" class="Vehicles-card-image" />
+            @else
+                <img src="{{ asset('landing/assets/images/carsilhouette.jpg') }}" alt="Image" style=" height: 200px; object-fit: cover;" class="Vehicles-card-image" />
+            @endif
 
             <div class="Vehicles-card-content">
                 <h3>{{ $vehicle->make }} {{ $vehicle->model }} ({{ $vehicle->year }})</h3>
-                <p>{{ $vehicle->description }}</p>
-            </div>
+                <p class="clamped-text">{{ Str::words($vehicle->description, 10, '...') }}</p>
+                <a href="{{ route('motor-link-vehicle-details', $vehicle) }}" class="Vehicles-view-button">Show more</a>
+              </div>
         </div>
     @empty
         <p>No vehicles found</p>

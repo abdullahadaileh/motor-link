@@ -34,7 +34,7 @@
                     <i class="icon-note menu-icon"></i><span class="nav-text">Vehicles</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="{{ route('motor-link-dashboard-vehicles-create') }}">Add vehicles</a></li>
+                    {{-- <li><a href="{{ route('motor-link-dashboard-vehicles-create') }}">Add vehicles</a></li> --}}
                     <li><a href="{{ route('motor-link-dashboard-vehicles-index') }}" aria-expanded="false">Vehicles</a></li>
                     <li><a href="{{ route('motor-link-dashboard-vehicle-types') }}" aria-expanded="false">Vehicle types</a></li>
                 </ul>
