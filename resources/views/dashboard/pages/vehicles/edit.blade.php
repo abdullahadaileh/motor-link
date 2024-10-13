@@ -62,6 +62,7 @@
                                 <option value="Saab" {{ $vehicle->make == 'Saab' ? 'selected' : '' }}>Saab</option>
                                 <option value="Lotus" {{ $vehicle->make == 'Lotus' ? 'selected' : '' }}>Lotus</option>
                                 <option value="Pagani" {{ $vehicle->make == 'Pagani' ? 'selected' : '' }}>Pagani</option>
+                                <option value="Mitsubishi" {{ $vehicle->make == 'Mitsubishi' ? 'selected' : '' }}>Mitsubishi</option>
                             </select>
                         </div>
 
@@ -138,7 +139,7 @@
                         </div>
 
                         <button style="background-color: #457B9D; border:none;" type="button" class="btn btn-primary" id="confirmEdit">Update Vehicle</button>
-                        <button style="background-color: #8FBBA1; border:none" type="button" class="btn btn-primary" id="backButton">Back</button>
+                        <button style="background-color: #7A9E8A; border:none" type="button" class="btn btn-primary" id="backButton">Back</button>
                     </form>
                 </div>
             </div>

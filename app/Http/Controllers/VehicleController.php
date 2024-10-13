@@ -9,12 +9,24 @@ use Illuminate\Http\Request;
 
 class VehicleController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $vehicles = Vehicle::all();
-        return view('dashboard.pages.vehicles.index', compact('vehicles'));
+        $query = Vehicle::query();
+    
+        // Filter by vehicle type
+        if ($request->filled('type_id')) {
+            $query->where('type_id', $request->type_id);
+        }
+    
+        // Get all vehicle types for filtering
+        $vehicleTypes = VehicleType::pluck('name', 'id');
+    
+        // Fetch the filtered vehicles
+        $vehicles = $query->get();
+    
+        return view('dashboard.pages.vehicles.index', compact('vehicles', 'vehicleTypes'));
     }
-
+    
     public function create()
     {
         $vehicleTypes = VehicleType::all(); // جلب جميع الأنواع ديناميكيًا
@@ -55,16 +67,35 @@ class VehicleController extends Controller
         return redirect()->route('motor-link-dashboard-vehicles-index')->with('success', 'Vehicle created successfully.');
     }
 
-    public function landingPage()
+    public function landingPage(Request $request)
     {
-        $vehicles = Vehicle::all(); 
-        return view('landingpage.pages.vehicles', compact('vehicles'));
+        $query = Vehicle::query();
+    
+        // Filter by vehicle type
+        if ($request->filled('type_id') && $request->type_id !== 'all') {
+            $query->where('type_id', $request->type_id);
+        }
+    
+        // Filter by search term (vehicle make)
+        if ($request->filled('search')) {
+            $searchTerm = $request->search;
+            $query->where('make', 'like', '%' . $searchTerm . '%');
+        }
+    
+        // Get all vehicle types for filtering
+        $vehicleTypes = VehicleType::pluck('name', 'id');
+    
+        // Fetch the filtered vehicles
+        $vehicles = $query->get();
+    
+        return view('landingpage.pages.vehicles', compact('vehicles', 'vehicleTypes'));
     }
+
     public function showLandingPage(Vehicle $vehicle) // New method for the single vehicle landing page
     {
         return view('landingpage.pages.vehicleShow', compact('vehicle'));
     }
-    
+
     public function show(Vehicle $vehicle)
     {
         return view('dashboard.pages.vehicles.show', compact('vehicle'));

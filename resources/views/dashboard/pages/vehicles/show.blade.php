@@ -46,7 +46,7 @@
 
                             <br>
                             <a style="background-color: #457B9D; border:none" href="{{ route('motor-link-dashboard-vehicles-index') }}" class="btn btn-primary">Back to Vehicles</a>
-                            <a style="background-color: #8FBBA1; border:none" href="{{ route('motor-link-dashboard-vehicles-edit', $vehicle->id) }}" class="btn btn-primary">Edit Vehicle</a>
+                            <a style="background-color: #7A9E8A; border:none" href="{{ route('motor-link-dashboard-vehicles-edit', $vehicle->id) }}" class="btn btn-primary">Edit Vehicle</a>
                         </div>
                     </div>
                 </div>

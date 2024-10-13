@@ -136,7 +136,7 @@ body {
 }
 
 .moto-cta-btn {
-  background-color: #96c9ab;
+  background-color: #7A9E8A;
   color: white;
   padding: 15px 30px;
   border-radius: 25px;
@@ -189,7 +189,7 @@ body {
 }
 
 .search-btn {
-  background-color: #96c9ab;
+  background-color: #7A9E8A;
   color: white;
   border: none;
   cursor: pointer;
@@ -432,7 +432,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 15px;
-  background-color: #96c9ab;
+  background-color: #7A9E8A;
   color: #ffffff;
   cursor: pointer;
   position: relative;
@@ -564,7 +564,7 @@ body {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: #96c9ab;
+    background-color: #7A9E8A;
     color: #fff;
     border: none;
     border-radius: 50%;
@@ -583,11 +583,12 @@ body {
   .scroll-to-top.show {
     opacity: 1;
   }
+  .scroll-to-top:hover {
+    background-color: #8FBBA1;
+
+  }
   
     /* Scroll to Top Button end */  
-
-
-
 
 
 /* meet the feeld */

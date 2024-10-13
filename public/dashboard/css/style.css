@@ -461,6 +461,15 @@ mark,
   max-width: 100%;
   height: auto; }
 
+  .form-group {
+    margin-bottom: 0; 
+}
+
+.btn {
+    margin-top: 28px;
+    margin-left: 10px; 
+}
+
 .figure {
   display: inline-block; }
 

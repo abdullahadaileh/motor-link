@@ -7,14 +7,27 @@
     <div id="car-animation" style="width: 120px;"></div>
 
     <div class="Vehicles-filters">
-        <input type="text" class="Vehicles-search" id="searchInput" placeholder="Search vehicles...">
+        <form id="filterForm" method="GET" action="{{ route('motor-link-vehicles') }}">
+            <input type="text" class="Vehicles-search" id="searchInput" name="search" placeholder="Search vehicles..." value="{{ request('search') }}">
+            
+            <!-- Filter by vehicle type -->
+            <select id="filterSelect" class="Vehicles-filter" name="type_id">
+                <option value="all">All Types</option>
+                @foreach($vehicleTypes as $id => $name)
+                    <option value="{{ $id }}" {{ request('type_id') == $id ? 'selected' : '' }}>{{ $name }}</option>
+                @endforeach
+            </select>
+
+            <!-- Filter Button -->
+            <button type="submit" id="filterButton" class="Vehicles-filter-button">Filter</button>
+        </form>
     </div>
 </div>
 
 {{-- Vehicle Cards --}}
 <div class="Vehicles-container" id="vehiclesContainer">
     @forelse ($vehicles as $vehicle)
-        <div class="Vehicles-card" data-make="{{ $vehicle->make }}" data-type="{{ $vehicle->type }}">
+        <div class="Vehicles-card" data-make="{{ $vehicle->make }}" data-type="{{ $vehicle->type->name ?? 'N/A' }}">
 
             @if($vehicle->image)
                 <img src="{{ asset($vehicle->image) }}" alt="Image" style=" height: 200px; object-fit: cover;" class="Vehicles-card-image" />
@@ -24,9 +37,10 @@
 
             <div class="Vehicles-card-content">
                 <h3>{{ $vehicle->make }} {{ $vehicle->model }} ({{ $vehicle->year }})</h3>
+                <p>{{ $vehicle->type->name ?? 'N/A' }}</p>
                 <p class="clamped-text">{{ Str::words($vehicle->description, 10, '...') }}</p>
                 <a href="{{ route('motor-link-vehicle-details', $vehicle) }}" class="Vehicles-view-button">Show more</a>
-              </div>
+            </div>
         </div>
     @empty
         <p>No vehicles found</p>
@@ -40,6 +54,7 @@
     document.addEventListener('DOMContentLoaded', function() {
         const searchInput = document.getElementById('searchInput');
         const filterSelect = document.getElementById('filterSelect');
+        const filterButton = document.getElementById('filterButton');
         const vehiclesContainer = document.getElementById('vehiclesContainer');
         const vehicleCards = vehiclesContainer.querySelectorAll('.Vehicles-card');
 
@@ -65,9 +80,10 @@
             });
         }
 
-        // Attach event listeners to search and filter
-        searchInput.addEventListener('input', filterVehicles);
-        filterSelect.addEventListener('change', filterVehicles);
+        // Attach event listener to the filter button
+        filterButton.addEventListener('click', function() {
+            filterVehicles(); // Filter only when button is clicked
+        });
     });
 </script>
 @endsection

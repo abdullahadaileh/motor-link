@@ -73,6 +73,7 @@
                                     <option value="Saab">Saab</option>
                                     <option value="Lotus">Lotus</option>
                                     <option value="Pagani">Pagani</option>
+                                    <option value="Mitsubishi">Mitsubishi</option>
                                 </select>
                             </div>
                             
@@ -152,7 +153,7 @@
                             <button style="background-color: #457B9D; border:none" type="button" class="btn btn-primary" id="addVehicleButton">
                                 Add Vehicle
                             </button>
-                            <button style="background-color: #8FBBA1; border:none" type="button" class="btn btn-primary" id="backButton">
+                            <button style="background-color: #7A9E8A; border:none" type="button" class="btn btn-primary" id="backButton">
                                 Back
                             </button>
                         </form>

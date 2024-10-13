@@ -67,12 +67,12 @@
                                 <div class="alert alert-danger mt-2">{{ $message }}</div>
                             @enderror
                         </div>
-                        
+
                         <!-- Button to trigger SweetAlert -->
                         <button style="background-color: #457B9D; border: none;" type="button" class="btn btn-primary" id="confirmEdit">
                             Update Vehicle Type
                         </button>
-                        <button style="background-color: #8FBBA1; border: none;" type="button" class="btn btn-primary" id="backButton">
+                        <button style="background-color: #7A9E8A; border: none;" type="button" class="btn btn-primary" id="backButton">
                             Back
                         </button>
                     </form>                                    

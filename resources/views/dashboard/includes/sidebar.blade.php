@@ -15,7 +15,7 @@
                     <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">Apps</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="./app-profile.html">Profile</a></li>
+                    <li><a href="{{ route('motor-link-dashboard-profile') }}">Profile</a></li>
                 </ul>
             </li>
             <li class="nav-label">Forms</li>

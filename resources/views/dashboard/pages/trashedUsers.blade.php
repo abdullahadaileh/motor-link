@@ -37,20 +37,20 @@
                             <tbody>
                                 @foreach($users as $user)
                                     <tr>
-                                        <td>
+                                        <td>                                            
                                             @if($user->image)
-                                                <img src="{{ asset($user->image) }}" alt="User Image" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                                            <img src="{{ asset($user->image) }}" alt="Image" style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover;" />
                                             @else
-                                                <img src="{{ asset('path/to/default/image.jpg') }}" alt="Default Image" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
-                                            @endif
-                                        </td>
-                                        <td>{{ $user->name }}</td>
+                                            <img src="{{ asset('dashboard/images/imgs/image.png') }}" alt="Image" style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover;" />
+                                        @endif
+                                    </td>
+                                    <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->phone_number ?? 'N/A' }}</td>
                                         <td>
                                             <form action="{{ route('motor-link-dashboard-users-restore', $user->id) }}" method="POST" class="restore-form">
                                                 @csrf
-                                                <button style="background-color: #8FBBA1; border:none" type="button" class="btn btn-primary restore-button">Restore</button>
+                                                <button style="background-color: #7A9E8A; border:none" type="button" class="btn btn-primary restore-button">Restore</button>
                                             </form>
                                         </td>
                                     </tr>

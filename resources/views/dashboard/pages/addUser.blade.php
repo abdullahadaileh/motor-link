@@ -73,7 +73,7 @@
                                 <button style="background-color: #457B9D;border:none" type="submit" class="btn btn-primary">
                                     Add User
                                 </button>
-                                <button style="background-color: #8FBBA1; border:none" href="{{ route('motor-link-dashboard-users') }}" type="button" class="btn btn-primary" id="backButton">
+                                <button style="background-color: #7A9E8A; border:none" href="{{ route('motor-link-dashboard-users') }}" type="button" class="btn btn-primary" id="backButton">
                                     Back
                                 </button>    
                             </form>
