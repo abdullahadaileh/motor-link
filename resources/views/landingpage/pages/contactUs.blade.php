@@ -41,18 +41,19 @@ data-stellar-background-ratio="0.5">
         </div>            
 
         <div class="col-md-12">
-            <form action="#" class="contact-form">
+            <form action="{{ route('motor-link-contact.store') }}" method="POST" class="contact-form">
+                @csrf
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Your Name">
+                    <input type="text" name="name" class="form-control" placeholder="Your Name" required>
                 </div>
                 <div class="form-group">
-                    <input type="email" class="form-control" placeholder="Your Email">
+                    <input type="email" name="email" class="form-control" placeholder="Your Email" required>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Subject">
+                    <input type="text" name="subject" class="form-control" placeholder="Subject" required>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control" placeholder="Message"></textarea>
+                    <textarea name="message" class="form-control" placeholder="Message" required></textarea>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Send Message</button>

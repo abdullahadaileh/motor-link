@@ -19,24 +19,36 @@
                 </ul>
             </li>
             <li class="nav-label">Forms</li>
+
+            <!-- Users Section -->
             <li>
                 <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                    <i class="icon-note menu-icon"></i><span class="nav-text">Users</span>
+                    <i class="icon-user"></i><span class="nav-text">Users</span>
                 </a>
                 <ul aria-expanded="false">
-                    {{-- <li><a href="{{ route('motor-link-dashboard-addUser') }}">Add new user</a></li> --}}
                     <li><a href="{{ route('motor-link-dashboard-users') }}" aria-expanded="false">Manage users</a></li>
                     <li><a href="{{ route('motor-link-dashboard-users-trashed') }}" aria-expanded="false">Restore users</a></li>
                 </ul>
             </li>
+
+            <!-- Vehicles Section -->
             <li>
                 <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                    <i class="icon-note menu-icon"></i><span class="nav-text">Vehicles</span>
+                    <i class='bx bx-car bx-light menu-icon' style="font-size: 1.1rem;"></i><span class="nav-text">Vehicles</span>
                 </a>
                 <ul aria-expanded="false">
-                    {{-- <li><a href="{{ route('motor-link-dashboard-vehicles-create') }}">Add vehicles</a></li> --}}
                     <li><a href="{{ route('motor-link-dashboard-vehicles-index') }}" aria-expanded="false">Vehicles</a></li>
                     <li><a href="{{ route('motor-link-dashboard-vehicle-types') }}" aria-expanded="false">Vehicle types</a></li>
+                </ul>
+            </li>
+
+            <!-- Contact submissions -->
+            <li>
+                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                    <i class="icon-envelope menu-icon"></i><span class="nav-text">Contacts</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{ route('motor-link-dashboard-contacts') }}" aria-expanded="false">Contact submissions</a></li>
                 </ul>
             </li>
         </ul>

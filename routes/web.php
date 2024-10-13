@@ -34,6 +34,11 @@ Route::get('/motor-link-about', function () {
 Route::get('/motor-link-contact', function () {
     return view('landingpage.pages.contactUs');
 })->name('motor-link-contact');
+use App\Http\Controllers\ContactController;
+
+Route::post('/motor-link-contact', [ContactController::class, 'store'])->name('motor-link-contact.store');
+Route::get('/dashboard/contacts', [ContactController::class, 'index'])->name('motor-link-dashboard-contacts');
+
 Route::get('/motor-link', [VehicleTypeController::class, 'showFleet'])->name('motor-link');
 
 
