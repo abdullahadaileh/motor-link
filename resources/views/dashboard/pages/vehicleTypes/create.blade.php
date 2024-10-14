@@ -64,7 +64,7 @@
                             <button style="background-color: #457B9D; border:none" type="button" class="btn btn-primary" id="addVehicleTypeButton">
                                 Create Vehicle Type
                             </button>
-                            <button style="background-color: #7A9E8A; border:none" href="{{ route('motor-link-dashboard-vehicle-types') }}" type="button" class="btn btn-primary" id="backButton">
+                            <button style="background-color: #8FBBA1; border:none" href="{{ route('motor-link-dashboard-vehicle-types') }}" type="button" class="btn btn-primary" id="backButton">
                                 Back
                             </button>
                         </form>

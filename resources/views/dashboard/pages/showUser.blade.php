@@ -34,7 +34,7 @@
                             <p><strong>Phone Number:</strong> {{ $user->phone_number ?? 'N/A' }}</p>
                             
                             <a style="background-color: #457B9D; border:none" href="{{ route('motor-link-dashboard-users') }}" class="btn btn-primary">Back to Users</a>
-                            <a style="background-color: #7A9E8A; border:none" href="{{ route('motor-link-dashboard-editUser', $user->id) }}" class="btn btn-primary">Edit User</a>
+                            <a style="background-color: #8FBBA1; border:none" href="{{ route('motor-link-dashboard-editUser', $user->id) }}" class="btn btn-primary">Edit User</a>
                         </div>
                     </div>
                 </div>

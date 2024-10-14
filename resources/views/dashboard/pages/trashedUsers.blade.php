@@ -50,7 +50,7 @@
                                         <td>
                                             <form action="{{ route('motor-link-dashboard-users-restore', $user->id) }}" method="POST" class="restore-form">
                                                 @csrf
-                                                <button style="background-color: #7A9E8A; border:none" type="button" class="btn btn-primary restore-button">Restore</button>
+                                                <button style="background-color: #8FBBA1; border:none" type="button" class="btn btn-primary restore-button">Restore</button>
                                             </form>
                                         </td>
                                     </tr>

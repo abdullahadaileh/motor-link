@@ -50,7 +50,7 @@
                                             <td>{{ $user->phone_number ?? 'N/A' }}</td>
                                             <td>
                                                 <div class="d-flex justify-content-between">
-                                                    <a style="background-color: #7A9E8A; border:none; color:white" href="{{ route('motor-link-dashboard-showUser', $user->id) }}" class="btn btn-warning">View</a>
+                                                    <a style="background-color: #8FBBA1; border:none; color:white" href="{{ route('motor-link-dashboard-showUser', $user->id) }}" class="btn btn-warning">View</a>
                                                     <a style="background-color: #457B9D; border:none; color:white" href="{{ route('motor-link-dashboard-editUser', $user->id) }}" class="btn btn-warning">Edit</a>
                                                 
                                                 <button style="border: none" type="button" class="btn btn-danger" onclick="confirmDelete('{{ $user->id }}')">

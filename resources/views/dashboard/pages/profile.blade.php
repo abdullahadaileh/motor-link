@@ -36,7 +36,7 @@
                             <p><strong> Since: </strong>{{ $user->created_at->format('d M, Y') }}</p>
                             
                             <!-- Move the button inside this div for it to appear below the text -->
-                            <a style="background-color: #7A9E8A; border:none" href="{{ route('motor-link-dashboard-editUser', $user->id) }}" class="btn btn-primary mt-3">Edit my info</a>
+                            <a style="background-color: #8FBBA1; border:none" href="{{ route('motor-link-dashboard-editUser', $user->id) }}" class="btn btn-primary mt-3">Edit my info</a>
                         </div>
                     </div>
                     <div id="imageModal" class="image-modal">

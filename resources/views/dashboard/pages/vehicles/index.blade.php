@@ -59,7 +59,7 @@
                                             @if($vehicle->image)
                                                 <img src="{{ asset($vehicle->image) }}" alt="Image" style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover;" />
                                             @else
-                                                <img src="{{ asset('path/to/default/image.jpg') }}" alt="Image" style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover;" />
+                                                <img src="{{ asset('landing/assets/images/Luxury car.webp') }}" alt="Image" style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover;" />
                                             @endif
                                         </td>
                                         <td>{{ $vehicle->make }}</td>
@@ -68,7 +68,7 @@
                                         <td>{{ $vehicle->type->name ?? 'N/A' }}</td> <!-- Adjusted to display the vehicle type -->
                                         <td>
                                             <div class="d-flex justify-content-between">
-                                                <a style="background-color: #7A9E8A; border:none" href="{{ route('motor-link-dashboard-vehicles-show', $vehicle->id) }}" class="btn btn-info">View</a>
+                                                <a style="background-color: #8FBBA1; border:none" href="{{ route('motor-link-dashboard-vehicles-show', $vehicle->id) }}" class="btn btn-info">View</a>
                                                 <a style="background-color: #457B9D; border:none; color:white" href="{{ route('motor-link-dashboard-vehicles-edit', $vehicle->id) }}" class="btn btn-warning">Edit</a>
                                                 
                                                 <button type="button" class="btn btn-danger" onclick="confirmDelete('{{ $vehicle->id }}')">

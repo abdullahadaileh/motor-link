@@ -52,7 +52,7 @@
                                         <td>{{ $type->description }}</td>
                                         <td>
                                             <div class="d-flex justify-content-between">
-                                                <a style="background-color: #8FBBA1; border:none" href="{{ route('motor-link-dashboard-vehicle-types-edit', $type->id) }}" class="btn btn-warning">Edit</a>
+                                                <a style="background-color: #8FBBA1; border:none" href="{{ route('motor-link-dashboard-vehicle-types-edit', $type->id) }}" class="btn btn-info">Edit</a>
                                                 <button type="button" class="btn btn-danger" onclick="confirmDelete('{{ $type->id }}')">Delete</button>
 
                                                 <form id="deleteForm{{ $type->id }}" action="{{ route('motor-link-dashboard-vehicle-types-destroy', $type->id) }}" method="POST" style="display: none;">
