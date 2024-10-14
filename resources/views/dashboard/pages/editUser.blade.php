@@ -1,14 +1,14 @@
 @extends('dashboard.layouts.master')
 
 @section('content')
-    <div class="row page-tiles mx-0">
-        <div class="col p-md-0">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('motor-link-dashboard-users') }}">Dashboard</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Edit User</a></li>
-            </ol>
-        </div>
+<div class="row page-titles mx-0">
+    <div class="col p-md-0">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ route('motor-link-dashboard') }}">Dashboard</a></li>
+            <li class="breadcrumb-item active"><a href="{{ route('motor-link-dashboard-vehicles-create') }}">Edit User</a></li>
+        </ol>
     </div>
+</div>
 
     <div class="container-fluid">
         <div class="row">

@@ -3,25 +3,21 @@
 @section('content')
 
 <div class="Vehicles-header">
-    <h1 class="Vehicles-title">Vehicles</h1>
-    <div id="car-animation" style="width: 120px;"></div>
+  <h1 class="Vehicles-title">Vehicles</h1>
+  <div id="car-animation" style="width: 120px;"></div>
 
-    <div class="Vehicles-filters">
-        <form id="filterForm" method="GET" action="{{ route('motor-link-vehicles') }}">
-            <input type="text" class="Vehicles-search" id="searchInput" name="search" placeholder="Search vehicles..." value="{{ request('search') }}">
-            
-            <!-- Filter by vehicle type -->
-            <select id="filterSelect" class="Vehicles-filter" name="type_id">
-                <option value="all">All Types</option>
-                @foreach($vehicleTypes as $id => $name)
-                    <option value="{{ $id }}" {{ request('type_id') == $id ? 'selected' : '' }}>{{ $name }}</option>
-                @endforeach
-            </select>
-
-            <!-- Filter Button -->
-            <button type="submit" id="filterButton" class="Vehicles-filter-button">Filter</button>
-        </form>
-    </div>
+  <div class="Vehicles-filters">
+      <form id="filterForm" method="GET" action="{{ route('motor-link-vehicles') }}">
+          <input style="width: 150px" type="text" class="Vehicles-search" id="searchInput" name="search" placeholder="Search vehicles..." value="{{ request('search') }}">
+          <select id="filterSelect" class="Vehicles-filter" name="type_id">
+              <option value="all">All Types</option>
+              @foreach($vehicleTypes as $id => $name)
+                  <option value="{{ $id }}" {{ request('type_id') == $id ? 'selected' : '' }}>{{ $name }}</option>
+              @endforeach
+          </select>
+          <button style="width: 100px" type="submit" id="filterButton" class="Vehicles-filter-button">Filter</button>
+      </form>
+  </div>
 </div>
 
 {{-- Vehicle Cards --}}

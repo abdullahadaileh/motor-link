@@ -20,6 +20,8 @@
   <!-- style Pages end -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.6/lottie.min.js"></script>
 
+<!-- Include SweetAlert CSS and JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">

@@ -63,6 +63,31 @@ data-stellar-background-ratio="0.5">
     </div>
 </div>
 </section>
+
+<!-- Scroll to top button -->
 <button id="scrollToTopBtn" class="scroll-to-top">↑</button>
+
+<!-- SweetAlert script for form submission -->
+@if(Session::has('success'))
+    <script>
+        Swal.fire({
+            title: 'Message Sent!',
+            text: '{{ Session::get('success') }}',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    </script>
+@endif
+
+@if(Session::has('error'))
+    <script>
+        Swal.fire({
+            title: 'Error!',
+            text: '{{ Session::get('error') }}',
+            icon: 'error',
+            confirmButtonText: 'Try Again'
+        });
+    </script>
+@endif
 
 @endsection

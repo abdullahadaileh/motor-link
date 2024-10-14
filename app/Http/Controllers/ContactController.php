@@ -23,9 +23,14 @@ class ContactController extends Controller
             'subject' => 'required|max:255',
             'message' => 'required',
         ]);
-
-        Contact::create($request->all());
-
-        return back()->with('success', 'Your message has been sent successfully!');
+    
+        try {
+            // Attempt to create a new contact entry
+            Contact::create($request->all());
+            return back()->with('success', 'Your message has been sent successfully!');
+        } catch (\Exception $e) {
+            // Log the error or handle it as necessary
+            return back()->with('error', 'There was an issue sending your message. Please try again later.');
+        }
     }
-}
+    }

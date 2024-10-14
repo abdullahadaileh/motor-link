@@ -14,7 +14,7 @@
         <div class="swiper-slide-content">
           <h2>{{ $type->name }}</h2>
           <p>{{ $type->description ?? 'Discover our selection of vehicles.' }}</p> <!-- Default description if none exists -->
-          <a href="{{ route('motor-link-vehicles') }}" class="show-more">More</a> <!-- Show more button -->
+          <a href="{{ route('motor-link-vehicles', ['search' => '', 'type_id' => $type->id]) }}" class="show-more">More</a> <!-- Show more button -->
         </div>
       </div>
       @endforeach
