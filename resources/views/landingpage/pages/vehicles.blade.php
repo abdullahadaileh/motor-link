@@ -42,6 +42,7 @@
         <p>No vehicles found</p>
     @endforelse
 </div>
+<button id="scrollToTopBtn" class="scroll-to-top">↑</button>
 
 @endsection
 

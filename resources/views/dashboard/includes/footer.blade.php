@@ -1,7 +1,7 @@
 
 <div class="footer">
             <div class="copyright">
-                <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
+                <p> Copyright &copy; All rights reserved | <a href="{{ route('motor-link') }}" class="linkfotermotorlink">Motor Link</a></p>
             </div>
 </div>
 

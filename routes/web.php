@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\VehicleTypeController;
@@ -57,10 +58,11 @@ Route::get('/motor-link-vehicles/{vehicle}', [VehicleController::class, 'showLan
 
 // Dashboard Page Routs
 
-Route::get('/motor-link-dashboard', function () {
-    return view('dashboard.dashboard');
-})->name('motor-link-dashboard');
+// Route::get('/motor-link-dashboard', function () {
+//     return view('dashboard.dashboard');
+// })->name('motor-link-dashboard');
 
+Route::get('/motor-link-dashboard', [DashboardController::class, 'dashboard'])->name('motor-link-dashboard');
 
 
 // user controller
