@@ -54,7 +54,7 @@
 <script>
     var ctx = document.getElementById('overviewChart').getContext('2d');
     var overviewChart = new Chart(ctx, {
-        type: 'bar', // نوع المخطط (يمكنك تغييره إلى 'line' أو 'pie')
+        type: 'bar', // ('line' 'pie')
         data: {
             labels: ['Total Users', 'Total Vehicles', 'Available Vehicles'], 
             datasets: [{

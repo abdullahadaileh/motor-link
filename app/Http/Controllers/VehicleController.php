@@ -79,7 +79,7 @@ class VehicleController extends Controller
         // Filter by search term (vehicle make)
         if ($request->filled('search')) {
             $searchTerm = $request->search;
-            $query->where('make', 'like', '%' . $searchTerm . '%');
+            $query->where('make', 'like', '%' . $searchTerm . '%'); // البحث فقط في حقل make
         }
     
         // Get all vehicle types for filtering
@@ -90,7 +90,7 @@ class VehicleController extends Controller
     
         return view('landingpage.pages.vehicles', compact('vehicles', 'vehicleTypes'));
     }
-
+    
     public function showLandingPage(Vehicle $vehicle) // New method for the single vehicle landing page
     {
         return view('landingpage.pages.vehicleShow', compact('vehicle'));
