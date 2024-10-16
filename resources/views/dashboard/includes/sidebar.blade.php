@@ -45,7 +45,7 @@
             <!-- Contact submissions -->
             <li>
                 <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                    <i class="icon-envelope menu-icon"></i><span class="nav-text">Contacts</span>
+                    <i class="icon-envelope-open"></i><span class="nav-text">Contacts</span>
                 </a>
                 <ul aria-expanded="false">
                     <li><a href="{{ route('motor-link-dashboard-contacts') }}" aria-expanded="false">Contact submissions</a></li>

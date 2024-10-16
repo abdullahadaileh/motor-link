@@ -34,6 +34,17 @@ data-stellar-background-ratio="0.5">
                     </div>
                     <p><span>Email: </span> <a href="mailto:motorlink@gmail.com">motorlink@gmail.com</a></p>
                 </div>
+                <div class="contact-info-item">
+                    <div class="icon">
+                        <span class="icon-envelope-o"></span>
+                    </div>
+                    <p>
+                        <span>Social Media: </span>
+                        <a href="https://www.instagram.com/motor_1ink?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
+                          <i class="fab fa-instagram"></i> MotorLink
+                        </a>
+                      </p>
+                </div>
             </div>
             <div class="col-md-6 d-flex justify-content-center">
                 <img src="landing/assets/images/icons/Active Support-bro.svg" alt="Contact Image" class="img-fluid" style="max-height: 100%; max-width: 100%;">
