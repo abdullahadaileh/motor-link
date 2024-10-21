@@ -26,7 +26,7 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes(); 
 
-            // تعريف المفاتيح الخارجية
+
             $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('type_id')->references('id')->on('vehicle_types')->onDelete('cascade'); 
         });

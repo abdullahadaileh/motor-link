@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContactController;
@@ -18,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 // Landing Routs
 
 Route::get('/', [VehicleTypeController::class, 'showFleet'])->name('motor-link');
+Route::get('/motor-link-profile', [UserController::class, 'userProfile'])->name('motor-link-profile')->middleware('auth');
 
 // Home page
 Route::get('/motor-link', function () {
@@ -44,6 +46,9 @@ Route::get('/motor-link-vehicles', function () {
 Route::get('/motor-link-vehicles', [VehicleController::class, 'landingPage'])->name('motor-link-vehicles');
 Route::get('/motor-link-vehicles/{vehicle}', [VehicleController::class, 'showLandingPage'])->name('motor-link-vehicle-details');
 
+// Booking page
+Route::get('/vehicles/{vehicle}/book', [BookingController::class, 'create'])->name('motor-link-vehicle-booking');
+Route::post('/vehicles/{vehicle}/book', [BookingController::class, 'store'])->name('motor-link-vehicle-booking-store');
 
 
 
@@ -57,27 +62,26 @@ Route::get('/motor-link-vehicles/{vehicle}', [VehicleController::class, 'showLan
 Route::get('/motor-link-dashboard', function () {
     return view('dashboard.dashboard');
 })->name('motor-link-dashboard');
-Route::get('/motor-link-dashboard', [DashboardController::class, 'dashboard'])->name('motor-link-dashboard');
+Route::get('/motor-link-dashboard', [DashboardController::class, 'dashboard'])->name('motor-link-dashboard')->middleware('checkAdmin');
 
 
 // User page
+Route::get('/motor-link-dashboard-users', function () {
+    return view('dashboard.pages.users');
+})->name('motor-link-dashboard-users')->middleware('checkAdmin');
 
 Route::get('/motor-link-dashboard-addUser', function () {
     return view('dashboard.pages.addUser');
-})->name('motor-link-dashboard-addUser');
+})->name('motor-link-dashboard-addUser')->middleware('checkAdmin');
 
 Route::get('/motor-link-dashboard-editUser', function () {
     return view('dashboard.pages.editUser');
 })->name('motor-link-dashboard-editUser');
 
-Route::get('/motor-link-dashboard-users', function () {
-    return view('dashboard.pages.users');
-})->name('motor-link-dashboard-users');
-
 Route::get('/motor-link-dashboard-users-trashed', [UserController::class, 'trashed'])
     ->name('motor-link-dashboard-users-trashed');
 
-Route::get('/dashboard/profile', [UserController::class, 'profile'])->name('motor-link-dashboard-profile');
+Route::get('/dashboard/profile', [UserController::class, 'ownerProfile'])->name('motor-link-dashboard-profile')->middleware('checkAdmin');
 
 Route::get('/motor-link-dashboard-users', [UserController::class, 'index'])->name('motor-link-dashboard-users');
 
@@ -98,7 +102,7 @@ Route::post('/users/restore/{id}', [UserController::class, 'restore'])->name('mo
 
 // Vehicles page
 
-Route::get('motor-link-dashboard-vehicles', [VehicleController::class, 'index'])->name('motor-link-dashboard-vehicles-index');
+Route::get('motor-link-dashboard-vehicles', [VehicleController::class, 'index'])->name('motor-link-dashboard-vehicles-index')->middleware('checkAdmin');
 Route::get('motor-link-dashboard-vehicles/create', [VehicleController::class, 'create'])->name('motor-link-dashboard-vehicles-create');
 Route::post('motor-link-dashboard-vehicles', [VehicleController::class, 'store'])->name('motor-link-dashboard-vehicles-store');
 Route::get('motor-link-dashboard-vehicles/{vehicle}', [VehicleController::class, 'show'])->name('motor-link-dashboard-vehicles-show');
@@ -108,7 +112,7 @@ Route::delete('motor-link-dashboard-vehicles/{vehicle}', [VehicleController::cla
 
 
 // Vehicle Types page
-Route::get('motor-link-dashboard-vehicle-types', [VehicleTypeController::class, 'index'])->name('motor-link-dashboard-vehicle-types');
+Route::get('motor-link-dashboard-vehicle-types', [VehicleTypeController::class, 'index'])->name('motor-link-dashboard-vehicle-types')->middleware('checkAdmin');
 Route::get('motor-link-dashboard-vehicle-types/create', [VehicleTypeController::class, 'create'])->name('motor-link-dashboard-vehicle-types-create');
 Route::post('motor-link-dashboard-vehicle-types', [VehicleTypeController::class, 'store'])->name('motor-link-dashboard-vehicle-types-store');
 Route::get('motor-link-dashboard-vehicle-types/{type}', [VehicleTypeController::class, 'show'])->name('motor-link-dashboard-vehicle-types-show');

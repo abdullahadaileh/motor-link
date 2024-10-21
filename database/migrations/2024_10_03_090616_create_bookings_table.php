@@ -21,9 +21,10 @@ return new class extends Migration
             $table->string('payment_method')->default('Cash on Delivery');
             $table->string('delivery_option');
             $table->dateTime('booking_date');
+            $table->string('status')->default('pending');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade');
-                        $table->timestamps();
+            $table->timestamps();
         });
     }
 

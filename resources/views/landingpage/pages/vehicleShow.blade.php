@@ -38,6 +38,7 @@
                             <p style="color: #6a8b9d"><strong style="color: #457B9D">Status:</strong> {{ $vehicle->status }}</p>
 
                             <br>
+                            <a href="{{ route('motor-link-vehicle-booking', $vehicle) }}" class="btn btn-success">Book Now</a>
                             <a style="background-color: #457B9D; border:none" href="{{ route('motor-link-vehicles') }}" class="btn btn-primary">&larr; Back to Vehicles</a>
                         </div>
                     </div>

@@ -45,7 +45,7 @@
                       @endif
                   </div>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                      <a class="dropdown-item" href="">User Profile</a>
+                      <a class="dropdown-item" href="{{route('motor-link-profile')}}">User Profile</a>
                       <a class="dropdown-item" href="{{ route('motor-link-dashboard') }}">Admin Dashboard</a>
                       <a class="dropdown-item" href="{{ route('logout') }}" 
                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

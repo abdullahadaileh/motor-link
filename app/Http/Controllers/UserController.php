@@ -16,29 +16,51 @@ class UserController extends Controller
         return view('dashboard.pages.users', compact('users'));
     }
 
-    // Show
+    // Show user by ID
     public function show($id)
-{
-    $user = User::findOrFail($id);
-    return view('dashboard.pages.showUser', compact('user'));
-}
-
-public function profile()
-{
-    if (!auth()->check()) {
-        return redirect()->route('login')->with('error', 'You need to log in first.');
+    {
+        $user = User::findOrFail($id);
+        return view('dashboard.pages.showUser', compact('user'));
     }
 
-    $user = auth()->user();
-    return view('dashboard.pages.profile', compact('user'));
-}
+    // User Profile
+    public function userProfile()
+    {
+        if (!auth()->check()) {
+            return redirect()->route('login')->with('error', 'You need to log in first.');
+        }
+        $user = auth()->user();
+        $bookings = $user->bookings()->with('vehicle')->get();
+        if ($user->role === 'owner') {
+            return redirect()->route('motor-link-dashboard-profile');
+        }
+
+        return view('landingpage.pages.userProfile', compact('user', 'bookings'));
+    }
+
+    
+    
+    // Owner Profile
+    public function ownerProfile()
+    {
+        if (!auth()->check()) {
+            return redirect()->route('login')->with('error', 'You need to log in first.');
+        }
+        $user = auth()->user();
+
+        if ($user->role !== 'owner') {
+            return redirect()->route('motor-link-profile');
+        }
+
+        return view('dashboard.pages.ownerProfile', compact('user'));
+    }
 
     public function create()
     {
         return view('users.create');
     }
 
-    // Store
+    // Store a new user
     public function store(Request $request)
     {
         $validatedUser = $request->validate([
@@ -48,26 +70,26 @@ public function profile()
             'phone_number' => 'nullable|string',
             'image' => 'nullable|mimes:png,jpg,svg,jpeg,webp',
         ]);
-    
+
         $imagePath = null;
-    
+
         if ($request->has('image')) {
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
-            $filename = time().'.'.$extension;
+            $filename = time() . '.' . $extension;
             $path = 'dashboard/images/uploads/users';
             $file->move($path, $filename);
             $imagePath = $path . '/' . $filename; 
         }
-    
+
         if ($imagePath) {
             $validatedUser['image'] = $imagePath;
         }
+
         User::create($validatedUser);
-        \Log::info('Success message sent to session: User created successfully.');
+        \Log::info('User created successfully.');
         return redirect()->route('motor-link-dashboard-users')->with('success', 'User created successfully.');
     }
-    
 
     public function edit($id)
     {
@@ -75,7 +97,7 @@ public function profile()
         return view('dashboard.pages.editUser', compact('user'));
     }
 
-    // Update
+    // Update a user
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
@@ -84,15 +106,15 @@ public function profile()
             'phone_number' => 'nullable|string',
             'image' => 'nullable|mimes:png,jpg,svg,jpeg,webp',
         ]);
-    
+
         $user = User::findOrFail($id);
-    
+
         $userData = [
             'name' => $request->name,
             'email' => $request->email,
             'phone_number' => $request->phone_number,
         ];
-    
+
         if ($request->has('image')) {
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
@@ -100,22 +122,20 @@ public function profile()
             $path = 'dashboard/images/uploads/users';
             $file->move($path, $filename);
             $imagePath = $path . '/' . $filename;
-    
 
             if (File::exists(public_path($user->image))) {
                 File::delete(public_path($user->image));
             }
-    
+
             $userData['image'] = $imagePath;
         }
 
         $user->update($userData);
 
-        return redirect()->route('motor-link-dashboard-users')
-                         ->with('success', 'User updated successfully.');
+        return redirect()->route('motor-link-dashboard-users')->with('success', 'User updated successfully.');
     }
-    
-    // Soft delete the specified user
+
+    // Soft delete a user
     public function destroy($id)
     {
         $user = User::findOrFail($id);
@@ -124,18 +144,19 @@ public function profile()
         return redirect()->route('motor-link-dashboard-users')->with('success', 'User deleted successfully.');
     }
 
-    // Restore a soft deleted user
+    // Show trashed users
     public function trashed()
     {
         $users = User::onlyTrashed()->get();
         return view('dashboard.pages.trashedUsers', compact('users'));
     }
     
+    // Restore a soft deleted user
     public function restore($id)
     {
-
         $user = User::withTrashed()->findOrFail($id);
         $user->restore();
-    
+
         return redirect()->route('motor-link-dashboard-users')->with('success', 'User restored successfully.');
-    }}
+    }
+}

@@ -79,7 +79,7 @@ class VehicleController extends Controller
         // Filter by search term (vehicle make)
         if ($request->filled('search')) {
             $searchTerm = $request->search;
-            $query->where('make', 'like', '%' . $searchTerm . '%'); // البحث فقط في حقل make
+            $query->where('make', 'like', '%' . $searchTerm . '%'); 
         }
     
         // Get all vehicle types for filtering
