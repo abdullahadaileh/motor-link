@@ -28,7 +28,7 @@ class VehicleFactory extends Factory
             'price_per_day' => $this->faker->randomFloat(2, 10, 500),
             'fuel_type' => $this->faker->randomElement(['Petrol', 'Diesel', 'Electric', 'Hybrid']),
             'description' => $this->faker->paragraph,
-            'status' => $this->faker->randomElement(['available', 'rented', 'maintenance']),
+            'status' => $this->faker->randomElement(['available']),
         ];
     }
 }
