@@ -4,7 +4,6 @@
 <div class="container-fluid">
     @if(session('success'))
         <script>
-            // سيتم عرض SweetAlert عند إعادة تحميل الصفحة
             window.onload = function() {
                 Swal.fire({
                     title: 'Success!',
@@ -20,7 +19,9 @@
         <div class="col-12">
             <div class="card" style="border: none !important;">
                 <div class="card-body">
-                    <h4 class="card-title">Book Vehicle: {{ $vehicle->make }} {{ $vehicle->model }}</h4>
+                    <h1 class="Vehicles-title">Book Vehicle: {{ $vehicle->make }} {{ $vehicle->model }}</h1>
+                    <br><br>
+                    <br><br>
                     <br><br>
 
                     <div class="row">
@@ -35,32 +36,44 @@
 
                         <!-- Second column for primary vehicle details -->
                         <div class="col-md-4">
-                            <p style="color: #6a8b9d"><strong style="color: #457B9D">Make:</strong> {{ $vehicle->make }}</p>
-                            <p style="color: #6a8b9d"><strong style="color: #457B9D">Model:</strong> {{ $vehicle->model }}</p>
-                            <p style="color: #6a8b9d"><strong style="color: #457B9D">Year:</strong> {{ $vehicle->year }}</p>
-                            <p style="color: #6a8b9d"><strong style="color: #457B9D">Type:</strong> {{ $vehicle->type->name ?? 'N/A' }}</p>
-                            <p style="color: #6a8b9d"><strong style="color: #457B9D">Price Per Day:</strong> {{ $vehicle->price_per_day }}</p>
+                            <p style="color: #6a8b9d"><strong style="color: #8FBBA1">Make:</strong> {{ $vehicle->make }}</p>
+                            <p style="color: #6a8b9d"><strong style="color: #8FBBA1">Model:</strong> {{ $vehicle->model }}</p>
+                            <p style="color: #6a8b9d"><strong style="color: #8FBBA1">Year:</strong> {{ $vehicle->year }}</p>
+                            <p style="color: #6a8b9d"><strong style="color: #8FBBA1">Type:</strong> {{ $vehicle->type->name ?? 'N/A' }}</p>
+                            <p style="color: #6a8b9d"><strong style="color: #8FBBA1">Price Per Day:</strong> {{ $vehicle->price_per_day }}</p>
                         </div>
 
                         <!-- Third column for booking form and additional details -->
                         <div class="col-md-4">
                             <form id="bookingForm" method="POST" action="{{ route('motor-link-vehicle-booking-store', $vehicle) }}">
                                 @csrf
-                                <div class="form-group">
-                                    <label for="start_date">Start Date:</label>
-                                    <input type="date" id="start_date" name="start_date" class="form-control" required>
+                                <div class="form-group mb-3">
+                                    <label for="start_date" class="form-label">Start Date:</label>
+                                    <input type="date" id="start_date" name="start_date" class="form-control @error('start_date') is-invalid @enderror" 
+                                           min="{{ \Carbon\Carbon::now()->toDateString() }}" 
+                                           max="{{ \Carbon\Carbon::now()->addMonth()->toDateString() }}" 
+                                           value="{{ old('start_date') }}" required>
+                                    @error('start_date')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
-                                <div class="form-group">
-                                    <label for="end_date">End Date:</label>
-                                    <input type="date" id="end_date" name="end_date" class="form-control" required>
+                                <div class="form-group mb-3">
+                                    <label for="end_date" class="form-label">End Date:</label>
+                                    <input type="date" id="end_date" name="end_date" class="form-control @error('end_date') is-invalid @enderror" 
+                                           min="{{ \Carbon\Carbon::now()->toDateString() }}" 
+                                           max="{{ \Carbon\Carbon::now()->addMonth()->toDateString() }}" 
+                                           value="{{ old('end_date') }}" required>
+                                    @error('end_date')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
-                                <div class="form-group">
-                                    <label for="delivery_option">Delivery Option:</label>
+                                <div class="form-group mb-3">
+                                    <label for="delivery_option" class="form-label">Delivery Option:</label>
                                     <input type="text" id="delivery_option" name="delivery_option" class="form-control" required>
                                 </div>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary d-inline-block" style="margin-right: 10px;">Confirm Booking</button>
-                                    <a style="background-color: #457B9D; border:none" href="{{ route('motor-link-vehicle-details', $vehicle->id) }}" class="btn btn-primary d-inline-block">&larr; Back to vehicle</a>
+                                <div class="form-group d-flex justify-content-between">
+                                    <a style="background-color: #6a8b9d ;border:none" href="{{ route('motor-link-vehicle-details', $vehicle->id) }}" class="btn btn-secondary">&larr; Back</a>
+                                    <button style="width: 80% ;background-color: #8FBBA1 ;border:none" type="submit" class="btn btn-primary">Confirm Booking</button>
                                 </div>
                             </form>
                         </div>

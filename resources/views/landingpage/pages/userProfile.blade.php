@@ -1,18 +1,14 @@
 @extends('landingpage.layouts.master')
 
 @section('content')
-<br>
-<br>
-<br>
-<br>
-<br>
+<br><br><br><br><br>
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
             <div style="border: none !important" class="card">
                 <div class="card-body">
                     <div class="row">
-                        <!-- First column for profile image -->
+                        <!-- Profile Image Column -->
                         <div class="col-md-4 text-center">
                             @if($user->image)
                             <img id="profileImage" src="{{ asset($user->image) }}" alt="Profile Image" class="img-thumbnail profile-img" style="width: 280px; height: 280px; border-radius: 50%; object-fit: cover;">
@@ -21,29 +17,29 @@
                             @endif
                         </div>
 
-                        <!-- Second column for primary details -->
+                        <!-- Primary Details Column -->
                         <div class="col-md-4">
-                            <br>
-                            <br>
+                            <br><br>
                             <p style="color: #6a8b9d"><strong style="color: #457B9D">Name:</strong> {{ $user->name }}</p>
                             <p style="color: #6a8b9d"><strong style="color: #457B9D">Email:</strong> {{ $user->email }}</p>
                             <p style="color: #6a8b9d"><strong style="color: #457B9D">Phone Number:</strong> {{ $user->phone_number ?? 'N/A' }}</p>
                         </div>
 
-                        <!-- Third column for additional details -->
+                        <!-- Additional Details Column -->
                         <div class="col-md-4">
-                            <br>
-                            <br>
+                            <br><br>
                             <p style="color: #6a8b9d"><strong style="color: #457B9D">Since:</strong> {{ $user->created_at->format('d M, Y') }}</p>
-                            <a style="background-color: #8FBBA1; border:none" href="{{ route('motor-link-dashboard-editUser', $user->id) }}" class="btn btn-primary mt-3">Edit my info</a>
+                            <!-- Button to trigger modal -->
+                            <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#editProfileModal" style="width:32%;background-color: #8FBBA1; border:none">
+                                Edit my info
+                            </button>
                         </div>
                     </div>
-                    <br>
-                    <br>
-                    <br>
+
+                    <br><br><br>
                     <h1 class="Vehicles-title">Your Bookings</h1>
-                    <br>
-                    <br>
+                    <br><br>
+
                     @if($bookings->isEmpty())
                         <p>You have not made any bookings yet.</p>
                     @else
@@ -85,4 +81,40 @@
         </div>
     </div>
 </div>
+
+<!-- Modal for Editing Profile -->
+<div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('updateProfile', $user->id) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone_number" class="form-label">Phone Number</label>
+                        <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ $user->phone_number }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Profile Image</label>
+                        <input type="file" class="form-control" id="image" name="image">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="background-color: #457B9D;">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection

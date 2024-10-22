@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [VehicleTypeController::class, 'showFleet'])->name('motor-link');
 Route::get('/motor-link-profile', [UserController::class, 'userProfile'])->name('motor-link-profile')->middleware('auth');
+Route::put('/user/update/{id}', [UserController::class, 'updateProfile'])->name('updateProfile');
 
 // Home page
 Route::get('/motor-link', function () {

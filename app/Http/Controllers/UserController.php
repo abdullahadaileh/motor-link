@@ -38,7 +38,31 @@ class UserController extends Controller
         return view('landingpage.pages.userProfile', compact('user', 'bookings'));
     }
 
-    
+    public function updateProfile(Request $request, $id)
+{
+    $user = User::findOrFail($id);
+
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|max:255',
+        'phone_number' => 'nullable|string|max:20',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ]);
+
+    $user->name = $request->name;
+    $user->email = $request->email;
+    $user->phone_number = $request->phone_number;
+
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('profile_images', 'public');
+        $user->image = '/storage/' . $imagePath;
+    }
+
+    $user->save();
+
+    return redirect()->route('motor-link-profile')->with('success', 'Profile updated successfully.');
+}
+
     
     // Owner Profile
     public function ownerProfile()

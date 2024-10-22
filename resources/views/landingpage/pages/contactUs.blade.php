@@ -32,7 +32,7 @@ data-stellar-background-ratio="0.5">
                     <div class="icon">
                         <span class="icon-envelope-o"></span>
                     </div>
-                    <p><span>Email: </span> <a href="mailto:motorlink@gmail.com">motorlink@gmail.com</a></p>
+                    <p><span>Email: </span> <a href="mailto:motorlink31@gmail.com">motorlink31@gmail.com</a></p>
                 </div>
                 <div class="contact-info-item">
                     <div class="icon">
