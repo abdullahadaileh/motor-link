@@ -58,13 +58,10 @@ Route::post('/vehicles/{vehicle}/book', [BookingController::class, 'store'])->na
 // Dashboard Routes //////////////// Dashboard Routes //////////////// Dashboard Routes  ////////////////
 // //////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
 // Dashboard page
-Route::get('/motor-link-dashboard', function () {
-    return view('dashboard.dashboard');
-})->name('motor-link-dashboard');
-Route::get('/motor-link-dashboard', [DashboardController::class, 'dashboard'])->name('motor-link-dashboard')->middleware('checkAdmin');
-
+Route::get('/motor-link-dashboard', [DashboardController::class, 'dashboard'])
+    ->name('motor-link-dashboard')
+    ->middleware('checkAdmin');
 
 // User page
 Route::get('/motor-link-dashboard-users', function () {
@@ -77,59 +74,93 @@ Route::get('/motor-link-dashboard-addUser', function () {
 
 Route::get('/motor-link-dashboard-editUser', function () {
     return view('dashboard.pages.editUser');
-})->name('motor-link-dashboard-editUser');
+})->name('motor-link-dashboard-editUser')->middleware('checkAdmin');
 
 Route::get('/motor-link-dashboard-users-trashed', [UserController::class, 'trashed'])
-    ->name('motor-link-dashboard-users-trashed');
+    ->name('motor-link-dashboard-users-trashed')->middleware('checkAdmin');
 
-Route::get('/dashboard/profile', [UserController::class, 'ownerProfile'])->name('motor-link-dashboard-profile')->middleware('checkAdmin');
+Route::get('/dashboard/profile', [UserController::class, 'ownerProfile'])
+    ->name('motor-link-dashboard-profile')->middleware('checkAdmin');
 
-Route::get('/motor-link-dashboard-users', [UserController::class, 'index'])->name('motor-link-dashboard-users');
+Route::get('/motor-link-dashboard-users', [UserController::class, 'index'])
+    ->name('motor-link-dashboard-users')->middleware('checkAdmin');
 
-Route::get('users/create', [UserController::class, 'create'])->name('users.create');
+Route::get('users/create', [UserController::class, 'create'])
+    ->name('users.create')->middleware('checkAdmin');
 
-Route::post('users', [UserController::class, 'store'])->name('users.store');
+Route::post('users', [UserController::class, 'store'])
+    ->name('users.store')->middleware('checkAdmin');
 
-Route::get('/users/{id}', [UserController::class, 'show'])->name('motor-link-dashboard-showUser');
+Route::get('/users/{id}', [UserController::class, 'show'])
+    ->name('motor-link-dashboard-showUser')->middleware('checkAdmin');
 
-Route::get('users/{id}/edit', [UserController::class, 'edit'])->name('motor-link-dashboard-editUser');
+Route::get('users/{id}/edit', [UserController::class, 'edit'])
+    ->name('motor-link-dashboard-editUser')->middleware('checkAdmin');
 
-Route::put('users/{id}', [UserController::class, 'update'])->name('users.update');
+Route::put('users/{id}', [UserController::class, 'update'])
+    ->name('users.update')->middleware('checkAdmin');
 
-Route::delete('users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+Route::delete('users/{id}', [UserController::class, 'destroy'])
+    ->name('users.destroy')->middleware('checkAdmin');
 
-Route::post('/users/restore/{id}', [UserController::class, 'restore'])->name('motor-link-dashboard-users-restore');
-
+Route::post('/users/restore/{id}', [UserController::class, 'restore'])
+    ->name('motor-link-dashboard-users-restore')->middleware('checkAdmin');
 
 // Vehicles page
+Route::get('motor-link-dashboard-vehicles', [VehicleController::class, 'index'])
+    ->name('motor-link-dashboard-vehicles-index')->middleware('checkAdmin');
 
-Route::get('motor-link-dashboard-vehicles', [VehicleController::class, 'index'])->name('motor-link-dashboard-vehicles-index')->middleware('checkAdmin');
-Route::get('motor-link-dashboard-vehicles/create', [VehicleController::class, 'create'])->name('motor-link-dashboard-vehicles-create');
-Route::post('motor-link-dashboard-vehicles', [VehicleController::class, 'store'])->name('motor-link-dashboard-vehicles-store');
-Route::get('motor-link-dashboard-vehicles/{vehicle}', [VehicleController::class, 'show'])->name('motor-link-dashboard-vehicles-show');
-Route::get('motor-link-dashboard-vehicles/{vehicle}/edit', [VehicleController::class, 'edit'])->name('motor-link-dashboard-vehicles-edit');
-Route::put('motor-link-dashboard-vehicles/{vehicle}', [VehicleController::class, 'update'])->name('motor-link-dashboard-vehicles-update');
-Route::delete('motor-link-dashboard-vehicles/{vehicle}', [VehicleController::class, 'destroy'])->name('motor-link-dashboard-vehicles-destroy');
+Route::get('motor-link-dashboard-vehicles/create', [VehicleController::class, 'create'])
+    ->name('motor-link-dashboard-vehicles-create')->middleware('checkAdmin');
 
+Route::post('motor-link-dashboard-vehicles', [VehicleController::class, 'store'])
+    ->name('motor-link-dashboard-vehicles-store')->middleware('checkAdmin');
+
+Route::get('motor-link-dashboard-vehicles/{vehicle}', [VehicleController::class, 'show'])
+    ->name('motor-link-dashboard-vehicles-show')->middleware('checkAdmin');
+
+Route::get('motor-link-dashboard-vehicles/{vehicle}/edit', [VehicleController::class, 'edit'])
+    ->name('motor-link-dashboard-vehicles-edit')->middleware('checkAdmin');
+
+Route::put('motor-link-dashboard-vehicles/{vehicle}', [VehicleController::class, 'update'])
+    ->name('motor-link-dashboard-vehicles-update')->middleware('checkAdmin');
+
+Route::delete('motor-link-dashboard-vehicles/{vehicle}', [VehicleController::class, 'destroy'])
+    ->name('motor-link-dashboard-vehicles-destroy')->middleware('checkAdmin');
 
 // Vehicle Types page
-Route::get('motor-link-dashboard-vehicle-types', [VehicleTypeController::class, 'index'])->name('motor-link-dashboard-vehicle-types')->middleware('checkAdmin');
-Route::get('motor-link-dashboard-vehicle-types/create', [VehicleTypeController::class, 'create'])->name('motor-link-dashboard-vehicle-types-create');
-Route::post('motor-link-dashboard-vehicle-types', [VehicleTypeController::class, 'store'])->name('motor-link-dashboard-vehicle-types-store');
-Route::get('motor-link-dashboard-vehicle-types/{type}', [VehicleTypeController::class, 'show'])->name('motor-link-dashboard-vehicle-types-show');
-Route::get('motor-link-dashboard-vehicle-types/{type}/edit', [VehicleTypeController::class, 'edit'])->name('motor-link-dashboard-vehicle-types-edit');
-Route::put('/motor-link-dashboard-vehicle-types/{type}', [VehicleTypeController::class, 'update'])->name('motor-link-dashboard-vehicle-types-update');
-Route::delete('motor-link-dashboard-vehicle-types/{type}', [VehicleTypeController::class, 'destroy'])->name('motor-link-dashboard-vehicle-types-destroy');
+Route::get('motor-link-dashboard-vehicle-types', [VehicleTypeController::class, 'index'])
+    ->name('motor-link-dashboard-vehicle-types')->middleware('checkAdmin');
+
+Route::get('motor-link-dashboard-vehicle-types/create', [VehicleTypeController::class, 'create'])
+    ->name('motor-link-dashboard-vehicle-types-create')->middleware('checkAdmin');
+
+Route::post('motor-link-dashboard-vehicle-types', [VehicleTypeController::class, 'store'])
+    ->name('motor-link-dashboard-vehicle-types-store')->middleware('checkAdmin');
+
+Route::get('motor-link-dashboard-vehicle-types/{type}', [VehicleTypeController::class, 'show'])
+    ->name('motor-link-dashboard-vehicle-types-show')->middleware('checkAdmin');
+
+Route::get('motor-link-dashboard-vehicle-types/{type}/edit', [VehicleTypeController::class, 'edit'])
+    ->name('motor-link-dashboard-vehicle-types-edit')->middleware('checkAdmin');
+
+Route::put('/motor-link-dashboard-vehicle-types/{type}', [VehicleTypeController::class, 'update'])
+    ->name('motor-link-dashboard-vehicle-types-update')->middleware('checkAdmin');
+
+Route::delete('motor-link-dashboard-vehicle-types/{type}', [VehicleTypeController::class, 'destroy'])
+    ->name('motor-link-dashboard-vehicle-types-destroy')->middleware('checkAdmin');
 
 // Booking page
-Route::get('motor-link-dashboard-bookings', [BookingController::class, 'index'])->name('motor-link-dashboard-bookings-index')->middleware('checkAdmin'); 
+Route::get('motor-link-dashboard-bookings', [BookingController::class, 'index'])
+    ->name('motor-link-dashboard-bookings-index')->middleware('checkAdmin');
 
-Route::put('motor-link-dashboard-bookings/{id}', [BookingController::class, 'update'])->name('motor-link-dashboard-bookings-update')->middleware('checkAdmin');
-
+Route::put('motor-link-dashboard-bookings/{id}', [BookingController::class, 'update'])
+    ->name('motor-link-dashboard-bookings-update')->middleware('checkAdmin');
 
 // Logout 
 Route::post('/logout', function () {
     Auth::logout();
     return redirect('/motor-link');
-})->name('logout');
+})->name('logout')->middleware('checkAdmin');
+
 Auth::routes();

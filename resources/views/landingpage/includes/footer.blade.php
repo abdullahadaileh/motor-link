@@ -46,8 +46,8 @@
                     </li>
                 <li><a href="#"><span class="icon icon-phone"></span><span class="text">0781075450 
                     </span></a></li>
-                <li><a href="#"><span class="icon icon-envelope"></span><span
-                      class="text">motorlink@gmail.com</span></a></li>
+                <li><a href="mailto:motorlink31@gmail.com"><span class="icon icon-envelope"></span><span
+                      class="text">motorlink31@gmail.com</span></a></li>
               </ul>
             </div>
           </div>

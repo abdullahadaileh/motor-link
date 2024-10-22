@@ -506,18 +506,20 @@ body {
 
 .ftco-footer .ftco-footer-widget a {
   color: #ffffff;
+  text-decoration: none; /* No text decoration */
 }
 
 .ftco-footer .ftco-footer-widget a:hover {
-  color: #8FBBA1;
+  color: #ebebeb; /* Changed hover color */
 }
 
 .ftco-footer .ftco-footer-social a {
-  color:#ffffff;
+  color: #ffffff;
+  text-decoration: none; /* No text decoration */
 }
 
 .ftco-footer .ftco-footer-social a:hover {
-  color: #8FBBA1;
+  color: #ebebeb; /* Changed hover color */
 }
 
 .ftco-footer .block-23 ul {
@@ -541,21 +543,20 @@ body {
 
 .ftco-footer .block-23 ul li a {
   color: #ffffff;
+  text-decoration: none; /* No text decoration */
 }
 
 .ftco-footer .block-23 ul li a:hover {
-  color: #8FBBA1;
+  color: #ebebeb; /* Changed hover color */
 }
-.linkfotermotorlink{
-  color: #8FBBA1;
-}
+
 .linkfotermotorlink {
   color: #ffffff;
-  text-decoration: none;
+  text-decoration: none; /* No text decoration */
 }
 
 .linkfotermotorlink:hover {
-  color: #6F9B87;
+  color: #ebebeb; /* Changed hover color */
 }
 
 

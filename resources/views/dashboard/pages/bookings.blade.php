@@ -40,7 +40,7 @@
                                         <td>{{ $booking->end_date }}</td>
                                         <td>{{ $booking->total_price }}</td>
                                         <td>
-                                            <span style="padding:10px; color:white" class="badge badge-{{ $booking->status == 'Approved' ? 'success' : ($booking->status == 'Rejected' ? 'danger' : 'warning') }}">
+                                            <span style="padding:10px; color:white" class="badge badge-{{ $booking->status == 'Approved' ? 'success' : ($booking->status == 'Declined' ? 'danger' : 'warning') }}">
                                                 {{ $booking->status }}
                                             </span>
                                         </td>
@@ -80,7 +80,7 @@
                         <select name="status" id="status" class="form-control" required>
                             <option value="pending">Pending</option>
                             <option value="Approved">Approved</option>
-                            <option value="Rejected">Rejected</option>
+                            <option value="Declined">Declined</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Update Status</button>

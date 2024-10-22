@@ -58,7 +58,7 @@ class BookingController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'status' => 'required|string|in:pending,Approved,Rejected',
+            'status' => 'required|string|in:pending,Approved,Declined',
         ]);
     
         $booking = Booking::findOrFail($id);

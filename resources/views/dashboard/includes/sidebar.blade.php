@@ -18,7 +18,6 @@
                     <li><a href="{{ route('motor-link-dashboard-profile') }}">Profile</a></li>
                 </ul>
             </li>
-            <li class="nav-label">Forms</li>
 
             <!-- Users Section -->
             <li>
