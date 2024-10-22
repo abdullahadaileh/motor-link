@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Vehicle;
-use App\Models\VehicleType; // للوصول إلى نموذج نوع المركبات
+use App\Models\VehicleType;
 use File;
 use Illuminate\Http\Request;
 
@@ -29,7 +29,7 @@ class VehicleController extends Controller
     
     public function create()
     {
-        $vehicleTypes = VehicleType::all(); // جلب جميع الأنواع ديناميكيًا
+        $vehicleTypes = VehicleType::all(); 
         return view('dashboard.pages.vehicles.create', compact('vehicleTypes'));
     }
 
@@ -40,7 +40,7 @@ class VehicleController extends Controller
             'model' => 'required|string',
             'year' => 'required|integer',
             'image' => 'nullable|mimes:png,jpg,svg,jpeg,webp',
-            'type_id' => 'required|exists:vehicle_types,id', // الإشارة إلى جدول الأنواع الجديد
+            'type_id' => 'required|exists:vehicle_types,id',
             'price_per_day' => 'required|numeric',
             'fuel_type' => 'required|string',
             'description' => 'nullable|string',
@@ -49,7 +49,7 @@ class VehicleController extends Controller
 
         $imagePath = null;
 
-        // التعامل مع منطق رفع الصورة
+
         if ($request->has('image')) {
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
@@ -113,18 +113,18 @@ class VehicleController extends Controller
             'model' => 'required|string',
             'year' => 'required|integer',
             'image' => 'nullable|mimes:png,jpg,svg,jpeg,webp',
-            'type_id' => 'required|exists:vehicle_types,id', // الإشارة إلى جدول الأنواع الجديد
+            'type_id' => 'required|exists:vehicle_types,id', 
             'price_per_day' => 'required|numeric',
             'fuel_type' => 'required|string',
             'description' => 'nullable|string',
             'status' => 'required|string',
         ]);
 
-        $imagePath = $vehicle->image; // الاحتفاظ بالصورة القديمة إذا لم يتم رفع صورة جديدة
+        $imagePath = $vehicle->image;
 
-        // التعامل مع منطق رفع الصورة
+
         if ($request->has('image')) {
-            // حذف الصورة القديمة إذا كانت موجودة
+  
             if ($imagePath) {
                 File::delete($imagePath);
             }
@@ -138,14 +138,14 @@ class VehicleController extends Controller
 
         $validatedData['image'] = $imagePath;
 
-        // تحديث البيانات
+
         $vehicle->update($validatedData);
         return redirect()->route('motor-link-dashboard-vehicles-index')->with('success', 'Vehicle updated successfully.');
     }
 
     public function destroy(Vehicle $vehicle)
     {
-        // حذف الصورة من التخزين
+
         if ($vehicle->image) {
             File::delete($vehicle->image);
         }

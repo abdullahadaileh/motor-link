@@ -14,7 +14,8 @@ class BookingController extends Controller
      */
     public function index()
     {
-        // Logic for listing bookings (if needed)
+        $bookings = Booking::with(['vehicle', 'user'])->get(); 
+        return view('dashboard.pages.bookings', compact('bookings'));
     }
 
     public function create(Vehicle $vehicle)
@@ -52,5 +53,25 @@ class BookingController extends Controller
             'booking_date' => now(),
         ]);
     
-        return redirect()->back()->with('success', 'Booking successful!');    }
+        return redirect()->back()->with('success', 'Booking successful!');
+    }
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|string|in:pending,Approved,Rejected',
+        ]);
+    
+        $booking = Booking::findOrFail($id);
+        $booking->status = $request->status;
+    
+        if ($request->status === 'Approved') {
+            $vehicle = Vehicle::findOrFail($booking->vehicle_id);
+            $vehicle->status = 'unavailable';
+            $vehicle->save();
+        }
+    
+        $booking->save();
+    
+        return redirect()->route('motor-link-dashboard-bookings-index')->with('success', 'Booking status updated successfully.');
+    }
     }

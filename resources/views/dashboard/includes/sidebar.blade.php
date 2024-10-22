@@ -41,6 +41,14 @@
                     <li><a href="{{ route('motor-link-dashboard-vehicle-types') }}" aria-expanded="false">Vehicle types</a></li>
                 </ul>
             </li>
+            <li>
+                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                    <i class='bx bx-car bx-light menu-icon' style="font-size: 1.1rem;"></i><span class="nav-text">Bookings</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{ route('motor-link-dashboard-bookings-index') }}" aria-expanded="false">Manage Bookings</a></li>
+                </ul>
+            </li>
 
             <!-- Contact submissions -->
             <li>

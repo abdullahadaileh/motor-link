@@ -45,13 +45,14 @@
                       @endif
                   </div>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                      <a class="dropdown-item" href="{{route('motor-link-profile')}}">User Profile</a>
+                      <a class="dropdown-item" href="{{route('motor-link-profile')}}">Profile</a>
+                      @if(auth()->user()->role === 'owner')
                       <a class="dropdown-item" href="{{ route('motor-link-dashboard') }}">Admin Dashboard</a>
+                  @endif
                       <a class="dropdown-item" href="{{ route('logout') }}" 
                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                       Logout
                       </a>
-                      
                       <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                           @csrf
                       </form>                      

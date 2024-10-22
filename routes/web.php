@@ -121,6 +121,12 @@ Route::get('motor-link-dashboard-vehicle-types/{type}/edit', [VehicleTypeControl
 Route::put('/motor-link-dashboard-vehicle-types/{type}', [VehicleTypeController::class, 'update'])->name('motor-link-dashboard-vehicle-types-update');
 Route::delete('motor-link-dashboard-vehicle-types/{type}', [VehicleTypeController::class, 'destroy'])->name('motor-link-dashboard-vehicle-types-destroy');
 
+// Booking page
+Route::get('motor-link-dashboard-bookings', [BookingController::class, 'index'])->name('motor-link-dashboard-bookings-index')->middleware('checkAdmin'); 
+
+Route::put('motor-link-dashboard-bookings/{id}', [BookingController::class, 'update'])->name('motor-link-dashboard-bookings-update')->middleware('checkAdmin');
+
+
 // Logout 
 Route::post('/logout', function () {
     Auth::logout();

@@ -59,7 +59,7 @@
                                             @if($vehicle->image)
                                                 <img src="{{ asset($vehicle->image) }}" alt="Image" style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover;" />
                                             @else
-                                                <img src="{{ asset('landing/assets/images/Luxury car.webp') }}" alt="Image" style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover;" />
+                                                <img src="{{ asset('landing/assets/images/carsilhouette.jpg') }}" alt="Image" style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover;" />
                                             @endif
                                         </td>
                                         <td>{{ $vehicle->make }}</td>

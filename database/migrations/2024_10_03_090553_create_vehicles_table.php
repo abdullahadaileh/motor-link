@@ -22,7 +22,7 @@ return new class extends Migration
             $table->decimal('price_per_day', 10, 2);
             $table->string('fuel_type');
             $table->text('description')->nullable();
-            $table->string('status');
+            $table->string('status')->default('available');
             $table->timestamps();
             $table->softDeletes(); 
 

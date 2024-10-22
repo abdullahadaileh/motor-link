@@ -47,4 +47,19 @@
         </div>
     </div>
 </div>
+
+<!-- Include SweetAlert JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        @if($vehicle->status === 'unavailable')
+            Swal.fire({
+                title: 'Soory this vehicle is not available',
+                icon: 'warning',
+                confirmButtonText: 'OK'
+            });
+        @endif
+    });
+</script>
 @endsection
