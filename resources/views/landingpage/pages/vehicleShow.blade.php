@@ -39,7 +39,7 @@
 
                             <br>
                             <a style="background-color: #6a8b9d; border:none" href="{{ route('motor-link-vehicles') }}" class="btn btn-primary">&larr; Back</a>
-                            <a style="background-color: #8FBBA1 ;border:none" href="{{ route('motor-link-vehicle-booking', $vehicle) }}" class="btn btn-success">Book Now</a>
+                            <a id="book-now-btn" style="background-color: #8FBBA1; border:none;" href="#" class="btn btn-success">Book Now</a>
                         </div>
                     </div>
                 </div>
@@ -60,6 +60,31 @@
                 confirmButtonText: 'OK'
             });
         @endif
+    });
+    // Assume you have a variable that indicates if the user is authenticated
+    const isAuthenticated = @json(auth()->check()); // Check if the user is logged in
+
+    document.getElementById('book-now-btn').addEventListener('click', function(event) {
+        // Prevent the default link behavior
+        event.preventDefault();
+
+        // Check if the user is authenticated
+        if (!isAuthenticated) {
+            // Show SweetAlert if the user is not logged in
+            Swal.fire({
+                icon: 'warning',
+                title: 'You Should Log In First',
+                text: 'Please log in to proceed with booking.',
+                confirmButtonText: 'Go to Login',
+                willClose: () => {
+                    // Redirect to the login page
+                    window.location.href = '{{ route('login') }}';
+                }
+            });
+        } else {
+            // Redirect to the booking page if authenticated
+            window.location.href = '{{ route('motor-link-vehicle-booking', $vehicle) }}';
+        }
     });
 </script>
 @endsection

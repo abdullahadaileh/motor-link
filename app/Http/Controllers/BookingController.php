@@ -9,15 +9,13 @@ use Carbon\Carbon;
 
 class BookingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
+        // Eager load user and vehicle along with bookings
         $bookings = Booking::with(['vehicle', 'user'])->get(); 
         return view('dashboard.pages.bookings', compact('bookings'));
     }
-
+    
     public function create(Vehicle $vehicle)
     {
         return view('landingpage.pages.bookings.create', compact('vehicle'));

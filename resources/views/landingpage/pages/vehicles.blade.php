@@ -32,9 +32,9 @@
             @endif
 
             <div class="Vehicles-card-content">
-                <h3>{{ $vehicle->make }} {{ $vehicle->model }} ({{ $vehicle->year }})</h3>
+                <h3>{{ $vehicle->make }} {{ $vehicle->model }}</h3>
                 <p>{{ $vehicle->type->name ?? 'N/A' }}</p>
-                <p class="clamped-text">{{ Str::words($vehicle->description, 10, '...') }}</p>
+                <p>{{ $vehicle->price_per_day }} JD per day</p>
                 <a href="{{ route('motor-link-vehicle-details', $vehicle) }}" class="Vehicles-view-button">Show more</a>
             </div>
         </div>

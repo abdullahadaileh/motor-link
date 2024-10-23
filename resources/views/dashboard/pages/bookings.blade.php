@@ -20,9 +20,10 @@
                         <table class="table table-striped table-bordered zero-configuration">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
                                     <th>Vehicle Name</th>
                                     <th>User</th>
+                                    <th>Location</th> <!-- Add Location Column -->
+                                    <th>Delivery Option</th> <!-- Add Delivery Option Column -->
                                     <th>Start Date</th>
                                     <th>End Date</th>
                                     <th>Total Price</th>
@@ -33,11 +34,12 @@
                             <tbody>
                                 @foreach ($bookings as $booking)
                                     <tr>
-                                        <td>{{ $booking->id }}</td>
                                         <td>{{ $booking->vehicle->make }}</td>
                                         <td>{{ $booking->user->name }}</td>
-                                        <td>{{ $booking->start_date }}</td>
-                                        <td>{{ $booking->end_date }}</td>
+                                        <td>{{ $booking->user->location }}</td> <!-- Display User Location -->
+                                        <td>{{ $booking->delivery_option }}</td> <!-- Display Delivery Option -->
+                                        <td>{{ \Carbon\Carbon::parse($booking->start_date)->format('F j, Y') }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($booking->end_date)->format('F j, Y') }}</td>
                                         <td>{{ $booking->total_price }}</td>
                                         <td>
                                             <span style="padding:10px; color:white" class="badge badge-{{ $booking->status == 'Approved' ? 'success' : ($booking->status == 'Declined' ? 'danger' : 'warning') }}">

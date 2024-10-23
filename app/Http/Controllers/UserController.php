@@ -39,30 +39,32 @@ class UserController extends Controller
     }
 
     public function updateProfile(Request $request, $id)
-{
-    $user = User::findOrFail($id);
-
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|max:255',
-        'phone_number' => 'nullable|string|max:20',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    ]);
-
-    $user->name = $request->name;
-    $user->email = $request->email;
-    $user->phone_number = $request->phone_number;
-
-    if ($request->hasFile('image')) {
-        $imagePath = $request->file('image')->store('profile_images', 'public');
-        $user->image = '/storage/' . $imagePath;
+    {
+        $user = User::findOrFail($id);
+    
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone_number' => 'nullable|string|max:20',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'location' => 'nullable|string|max:255',
+        ]);
+    
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone_number = $request->phone_number;
+        $user->location = $request->location; // تحديث الموقع
+    
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('profile_images', 'public');
+            $user->image = '/storage/' . $imagePath;
+        }
+    
+        $user->save();
+    
+        return redirect()->route('motor-link-profile')->with('success', 'Profile updated successfully.');
     }
-
-    $user->save();
-
-    return redirect()->route('motor-link-profile')->with('success', 'Profile updated successfully.');
-}
-
+        
     
     // Owner Profile
     public function ownerProfile()
@@ -93,9 +95,11 @@ class UserController extends Controller
             'password' => 'required|string|min:8|confirmed',
             'phone_number' => 'nullable|string',
             'image' => 'nullable|mimes:png,jpg,svg,jpeg,webp',
+            'location' => 'nullable|string|max:255',
         ]);
 
         $imagePath = null;
+        
 
         if ($request->has('image')) {
             $file = $request->file('image');
@@ -109,12 +113,31 @@ class UserController extends Controller
         if ($imagePath) {
             $validatedUser['image'] = $imagePath;
         }
+        
+        $validatedUser['location'] = $request->location;
 
         User::create($validatedUser);
         \Log::info('User created successfully.');
         return redirect()->route('motor-link-dashboard-users')->with('success', 'User created successfully.');
     }
-
+    public function saveLocation(Request $request)
+    {
+        $request->validate([
+            'location' => 'required|string|max:255',
+        ]);
+    
+        $user = auth()->user(); 
+    
+        if (!$user) {
+            return response()->json(['success' => false, 'message' => 'User not authenticated'], 401);
+        }
+    
+        $user->location = $request->location; 
+        $user->save();
+    
+        return response()->json(['success' => true, 'message' => 'Location saved successfully!']);
+    }
+    
     public function edit($id)
     {
         $user = User::findOrFail($id);

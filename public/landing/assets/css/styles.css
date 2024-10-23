@@ -79,6 +79,14 @@ body {
 }
 /* navbar   navbar   navbar   navbar   navbar   navbar   navbar   end*/
 
+@media (max-width: 768px) {
+  .small-table {
+      font-size: 0.6rem; 
+  }
+  .small-table th, .small-table td {
+      padding: 0.3rem; 
+  }
+}
 
 
 
@@ -136,7 +144,7 @@ body {
 }
 
 .moto-cta-btn {
-  background-color: #7A9E8A;
+  background-color: #8FBBA1;
   color: white;
   padding: 15px 30px;
   border-radius: 25px;
@@ -189,7 +197,7 @@ body {
 }
 
 .search-btn {
-  background-color: #7A9E8A;
+  background-color: #8FBBA1;
   color: white;
   border: none;
   cursor: pointer;

@@ -48,11 +48,10 @@
 
     ::-webkit-scrollbar-track {
       background: #f1f1f100;
-      border-radius: 10px;
     }
 
     ::-webkit-scrollbar-thumb {
-      background: #457b9d9f;
+      background: #457b9d07;
       border-radius: 10px;
     }
   </style>

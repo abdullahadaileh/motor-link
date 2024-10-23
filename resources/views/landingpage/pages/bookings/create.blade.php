@@ -69,7 +69,11 @@
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="delivery_option" class="form-label">Delivery Option:</label>
-                                    <input type="text" id="delivery_option" name="delivery_option" class="form-control" required>
+                                    <select id="delivery_option" name="delivery_option" class="form-control" required>
+                                        <option value="" disabled selected>Select an option</option>
+                                        <option value="receipt">Receipt</option>
+                                        <option value="delivery">Delivery to the site</option>
+                                    </select>
                                 </div>
                                 <div class="form-group d-flex justify-content-between">
                                     <a style="background-color: #6a8b9d ;border:none" href="{{ route('motor-link-vehicle-details', $vehicle->id) }}" class="btn btn-secondary">&larr; Back</a>

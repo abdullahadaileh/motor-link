@@ -19,9 +19,7 @@
             <ul class="list-unstyled">
               <li><a href="{{ route('motor-link-about') }}" class="py-2 d-block">About</a></li>
               <li><a href="{{ route('motor-link-about') }}" class="py-2 d-block">Services</a></li>
-              <li><a href="#" class="py-2 d-block">Term and Conditions</a></li>
-              <li><a href="#" class="py-2 d-block">Best Price Guarantee</a></li>
-              <li><a href="#" class="py-2 d-block">Privacy &amp; Cookies Policy</a></li>
+              <li><a href="{{ route('motor-link') }}#how-it-works" class="py-2 d-block">How it works</a></li>
             </ul>
           </div>
         </div>
@@ -30,10 +28,8 @@
             <h2 class="ftco-heading-2">Customer Support</h2>
             <ul class="list-unstyled">
               <li><a href="{{ route('motor-link-about') }}#faq-section" class="py-2 d-block">FAQ</a></li>
-              <li><a href="#" class="py-2 d-block">Payment Option</a></li>
               <li><a href="{{ route('motor-link') }}#how-it-works" class="py-2 d-block">Booking Tips</a></li>
-              <li><a href="{{ route('motor-link') }}#how-it-works" class="py-2 d-block">How it works</a></li>
-              <li><a href="contactUs.html" class="py-2 d-block">Contact Us</a></li>
+              <li><a href="{{ route('motor-link-contact') }}" class="py-2 d-block">Contact Us</a></li>
             </ul>
           </div>
         </div>
@@ -44,10 +40,8 @@
               <ul>
                 <li style="color: white;">Jordan | Aqaba
                     </li>
-                <li><a href="#"><span class="icon icon-phone"></span><span class="text">0781075450 
-                    </span></a></li>
-                <li><a href="mailto:motorlink31@gmail.com"><span class="icon icon-envelope"></span><span
-                      class="text">motorlink31@gmail.com</span></a></li>
+                    <li><a href="tel:+962781075450">0781075450</a></li>
+                    <li><a href="mailto:motorlink31@gmail.com">motorlink31@gmail.com</a></li>
               </ul>
             </div>
           </div>
@@ -55,7 +49,6 @@
       </div>
       <div class="row">
         <div class="col-md-12 text-center">
-
           <p> Copyright &copy; All rights reserved | <a href="{{ route('motor-link') }}" class="linkfotermotorlink">Motor Link</a></p>
         </div>
       </div>

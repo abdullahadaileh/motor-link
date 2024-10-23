@@ -29,6 +29,7 @@
                         <div class="col-md-4">
                             <br><br>
                             <p style="color: #6a8b9d"><strong style="color: #457B9D">Since:</strong> {{ $user->created_at->format('d M, Y') }}</p>
+                            <p style="color: #6a8b9d"><strong style="color: #457B9D">Location:</strong> {{ $user->location ?? 'Not specified' }}</p> <!-- Displaying user location -->
                             <!-- Button to trigger modal -->
                             <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#editProfileModal" style="width:32%;background-color: #8FBBA1; border:none">
                                 Edit my info
@@ -43,38 +44,39 @@
                     @if($bookings->isEmpty())
                         <p>You have not made any bookings yet.</p>
                     @else
-                    <table class="table table-striped table-bordered text-center" style="background-color: #ffffff !important;">
-                        <thead>
-                            <tr style="background-color: #ffffff !important;">
-                                <th>Vehicle Image</th>
-                                <th>Vehicle Name</th>
-                                <th>Start Date</th>
-                                <th>End Date</th>
-                                <th>Total Price</th>
-                                <th>Delivery Option</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody style="background-color: #ffffff !important;">
-                            @foreach($bookings as $booking)
-                                <tr>
-                                    <td class="align-middle">
-                                        @if($booking->vehicle->image)
-                                        <img src="{{ asset($booking->vehicle->image) }}" alt="{{ $booking->vehicle->make }}" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
-                                        @else
-                                        <img src="{{ asset('landing/assets/images/carsilhouette.jpg') }}" alt="Image" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;" />
-                                    @endif
-                                    </td>
-                                    <td class="align-middle">{{ $booking->vehicle->make }}</td>
-                                    <td class="align-middle">{{ \Carbon\Carbon::parse($booking->start_date)->format('d M Y') }}</td>
-                                    <td class="align-middle">{{ \Carbon\Carbon::parse($booking->end_date)->format('d M Y') }}</td>
-                                    <td class="align-middle">{{ number_format($booking->total_price, 2) }}</td>
-                                    <td class="align-middle">{{ $booking->delivery_option }}</td>
-                                    <td class="align-middle">{{ $booking->status }}</td>
+                    <div class="table-responsive">
+                        <table class="table table-striped text-center small-table" style="background-color: #ffffff !important;">
+                            <thead>
+                                <tr style="background-color: #ffffff !important;">
+                                    <th>Vehicle Image</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Total Price</th>
+                                    <th>Delivery Option</th>
+                                    <th>Status</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody style="background-color: #ffffff !important;">
+                                @foreach($bookings as $booking)
+                                    <tr>
+                                        <td class="align-middle">
+                                            <a href="{{ route('motor-link-vehicle-details', $booking->vehicle) }}">
+                                                @if($booking->vehicle->image)
+                                                <img src="{{ asset($booking->vehicle->image) }}" alt="{{ $booking->vehicle->make }}" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
+                                                @else
+                                                <img src="{{ asset('landing/assets/images/carsilhouette.jpg') }}" alt="Image" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;" />
+                                                @endif
+                                            </a>                                        </td>
+                                        <td class="align-middle">{{ \Carbon\Carbon::parse($booking->start_date)->format('d M Y') }}</td>
+                                        <td class="align-middle">{{ \Carbon\Carbon::parse($booking->end_date)->format('d M Y') }}</td>
+                                        <td class="align-middle">{{ number_format($booking->total_price, 2) }}</td>
+                                        <td class="align-middle">{{ $booking->delivery_option }}</td>
+                                        <td class="align-middle">{{ $booking->status }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                     @endif
                 </div>
             </div>
@@ -110,11 +112,104 @@
                         <label for="image" class="form-label">Profile Image</label>
                         <input type="file" class="form-control" id="image" name="image">
                     </div>
-                    <button type="submit" class="btn btn-primary" style="background-color: #457B9D;">Save Changes</button>
+                    <div class="mb-3">
+                        <label for="location" class="form-label">Location</label>
+                        <input type="text" class="form-control" id="location-input" name="location" value="{{ $user->location }}" readonly required>
+                        <button type="button" class="btn btn-secondary mt-2" id="current-location-btn" style="background-color: #8FBBA1;border:none">Use Current Location</button>
+                        <button type="button" class="btn btn-primary mt-2" id="save-location-btn" style="background-color: #457B9D;border:none">Save Location</button>
+                    </div>                    
+                    <button type="submit" class="btn btn-primary" style="background-color: #457B9D;border:none">Save Changes</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
+<script>
+    document.getElementById('current-location-btn').addEventListener('click', function() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+
+                const locationInput = document.getElementById('location-input');
+
+                fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data && data.display_name) {
+                            locationInput.value = data.display_name;
+
+                            // SweetAlert2 notification
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Location Found!',
+                                text: `Your location has been set to: ${data.display_name}`
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Failed to fetch location. Please try again.'
+                        });
+                    });
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Geolocation not supported',
+                text: 'Your browser does not support geolocation.'
+            });
+        }
+    });
+
+    document.getElementById('save-location-btn').addEventListener('click', function() {
+        const location = document.getElementById('location-input').value;
+
+        if (location) {
+            // Send data to the server
+            fetch('/save-location', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({ location: location })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: 'Location saved successfully!'
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Error saving location.'
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'An error occurred. Please try again.'
+                });
+            });
+        } else {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Location Required',
+                text: 'Please enter a location first.'
+            });
+        }
+    });
+</script>
 
 @endsection

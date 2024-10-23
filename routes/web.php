@@ -50,6 +50,7 @@ Route::get('/motor-link-vehicles/{vehicle}', [VehicleController::class, 'showLan
 // Booking page
 Route::get('/vehicles/{vehicle}/book', [BookingController::class, 'create'])->name('motor-link-vehicle-booking');
 Route::post('/vehicles/{vehicle}/book', [BookingController::class, 'store'])->name('motor-link-vehicle-booking-store');
+Route::post('/save-location', [UserController::class, 'saveLocation'])->name('save-location');
 
 
 

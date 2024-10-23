@@ -25,30 +25,6 @@ scrollToTopBtn.addEventListener('click', () => {
 
 
 
-// maps.js Start
-function initMap() {
-  const input = document.getElementById('location-input');
-  const autocomplete = new google.maps.places.Autocomplete(input);
-
-  const map = new google.maps.Map(document.getElementById('map'), {
-    center: { lat: -34.397, lng: 150.644 },
-    zoom: 8,
-  });
-
-  autocomplete.addListener('place_changed', () => {
-    const place = autocomplete.getPlace();
-    if (place.geometry) {
-      map.setCenter(place.geometry.location);
-      map.setZoom(15);
-    }
-  });
-}
-
-window.onload = initMap;
-// maps.js End
-
-
-
 var swiper = new Swiper(".swiper", {
   effect: "coverflow",
   grabCursor: true,
