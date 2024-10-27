@@ -74,6 +74,11 @@
                                         <option value="receipt">Receipt</option>
                                         <option value="delivery">Delivery to the site</option>
                                     </select>
+                                    <div id="additional-fee" style="color: red; display: none;">Additional Fee: 3 JD</div>
+                                </div>
+                                                                <div class="form-group mb-3">
+                                    <label for="total_price" class="form-label">Total Price:</label>
+                                    <input type="text" id="total_price" class="form-control" value="{{ $vehicle->price_per_day }}" readonly>
                                 </div>
                                 <div class="form-group d-flex justify-content-between">
                                     <a style="background-color: #6a8b9d ;border:none" href="{{ route('motor-link-vehicle-details', $vehicle->id) }}" class="btn btn-secondary">&larr; Back</a>
@@ -90,12 +95,42 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+    const basePrice = {{ $vehicle->price_per_day }};
+    const deliveryFee = 3;
+    
+    function calculateTotalPrice() {
+        const startDate = new Date(document.getElementById('start_date').value);
+        const endDate = new Date(document.getElementById('end_date').value);
+        const deliveryOption = document.getElementById('delivery_option').value;
+
+        if (startDate && endDate && endDate >= startDate) {
+            const days = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1; // Include end date
+            let totalAmount = days * basePrice;
+
+            // Add delivery fee if selected
+            if (deliveryOption === 'delivery') {
+                totalAmount += deliveryFee;
+                document.getElementById('additional-fee').style.display = 'block';
+            } else {
+                document.getElementById('additional-fee').style.display = 'none';
+            }
+
+            // Update total price input field
+            document.getElementById('total_price').value = totalAmount;
+        }
+    }
+
+    document.getElementById('start_date').addEventListener('change', calculateTotalPrice);
+    document.getElementById('end_date').addEventListener('change', calculateTotalPrice);
+    document.getElementById('delivery_option').addEventListener('change', calculateTotalPrice);
+
     document.getElementById('bookingForm').addEventListener('submit', function(event) {
         event.preventDefault();
+        const totalAmount = document.getElementById('total_price').value;
 
         Swal.fire({
-            title: 'Are you sure?',
-            text: "Do you want to confirm this booking?",
+            title: 'Total Amount',
+            text: "Your total amount is: " + totalAmount + " JD. Do you want to confirm this booking?",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',

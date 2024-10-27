@@ -39,6 +39,11 @@ class BookingController extends Controller
         $vehicle_rate_per_day = $vehicle->price_per_day;
         $calculated_total_price = $rental_days * $vehicle_rate_per_day;
     
+        // Check for additional delivery fee
+        if ($request->delivery_option === 'delivery') {
+            $calculated_total_price += 3; // Add additional delivery fee
+        }
+    
         // Create the booking
         Booking::create([
             'user_id' => auth()->id(),
@@ -51,9 +56,9 @@ class BookingController extends Controller
             'booking_date' => now(),
         ]);
     
-        return redirect()->back()->with('success', 'Booking successful!');
+        return redirect()->route('motor-link-vehicles')->with('success', 'Booking successful!');
     }
-    public function update(Request $request, $id)
+        public function update(Request $request, $id)
     {
         $request->validate([
             'status' => 'required|string|in:pending,Approved,Declined',
@@ -64,10 +69,14 @@ class BookingController extends Controller
     
         if ($request->status === 'Approved') {
             $vehicle = Vehicle::findOrFail($booking->vehicle_id);
-            $vehicle->status = 'unavailable';
+            $vehicle->status = 'unavailable'; 
+            $vehicle->save();
+        } elseif ($request->status === 'Pending' || $request->status === 'Declined') {
+            $vehicle = Vehicle::findOrFail($booking->vehicle_id);
+            $vehicle->status = 'available'; 
             $vehicle->save();
         }
-    
+            
         $booking->save();
     
         return redirect()->route('motor-link-dashboard-bookings-index')->with('success', 'Booking status updated successfully.');

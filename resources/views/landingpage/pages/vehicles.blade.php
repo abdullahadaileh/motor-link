@@ -1,6 +1,18 @@
 @extends('landingpage.layouts.master')
 
 @section('content')
+@if(session('success'))
+<script>
+    window.onload = function() {
+        Swal.fire({
+            title: 'Success!',
+            text: "{{ session('success') }}",
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    }
+</script>
+@endif
 
 <div class="Vehicles-header">
   <h1 class="Vehicles-title">Vehicles</h1>
@@ -17,27 +29,28 @@
         </select>
         <button style="width: 100px" type="submit" id="filterButton" class="Vehicles-filter-button">Filter</button>
     </form>
-      </div>
+  </div>
 </div>
 
 {{-- Vehicle Cards --}}
 <div class="Vehicles-container" id="vehiclesContainer">
     @forelse ($vehicles as $vehicle)
-        <div class="Vehicles-card" data-make="{{ $vehicle->make }}" data-type="{{ $vehicle->type->name ?? 'N/A' }}">
+        @if($vehicle->status === 'available') {{-- Check if vehicle is available --}}
+            <div class="Vehicles-card" data-make="{{ $vehicle->make }}" data-type="{{ $vehicle->type->name ?? 'N/A' }}">
+                @if($vehicle->image)
+                    <img src="{{ asset($vehicle->image) }}" alt="Image" style="height: 200px; object-fit: cover;" class="Vehicles-card-image" />
+                @else
+                    <img src="{{ asset('landing/assets/images/carsilhouette.jpg') }}" alt="Image" style="height: 200px; object-fit: cover;" class="Vehicles-card-image" />
+                @endif
 
-            @if($vehicle->image)
-                <img src="{{ asset($vehicle->image) }}" alt="Image" style=" height: 200px; object-fit: cover;" class="Vehicles-card-image" />
-            @else
-                <img src="{{ asset('landing/assets/images/carsilhouette.jpg') }}" alt="Image" style=" height: 200px; object-fit: cover;" class="Vehicles-card-image" />
-            @endif
-
-            <div class="Vehicles-card-content">
-                <h3>{{ $vehicle->make }} {{ $vehicle->model }}</h3>
-                <p>{{ $vehicle->type->name ?? 'N/A' }}</p>
-                <p>{{ $vehicle->price_per_day }} JD per day</p>
-                <a href="{{ route('motor-link-vehicle-details', $vehicle) }}" class="Vehicles-view-button">Show more</a>
+                <div class="Vehicles-card-content">
+                    <h3>{{ $vehicle->make }} {{ $vehicle->model }}</h3>
+                    <p>{{ $vehicle->type->name ?? 'N/A' }}</p>
+                    <p>{{ $vehicle->price_per_day }} JD per day</p>
+                    <a href="{{ route('motor-link-vehicle-details', $vehicle) }}" class="Vehicles-view-button">Show more</a>
+                </div>
             </div>
-        </div>
+        @endif
     @empty
         <p>No vehicles found</p>
     @endforelse

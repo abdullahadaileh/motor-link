@@ -1,7 +1,7 @@
 @extends('landingpage.layouts.master')
 @section('content')
-
-<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('landing/assets/images/pexels-molnartamasphotography-25635758.jpg');"
+<div class="bodyOfContact">
+<section class="hero-wrap hero-wrap-2 js-fullheight" 
 data-stellar-background-ratio="0.5">
 <div class="overlay"></div>
 <div class="container">
@@ -47,7 +47,7 @@ data-stellar-background-ratio="0.5">
                 </div>
             </div>
             <div class="col-md-6 d-flex justify-content-center">
-                <img src="landing/assets/images/icons/Active Support-bro.svg" alt="Contact Image" class="img-fluid" style="max-height: 100%; max-width: 100%;">
+                <img src="landing/assets/images/car-silver2.png" alt="Contact Image" class="img-fluid" style="max-height: 100%; max-width: 100%;">
             </div>
         </div>            
 
@@ -100,5 +100,5 @@ data-stellar-background-ratio="0.5">
         });
     </script>
 @endif
-
+</div>
 @endsection
