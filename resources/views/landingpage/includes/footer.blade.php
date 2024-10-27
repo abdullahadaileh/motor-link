@@ -94,6 +94,22 @@ var animation = lottie.loadAnimation({
         loop: true, 
         autoplay: true, 
     });
+
+    document.addEventListener("DOMContentLoaded", function() {
+    @if(session('status') === 'logged_in' || session('status') === 'google_logged_in')
+        Swal.fire({
+            title: 'Success!',
+            text: 'You are logged in successfully!',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '{{ route("motor-link") }}';
+            }
+        });
+    @endif
+});
+
 </script>
 
 </body>

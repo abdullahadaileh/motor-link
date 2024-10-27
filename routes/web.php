@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SocialiteController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\VehicleController;
@@ -10,7 +11,8 @@ use Illuminate\Support\Facades\Route;
 
 
 
-
+Route::get('auth/google', [SocialiteController::class, 'redirectToGoogle'])->name('google.login');
+Route::get('auth/google/callback', [SocialiteController::class, 'handleGoogleCallback']);
 
 // //////////////////////////////////////////////////////////////////////////////////////////////////////
 // Landing Routs //////////////// Landing Routs //////////////// Landing Routs  /////////////////////////
