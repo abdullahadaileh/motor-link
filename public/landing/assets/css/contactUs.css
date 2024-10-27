@@ -81,7 +81,7 @@
 }
 
 .contact-info a:hover {
-    text-decoration: underline;
+    text-decoration: none;
     color: #6F9B87;
 }
 

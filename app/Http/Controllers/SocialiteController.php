@@ -24,14 +24,25 @@ class SocialiteController extends Controller
         $user = Socialite::driver('google')->user();
 
         try {
-            $finduser = User::where('social_id',$user->id)->first();
+            // البحث عن المستخدم بواسطة البريد الإلكتروني
+            $finduser = User::where('email', $user->getEmail())->first();
+
             if ($finduser) {
-                Auth::login($finduser);
+                // إذا كان المستخدم موجودًا ويمتلك social_id، قم بتسجيل الدخول
+                if ($finduser->social_id) {
+                    Auth::login($finduser);
+                } else {
+                    // إذا كان المستخدم موجودًا ولكن بدون social_id، قم بتحديث بياناته
+                    $finduser->update([
+                        'social_id' => $user->id,
+                        'social_type' => 'google',
+                    ]);
+                    Auth::login($finduser);
+                }
                 return redirect('/motor-link');
-            }else
-            {
-                $newUser = User::create
-                ([
+            } else {
+                // إذا كان المستخدم غير موجود، قم بإنشاء حساب جديد
+                $newUser = User::create([
                     'name' => $user->getName(),
                     'email' => $user->getEmail(),
                     'social_id' => $user->id,
@@ -42,28 +53,35 @@ class SocialiteController extends Controller
                 Auth::login($newUser);
                 return redirect('/motor-link');
             }
-
-
-
         } catch (\Throwable $th) {
             dd('error' . $th->getMessage());
         }
     }
-
 
     public function handleFacebookCallback()
     {
         $user = Socialite::driver('facebook')->user();
 
         try {
-            $finduser = User::where('social_id',$user->id)->first();
+            // البحث عن المستخدم بواسطة البريد الإلكتروني
+            $finduser = User::where('email', $user->getEmail())->first();
+
             if ($finduser) {
-                Auth::login($finduser);
+                // إذا كان المستخدم موجودًا ويمتلك social_id، قم بتسجيل الدخول
+                if ($finduser->social_id) {
+                    Auth::login($finduser);
+                } else {
+                    // إذا كان المستخدم موجودًا ولكن بدون social_id، قم بتحديث بياناته
+                    $finduser->update([
+                        'social_id' => $user->id,
+                        'social_type' => 'facebook',
+                    ]);
+                    Auth::login($finduser);
+                }
                 return redirect('/motor-link');
-            }else
-            {
-                $newUser = User::create
-                ([
+            } else {
+                // إذا كان المستخدم غير موجود، قم بإنشاء حساب جديد
+                $newUser = User::create([
                     'name' => $user->getName(),
                     'email' => $user->getEmail(),
                     'social_id' => $user->id,
@@ -74,12 +92,8 @@ class SocialiteController extends Controller
                 Auth::login($newUser);
                 return redirect('/motor-link');
             }
-
-
-
         } catch (\Throwable $th) {
             dd('error' . $th->getMessage());
         }
     }
 }
-

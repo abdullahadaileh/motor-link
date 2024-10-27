@@ -52,15 +52,15 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        @if($vehicle->status === 'unavailable')
-            Swal.fire({
-                title: 'Soory this vehicle is not available',
-                icon: 'warning',
-                confirmButtonText: 'OK'
-            });
-        @endif
-    });
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     @if($vehicle->status === 'unavailable')
+    //         Swal.fire({
+    //             title: 'Soory this vehicle is not available',
+    //             icon: 'warning',
+    //             confirmButtonText: 'OK'
+    //         });
+    //     @endif
+    // });
     // Assume you have a variable that indicates if the user is authenticated
     const isAuthenticated = @json(auth()->check()); // Check if the user is logged in
 

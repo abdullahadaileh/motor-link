@@ -159,6 +159,11 @@ Route::get('motor-link-dashboard-bookings', [BookingController::class, 'index'])
 
 Route::put('motor-link-dashboard-bookings/{id}', [BookingController::class, 'update'])
     ->name('motor-link-dashboard-bookings-update')->middleware('checkAdmin');
+    
+Route::get('motor-link-dashboard-bookings/{id}/show', [BookingController::class, 'show'])
+    ->name('motor-link-dashboard-bookings-show')->middleware('checkAdmin');
+Route::delete('motor-link-dashboard-bookings/{id}/delete', [BookingController::class, 'destroy'])
+    ->name('motor-link-dashboard-bookings-delete')->middleware('checkAdmin');
 
 // Logout 
 Route::post('/logout', function () {

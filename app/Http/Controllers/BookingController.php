@@ -79,6 +79,20 @@ class BookingController extends Controller
             
         $booking->save();
     
-        return redirect()->route('motor-link-dashboard-bookings-index')->with('success', 'Booking status updated successfully.');
+        return redirect()->back()->with('success', 'Booking status updated successfully.');
     }
+
+    public function show($id)
+    {
+        $booking = Booking::with(['vehicle', 'user'])->findOrFail($id);
+        return view('dashboard.pages.show', compact('booking'));
     }
+    public function destroy($id)
+    {
+        $booking = Booking::findOrFail($id);
+        $booking->delete();
+    
+        return redirect()->back()->with('success', 'Booking deleted successfully.');
+    }
+    
+}

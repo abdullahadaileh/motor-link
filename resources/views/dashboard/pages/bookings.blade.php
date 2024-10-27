@@ -21,25 +21,25 @@
                             <thead>
                                 <tr>
                                     <th>Vehicle Name</th>
-                                    <th>User</th>
-                                    <th>Location</th> <!-- Add Location Column -->
-                                    <th>Delivery Option</th> <!-- Add Delivery Option Column -->
+                                    {{-- <th>User</th> --}}
+                                    {{-- <th>Location</th>  --}}
+                                    <th>Delivery Option</th> 
                                     <th>Start Date</th>
-                                    <th>End Date</th>
+                                    {{-- <th>End Date</th> --}}
                                     <th>Total Price</th>
                                     <th>Status</th>
-                                    <th>Actions</th>
+                                    <th style="width: 26%;">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($bookings as $booking)
                                     <tr>
                                         <td>{{ $booking->vehicle->make }}</td>
-                                        <td>{{ $booking->user->name }}</td>
-                                        <td>{{ $booking->user->location }}</td> <!-- Display User Location -->
-                                        <td>{{ $booking->delivery_option }}</td> <!-- Display Delivery Option -->
+                                        {{-- <td>{{ $booking->user->name }}</td> --}}
+                                        {{-- <td>{{ $booking->user->location }}</td>  --}}
+                                        <td>{{ $booking->delivery_option }}</td>
                                         <td>{{ \Carbon\Carbon::parse($booking->start_date)->format('F j, Y') }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($booking->end_date)->format('F j, Y') }}</td>
+                                        {{-- <td>{{ \Carbon\Carbon::parse($booking->end_date)->format('F j, Y') }}</td> --}}
                                         <td>{{ $booking->total_price }}</td>
                                         <td>
                                             <span style="padding:10px; color:white" class="badge badge-{{ $booking->status == 'Approved' ? 'success' : ($booking->status == 'Declined' ? 'danger' : 'warning') }}">
@@ -47,9 +47,19 @@
                                             </span>
                                         </td>
                                         <td>
-                                            <button style="background-color: #8FBBA1; border:none; color:white; margin-top:10px" type="button" class="btn btn-info" onclick="openModal({{ $booking->id }}, '{{ $booking->status }}')">
-                                                Change Status
+                                            <a style="background-color: #8FBBA1; border:none; color:white; margin-top:10px" href="{{ route('motor-link-dashboard-bookings-show', $booking->id) }}" class="btn btn-primary" style="margin-top: 10px">
+                                                View 
+                                            </a>
+                                            <button style="background-color: #457B9D; border:none; color:white; margin-top:10px" type="button" class="btn btn-info" onclick="openModal({{ $booking->id }}, '{{ $booking->status }}')">
+                                                Edit
                                             </button>
+                                            <form id="delete-form{{ $booking->id }}" action="{{ route('motor-link-dashboard-bookings-delete', $booking->id) }}" method="POST" style="display: inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button style=" border:none; color:white; margin-top:10px" type="button" class="btn btn-danger" onclick="confirmDelete({{ $booking->id }})">
+                                                    Delete
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -62,43 +72,24 @@
     </div>
 </div>
 
-<!-- Modal for status change -->
-<div class="modal fade" id="statusModal" tabindex="-1" role="dialog" aria-labelledby="statusModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="statusModalLabel">Change Booking Status</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="statusForm" method="POST" action="{{ route('motor-link-dashboard-bookings-update', ':id') }}">
-                    @csrf
-                    @method('PUT')
-                    <input type="hidden" name="booking_id" id="booking_id">
-                    <div class="form-group">
-                        <label for="status">Select Status</label>
-                        <select name="status" id="status" class="form-control" required>
-                            <option value="pending">Pending</option>
-                            <option value="Approved">Approved</option>
-                            <option value="Declined">Declined</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Update Status</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
 <script>
-    function openModal(bookingId, currentStatus) {
-        $('#booking_id').val(bookingId);
-        $('#status').val(currentStatus);
-        $('#statusForm').attr('action', $('#statusForm').attr('action').replace(':id', bookingId));
-        $('#statusModal').modal('show');
+    function confirmDelete(bookingId) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Submit the delete form
+                document.getElementById('delete-form' + bookingId).submit();
+            }
+        });
     }
+
 </script>
 
 @endsection
