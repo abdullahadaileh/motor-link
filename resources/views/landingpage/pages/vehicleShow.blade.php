@@ -16,12 +16,11 @@
                         <!-- First column for vehicle image -->
                         <div class="col-md-4 text-center">
                             @if($vehicle->image)
-                                <img class="showVehicleImage" src="{{ asset($vehicle->image) }}" alt="Image" style="width: 100%; height: auto; max-width: 300px; border-radius: 20%; object-fit: cover;" />
+                                <img id="vehicleImage" class="showVehicleImage" src="{{ asset($vehicle->image) }}" alt="Image" style="width: 100%; height: auto; max-width: 300px; border-radius: 20%; object-fit: cover;" />
                             @else
-                            <img class="showVehicleImage" src="{{ asset('landing/assets/images/carsilhouette.jpg') }}" alt="Image" style="width: 100%; height: auto; max-width: 300px; border-radius: 20%; object-fit: cover;" />
+                                <img id="vehicleImage" class="showVehicleImage" src="{{ asset('landing/assets/images/carsilhouette.jpg') }}" alt="Image" style="width: 100%; height: auto; max-width: 300px; border-radius: 20%; object-fit: cover;" />
                             @endif
                         </div>
-
                         <!-- Second column for primary details -->
                         <div class="col-md-4">
                             <p style="color: #6a8b9d"><strong style="color: #457B9D">Make:</strong> {{ $vehicle->make }}</p>
@@ -39,7 +38,9 @@
 
                             <br>
                             <a style="background-color: #6a8b9d; border:none" href="{{ route('motor-link-vehicles') }}" class="btn btn-primary">&larr; Back</a>
+                            @if($vehicle->status !== 'unavailable')
                             <a id="book-now-btn" style="background-color: #8FBBA1; border:none;" href="#" class="btn btn-success">Book Now</a>
+                        @endif
                         </div>
                     </div>
                 </div>
@@ -47,42 +48,54 @@
         </div>
     </div>
 </div>
-
+<div id="vehicleModal" class="image-modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); align-items: center; justify-content: center;">
+    <span class="close" style="position: absolute; top: 20px; right: 20px; font-size: 30px; color: white; cursor: pointer;">&times;</span>
+    <img id="modalVehicleImage" style="width:700px" />
+</div>
 <!-- Include SweetAlert JS -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-    // document.addEventListener('DOMContentLoaded', function() {
-    //     @if($vehicle->status === 'unavailable')
-    //         Swal.fire({
-    //             title: 'Soory this vehicle is not available',
-    //             icon: 'warning',
-    //             confirmButtonText: 'OK'
-    //         });
-    //     @endif
-    // });
-    // Assume you have a variable that indicates if the user is authenticated
-    const isAuthenticated = @json(auth()->check()); // Check if the user is logged in
+document.addEventListener('DOMContentLoaded', function () {
+    const vehicleImage = document.getElementById('vehicleImage');
+    const vehicleModal = document.getElementById('vehicleModal');
+    const modalVehicleImage = document.getElementById('modalVehicleImage');
+    const closeModal = vehicleModal.querySelector('.close');
+
+    vehicleImage.addEventListener('click', function () {
+        modalVehicleImage.src = this.src; 
+        vehicleModal.style.display = 'flex'; 
+    });
+
+    closeModal.addEventListener('click', function () {
+        vehicleModal.style.display = 'none'; 
+    });
+
+
+    vehicleModal.addEventListener('click', function (event) {
+        if (event.target === vehicleModal) {
+            vehicleModal.style.display = 'none';
+        }
+    });
+});
+
+
+const isAuthenticated = @json(auth()->check()); 
 
     document.getElementById('book-now-btn').addEventListener('click', function(event) {
-        // Prevent the default link behavior
         event.preventDefault();
 
-        // Check if the user is authenticated
         if (!isAuthenticated) {
-            // Show SweetAlert if the user is not logged in
             Swal.fire({
                 icon: 'warning',
                 title: 'You Should Log In First',
                 text: 'Please log in to proceed with booking.',
                 confirmButtonText: 'Go to Login',
                 willClose: () => {
-                    // Redirect to the login page
                     window.location.href = '{{ route('login') }}';
                 }
             });
         } else {
-            // Redirect to the booking page if authenticated
             window.location.href = '{{ route('motor-link-vehicle-booking', $vehicle) }}';
         }
     });

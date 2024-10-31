@@ -124,7 +124,36 @@
         </div>
     </div>
 </div>
+<!-- Modal for Profile Image -->
+<div id="profileImageModal" class="image-modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); align-items: center; justify-content: center;">
+    <span class="close" style="position: absolute; top: 20px; right: 20px; font-size: 30px; color: white; cursor: pointer;">&times;</span>
+    <img id="modalProfileImage" style="max-width: 90%; max-height: 90%;" />
+</div>
+
 <script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const profileImage = document.getElementById('profileImage');
+    const profileImageModal = document.getElementById('profileImageModal');
+    const modalProfileImage = document.getElementById('modalProfileImage');
+    const closeModal = profileImageModal.querySelector('.close');
+
+    profileImage.addEventListener('click', function () {
+        modalProfileImage.src = this.src; 
+        profileImageModal.style.display = 'flex'; 
+    });
+
+    closeModal.addEventListener('click', function () {
+        profileImageModal.style.display = 'none'; 
+    });
+
+
+    profileImageModal.addEventListener('click', function (event) {
+        if (event.target === profileImageModal) {
+            profileImageModal.style.display = 'none';
+        }
+    });
+});
+
     document.getElementById('current-location-btn').addEventListener('click', function() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
