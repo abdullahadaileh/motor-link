@@ -55,10 +55,12 @@ data-stellar-background-ratio="0.5">
             <form action="{{ route('motor-link-contact.store') }}" method="POST" class="contact-form">
                 @csrf
                 <div class="form-group">
-                    <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                    <input type="text" name="name" class="form-control" placeholder="Your Name" 
+                           value="{{ auth()->user()->name ?? '' }}" required>
                 </div>
                 <div class="form-group">
-                    <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+                    <input type="email" name="email" class="form-control" placeholder="Your Email" 
+                           value="{{ auth()->user()->email ?? '' }}" required>
                 </div>
                 <div class="form-group">
                     <input type="text" name="subject" class="form-control" placeholder="Subject" required>

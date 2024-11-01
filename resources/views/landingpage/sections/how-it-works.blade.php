@@ -1,5 +1,8 @@
 <div class="how-it-works" id="how-it-works">
+  <span class="services-subheading">Steps</span>
   <h2 class="mb-3">Rent with following 3 working steps</h2>
+  <br>
+  <br>
   <div class="steps">
     <!-- Step 1: Search and Select a Vehicle -->
     <div class="step">

@@ -33,4 +33,17 @@ class ContactController extends Controller
             return back()->with('error', 'There was an issue sending your message. Please try again later.');
         }
     }
+    public function showContactForm()
+{
+    $user = auth()->user();
+    return view('landingpage.pages.contactUs', compact('user'));
+}
+
+    public function destroy($id)
+    {
+        $contact = Contact::findOrFail($id);
+        $contact->delete();
+
+        return back()->with('success', 'Contact deleted successfully.');
     }
+}

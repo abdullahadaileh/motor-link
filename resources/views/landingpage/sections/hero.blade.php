@@ -11,7 +11,6 @@
       <div class="selection-container">
         <input type="text" id="location-input" name="location" class="location-input" placeholder="Enter your location" required>
         <button id="current-location-btn" class="search-btn">Use Current Location</button>
-        <button id="save-location-btn" class="search-btn" style="background-color: #457b9dbc; border:none">Save Location</button>
       </div>
     </div>
   </div>
@@ -40,6 +39,42 @@
             if (data && data.display_name) {
               locationInput.value = data.display_name;
               showAlert('success', 'Location Found!', `Your location has been set to: ${data.display_name}`);
+
+              // Save the location automatically
+              const location = locationInput.value;
+
+              const isAuthenticated = @json(auth()->check()); // Returns true if logged in, false otherwise
+
+              if (!isAuthenticated) {
+                showAlert('warning', 'Not Logged In', 'Please log in to save your location.');
+                window.location.href = '{{ route('login') }}';
+                return;
+              }
+
+              if (location) {
+                fetch('/save-location', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                  },
+                  body: JSON.stringify({ location: location })
+                })
+                .then(response => response.json())
+                .then(data => {
+                  if (data.success) {
+                    showAlert('success', 'Success', 'Location saved successfully!');
+                  } else {
+                    showAlert('error', 'Error', 'Error saving location.');
+                  }
+                })
+                .catch(error => {
+                  console.error('Error:', error);
+                  showAlert('error', 'Error', 'An error occurred. Please try again.');
+                });
+              } else {
+                showAlert('warning', 'Location Required', 'Please enter a location first.');
+              }
             }
           })
           .catch(error => {
@@ -49,43 +84,6 @@
       });
     } else {
       showAlert('error', 'Geolocation not supported', 'Your browser does not support geolocation.');
-    }
-  });
-
-  const isAuthenticated = @json(auth()->check()); // Returns true if logged in, false otherwise
-
-  document.getElementById('save-location-btn').addEventListener('click', function() {
-    const location = document.getElementById('location-input').value;
-
-    if (!isAuthenticated) {
-      showAlert('warning', 'Not Logged In', 'Please log in to save your location.');
-      window.location.href = '{{ route('login') }}';
-      return;
-    }
-
-    if (location) {
-      fetch('/save-location', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRF-TOKEN': '{{ csrf_token() }}'
-        },
-        body: JSON.stringify({ location: location })
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          showAlert('success', 'Success', 'Location saved successfully!');
-        } else {
-          showAlert('error', 'Error', 'Error saving location.');
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        showAlert('error', 'Error', 'An error occurred. Please try again.');
-      });
-    } else {
-      showAlert('warning', 'Location Required', 'Please enter a location first.');
     }
   });
 </script>

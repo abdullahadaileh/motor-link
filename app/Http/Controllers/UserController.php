@@ -48,13 +48,25 @@ class UserController extends Controller
             'phone_number' => 'nullable|string|max:20',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'location' => 'nullable|string|max:255',
+            'password' => 'nullable|string|min:8|confirmed', // Validation for new password
+            'old_password' => 'required_with:password|string' // تأكد من أن كلمة المرور الحالية مطلوبة عند وجود كلمة مرور جديدة
         ]);
     
+        // تحقق من صحة كلمة المرور الحالية قبل تحديث كلمة المرور الجديدة
+        if ($request->filled('password')) {
+            if (!Hash::check($request->old_password, $user->password)) {
+                return redirect()->back()->withErrors(['old_password' => 'Current password is incorrect.']);
+            }
+            $user->password = Hash::make($request->password); // تحديث كلمة المرور الجديدة
+        }
+    
+        // تحديث البيانات الأخرى
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone_number = $request->phone_number;
-        $user->location = $request->location; // تحديث الموقع
+        $user->location = $request->location;
     
+        // تحديث الصورة إذا كانت موجودة
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('profile_images', 'public');
             $user->image = '/storage/' . $imagePath;
@@ -63,8 +75,7 @@ class UserController extends Controller
         $user->save();
     
         return redirect()->route('motor-link-profile')->with('success', 'Profile updated successfully.');
-    }
-        
+    }            
     
     // Owner Profile
     public function ownerProfile()
@@ -80,7 +91,33 @@ class UserController extends Controller
 
         return view('dashboard.pages.ownerProfile', compact('user'));
     }
-
+    public function updateOwnerProfile(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . $id,
+            'phone_number' => 'nullable|string|max:15',
+            'old_password' => 'required_with:password|string', 
+            'password' => 'nullable|string|min:8|confirmed',
+        ]);
+    
+        $user = User::findOrFail($id);
+    
+        if ($request->filled('password')) {
+            if (!Hash::check($request->old_password, $user->password)) {
+                return redirect()->back()->withErrors(['old_password' => 'Current password is incorrect.']);
+            }
+            $user->password = Hash::make($request->password); 
+        }
+    
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone_number = $request->phone_number;
+        $user->save();
+    
+        return redirect()->route('motor-link-profile')->with('success', 'Profile updated successfully.');
+    }
+            
     public function create()
     {
         return view('users.create');

@@ -20,18 +20,20 @@
                 <a class="nav-link" href="{{ route('motor-link-vehicles') }}">Vehicles</a>
             </li>
         </ul>
-  
+
         @if (Route::has('login'))
         <div class="ml-auto">
             @auth
                 <div class="dropdown">
-                    <div class="img-thumbnail rounded-circle" data-toggle="dropdown">
+                    <!-- Profile Image for Desktop, User Name for Mobile -->
+                    <div class="profile-container" data-toggle="dropdown">
                         <span class="activity active"></span>
                         @if (Auth::check() && Auth::user()->image)
-                            <img src="{{ asset(Auth::user()->image) }}" alt="{{ Auth::user()->name }}" height="40" width="40" style="border-radius: 50%; object-fit: cover;">
+                            <img src="{{ asset(Auth::user()->image) }}" alt="{{ Auth::user()->name }}" class="profile-image">
                         @else
-                            <img src="{{ asset('dashboard/images/imgs/image.png') }}" alt="Default Image" height="40" width="40" style="border-radius: 50%; object-fit: cover;">
+                            <img src="{{ asset('dashboard/images/imgs/image.png') }}" alt="Default Image" class="profile-image">
                         @endif
+                        <span class="profile-name">{{ Auth::user()->name }}</span>
                     </div>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="{{route('motor-link-profile')}}">Profile</a>
@@ -53,5 +55,4 @@
         </div>
         @endif
     </div>
-  </nav>
-  
+</nav>

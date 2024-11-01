@@ -1,15 +1,17 @@
 @extends('landingpage.layouts.master')
 
 @section('content')
+{{-- <br>
 <br>
-<br>
-<br>
+<br> --}}
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
             <div style="border: none !important" class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Vehicle Details</h4>
+                    {{-- <h4 class="card-title">Vehicle Details</h4> --}}
+                    <h1 class="Vehicles-title">Vehicle Details: {{ $vehicle->make }}</h1>
+
                     <br><br>
 
                     <div class="row">

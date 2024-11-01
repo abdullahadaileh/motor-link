@@ -27,10 +27,6 @@
                     </span>
                 @enderror
             </div>
-            <div class="forget">
-                <label for=""><input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>Remember Me</label>
-                <a href="#" onclick="toggleForm()">Forget Password</a>
-            </div>
             <div class="button-container">
                 <button type="submit">Log in</button>
                 <button type="button" class="home-button" onclick="location.href='{{ route('motor-link') }}'">Home</button>

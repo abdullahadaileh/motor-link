@@ -86,7 +86,7 @@
 
 <!-- Modal for Editing Profile -->
 <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
@@ -96,29 +96,62 @@
                 <form action="{{ route('updateProfile', $user->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}" required>
+                    
+                    <div class="row">
+                        <!-- Name and Email fields in the first row -->
+                        <div class="col-md-6 mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="old_password" class="form-label">Current Password</label>
+                            <input type="password" class="form-control" id="old_password" name="old_password" placeholder="Enter current password">
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}" required>
+
+                    <div class="row">
+                        <!-- Phone number and Old Password fields -->
+                        <div class="col-md-6 mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="password" class="form-label">New Password</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter new password">
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="phone_number" class="form-label">Phone Number</label>
-                        <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ $user->phone_number }}">
+
+                    <div class="row">
+                        <!-- New Password and Confirm Password fields -->
+                        <div class="col-md-6 mb-3">
+                            <label for="phone_number" class="form-label">Phone Number</label>
+                            <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ $user->phone_number }}">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="password_confirmation" class="form-label">Confirm New Password</label>
+                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Confirm new password">
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="image" class="form-label">Profile Image</label>
-                        <input type="file" class="form-control" id="image" name="image">
+
+                    <div class="row">
+                        <!-- Profile Image and Location fields -->
+                        <div class="col-md-6 mb-3">
+                            <label for="image" class="form-label">Profile Image</label>
+                            <input type="file" class="form-control" id="image" name="image">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="location" class="form-label">Location</label>
+                            <div class="d-flex">
+                                <input style="width: 55%" type="text" class="form-control me-2" id="location-input" name="location" value="{{ $user->location }}" readonly>
+                                <button type="button" class="btn btn-secondary" id="current-location-btn" style="background-color: #8FBBA1; border:none;width: 45%;font-size:13px">Use Current Location</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="location" class="form-label">Location</label>
-                        <input type="text" class="form-control" id="location-input" name="location" value="{{ $user->location }}" readonly required>
-                        <button type="button" class="btn btn-secondary mt-2" id="current-location-btn" style="background-color: #8FBBA1;border:none">Use Current Location</button>
-                        <button type="button" class="btn btn-primary mt-2" id="save-location-btn" style="background-color: #457B9D;border:none">Save Location</button>
-                    </div>                    
-                    <button type="submit" class="btn btn-primary" style="background-color: #457B9D;border:none">Save Changes</button>
+
+                    <!-- Save Changes Button -->
+                    <div class="d-flex justify-content-end mt-3">
+                        <button type="submit" class="btn btn-primary" style="background-color: #457B9D;border:none">Save Changes</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -154,91 +187,71 @@
     });
 });
 
-    document.getElementById('current-location-btn').addEventListener('click', function() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                const latitude = position.coords.latitude;
-                const longitude = position.coords.longitude;
+document.getElementById('current-location-btn').addEventListener('click', function() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
 
-                const locationInput = document.getElementById('location-input');
+            const locationInput = document.getElementById('location-input');
 
-                fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data && data.display_name) {
-                            locationInput.value = data.display_name;
+            fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.display_name) {
+                        locationInput.value = data.display_name;
 
-                            // SweetAlert2 notification
+                        fetch('/save-location', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            },
+                            body: JSON.stringify({ location: data.display_name })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Success',
+                                    text: 'Location saved successfully!'
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: 'Error saving location.'
+                                });
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
                             Swal.fire({
-                                icon: 'success',
-                                title: 'Location Found!',
-                                text: `Your location has been set to: ${data.display_name}`
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'An error occurred. Please try again.'
                             });
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: 'Failed to fetch location. Please try again.'
                         });
-                    });
-            });
-        } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Geolocation not supported',
-                text: 'Your browser does not support geolocation.'
-            });
-        }
-    });
-
-    document.getElementById('save-location-btn').addEventListener('click', function() {
-        const location = document.getElementById('location-input').value;
-
-        if (location) {
-            // Send data to the server
-            fetch('/save-location', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                },
-                body: JSON.stringify({ location: location })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Success',
-                        text: 'Location saved successfully!'
-                    });
-                } else {
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
-                        text: 'Error saving location.'
+                        text: 'Failed to fetch location. Please try again.'
                     });
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'An error occurred. Please try again.'
                 });
-            });
-        } else {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Location Required',
-                text: 'Please enter a location first.'
-            });
-        }
-    });
+        });
+    } else {
+        Swal.fire({
+            icon: 'error',
+            title: 'Geolocation not supported',
+            text: 'Your browser does not support geolocation.'
+        });
+    }
+});
 </script>
 
 @endsection

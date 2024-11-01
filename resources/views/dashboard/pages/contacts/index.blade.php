@@ -28,6 +28,7 @@
                                         <th>Subject</th>
                                         <th>Message</th>
                                         <th>Date Submitted</th>
+                                        <th style="width: 12%">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -39,6 +40,18 @@
                                             <td>{{ $contact->subject }}</td>
                                             <td>{{ $contact->message }}</td>
                                             <td>{{ $contact->created_at->format('d/m/Y') }}</td>
+                                            <td>
+                                                <div class="d-flex justify-content-between">
+                                                    <button style="border: none; margin-top:10px" type="button" class="btn btn-danger" onclick="confirmDelete('{{ $contact->id }}')">
+                                                        Delete
+                                                    </button>
+
+                                                    <form id="deleteForm{{ $contact->id }}" action="{{ route('motor-link-contacts.destroy', $contact->id) }}" method="POST" style="display: none;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                    </form>
+                                                </div>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -49,5 +62,23 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function confirmDelete(contactId) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('deleteForm' + contactId).submit();
+                }
+            });
+        }
+    </script>
 
 @endsection

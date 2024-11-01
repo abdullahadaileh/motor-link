@@ -20,15 +20,14 @@ Route::get('auth/google/callback', [SocialiteController::class, 'handleGoogleCal
 
 // Landing Routs
 
-Route::get('/', [VehicleTypeController::class, 'showFleet'])->name('motor-link');
-Route::get('/motor-link-profile', [UserController::class, 'userProfile'])->name('motor-link-profile')->middleware('auth');
-Route::put('/user/update/{id}', [UserController::class, 'updateProfile'])->name('updateProfile');
-
-// Home page
-Route::get('/motor-link', function () {
-    return view('landingpage.landing');
-})->name('motor-link');
+// Home page - Load Fleet
 Route::get('/motor-link', [VehicleTypeController::class, 'showFleet'])->name('motor-link');
+
+// User Profile - Requires Authentication
+Route::get('/motor-link-profile', [UserController::class, 'userProfile'])->name('motor-link-profile')->middleware('auth');
+
+// Update Profile
+Route::put('/user/update/{id}', [UserController::class, 'updateProfile'])->name('updateProfile');
 
 // About us 
 Route::get('/motor-link-about', function () {
@@ -39,8 +38,7 @@ Route::get('/motor-link-about', function () {
 Route::get('/motor-link-contact', function () {
     return view('landingpage.pages.contactUs');
 })->name('motor-link-contact');
-Route::post('/motor-link-contact', [ContactController::class, 'store'])->name('motor-link-contact.store');
-Route::get('/dashboard/contacts', [ContactController::class, 'index'])->name('motor-link-dashboard-contacts');
+
 
 // Vehicles page
 Route::get('/motor-link-vehicles', function () {
@@ -66,6 +64,11 @@ Route::get('/motor-link-dashboard', [DashboardController::class, 'dashboard'])
     ->name('motor-link-dashboard')
     ->middleware('checkAdmin');
 
+// Owner Profile
+Route::get('/dashboard/profile', [UserController::class, 'ownerProfile'])
+->name('motor-link-dashboard-profile')->middleware('checkAdmin');
+Route::post('/dashboard/update-owner-profile/{id}', [UserController::class, 'updateOwnerProfile'])->name('motor-link-dashboard-updateOwnerProfile');
+
 // User page
 Route::get('/motor-link-dashboard-users', function () {
     return view('dashboard.pages.users');
@@ -81,9 +84,6 @@ Route::get('/motor-link-dashboard-editUser', function () {
 
 Route::get('/motor-link-dashboard-users-trashed', [UserController::class, 'trashed'])
     ->name('motor-link-dashboard-users-trashed')->middleware('checkAdmin');
-
-Route::get('/dashboard/profile', [UserController::class, 'ownerProfile'])
-    ->name('motor-link-dashboard-profile')->middleware('checkAdmin');
 
 Route::get('/motor-link-dashboard-users', [UserController::class, 'index'])
     ->name('motor-link-dashboard-users')->middleware('checkAdmin');
@@ -164,6 +164,11 @@ Route::get('motor-link-dashboard-bookings/{id}/show', [BookingController::class,
     ->name('motor-link-dashboard-bookings-show')->middleware('checkAdmin');
 Route::delete('motor-link-dashboard-bookings/{id}/delete', [BookingController::class, 'destroy'])
     ->name('motor-link-dashboard-bookings-delete')->middleware('checkAdmin');
+
+// Contacts
+Route::post('/motor-link-contact', [ContactController::class, 'store'])->name('motor-link-contact.store');
+Route::get('/dashboard/contacts', [ContactController::class, 'index'])->name('motor-link-dashboard-contacts');
+Route::delete('/contacts/{id}', [ContactController::class, 'destroy'])->name('motor-link-contacts.destroy');
 
 // Logout 
 Route::post('/logout', function () {

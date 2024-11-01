@@ -21,6 +21,7 @@ body {
   
 /* navbar   navbar   navbar   navbar   navbar   navbar   navbar   start*/
 
+/* Navbar Styling */
 .navbar {
   position: fixed;
   top: 0;
@@ -49,14 +50,10 @@ body {
 
 .navbar-nav .nav-link {
   color: #457B9D !important;
-  /* font-weight: 600 !important; */
 }
 
 .login-btn {
-  padding-left: 20px !important;
-  padding-right: 20px !important;
-  padding-bottom: 8px !important;
-  letter-spacing: 1px;
+  padding: 8px 20px !important;
   background-color: #96c9ab !important;
   border-radius: 20px !important;
   color: white !important;
@@ -74,10 +71,24 @@ body {
   margin-right: 20px;
 }
 
-.moto-hero {
-  margin-top: 0;
+/* Profile image container */
+.profile-container {
+  position: relative;
+  cursor: pointer;
 }
 
+.profile-image {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-name {
+  display: none; /* Hidden on desktop */
+}
+
+/* Responsive Styles */
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
@@ -103,8 +114,32 @@ body {
   .dropdown-menu {
     width: 100%; 
   }
-}
 
+  /* Hide image and show name */
+  .profile-image {
+    display: none; /* Hide image */
+  }
+
+  .profile-name {
+    display: inline-block; /* Show user name */
+    font-weight: 600;
+    color: #457B9D;
+  }
+
+  /* Rectangle border for profile container */
+  .profile-container {
+    width: 100%; 
+    height: 45px;
+    /* border: 1px solid #457B9D;   */
+    border-radius: 5px;   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .navbar-light :hover {
+  background-color: white !important;
+  }
+}
 /* navbar   navbar   navbar   navbar   navbar   navbar   navbar   end*/
 
 @media (max-width: 768px) {
@@ -198,7 +233,7 @@ body {
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   z-index: 2;
-  width: 95%;  
+  width: 60%;  
 }
 
 .selection-container {
@@ -209,7 +244,6 @@ body {
 }
 
 .location-input, .date-picker, .search-btn {
-  font-family: "Nunito Sans", sans-serif;
   margin: 10px;
   padding: 10px;
   border: 1px solid #ddd;
@@ -218,29 +252,29 @@ body {
 
 .location-input {
   width: 300px;
+  color: #00bfa5 !important;
 }
 
 
 .search-btn {
   background-color: #8FBBA1;
   color: white;
-  width: 30%;
   border: none;
+  width: 200px;
   cursor: pointer;
   border-radius: 5px;
   padding: 10px 20px;
   font-weight: bold;
   transition: background-color 0.3s ease-in-out;
 }
-
 .search-btn:hover {
-  background-color: #8FBBA1;
+background-color: #8FBBA1;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 769px) {
   .selection-bar {
     width: 100%;
-    height: 110%;
+    height: 283%;
     bottom: 5%;
   }
   .selection-container {
@@ -250,6 +284,14 @@ body {
     width: 100%;
     margin: 5px 0;
   }
+}
+@media (max-width: 550px) {
+  .selection-bar {
+    width: 100%;
+    height: 80% !important;
+    bottom: 5%;
+  }
+
 }
 /* section1   section1   section1   section1   section1   end */
 
@@ -292,77 +334,86 @@ body {
 }
 
 /* services services  services */
-.services {
-  padding: 1.5rem;
-  border: 1px solid #e5e5e5;
-  border-radius: 0.75rem;
-  transition: box-shadow 0.3s ease;
+.services-section {
+  padding: 2rem 0;
+}
+
+.services-container {
+  max-width: 1200px;
+  margin: 0 auto; 
+}
+
+.services-header {
   text-align: center;
-  width: 100%;
-  height: 100%;
+  margin-bottom: 3rem; 
 }
 
-.services:hover {
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+.services-title {
+  font-size: 2rem;
+  color: #457B9D;
 }
 
-.services .icon {
+.services-subheading {
+  font-size: 1.25rem; 
+  color: #00bfa5;
+}
+
+.services-list {
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: space-between; 
+}
+
+.service-card {
+  flex: 1 1 calc(25% - 1rem); 
+  margin: 0.5rem; 
+  border: 1px solid #e5e5e5;
+  border-radius: 0.75rem; 
+  padding: 1rem;
+  transition: box-shadow 0.3s ease; 
+  background-color: #fff; 
+}
+
+.service-card:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); 
+}
+
+.service-icon {
+  margin: 0 auto 1rem; 
   width: 4rem;
-  height: 4rem;
-  background-color: #457B9D;
-  border-radius: 50%;
+  height: 4rem; 
+  background-color: #457B9D; 
+  border-radius: 50%; 
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 1rem auto;
 }
 
-.services .icon img {
+.service-icon img {
   width: 2.5rem;
-  height: 2.5rem;
+  height: 2.5rem; 
   filter: brightness(0) invert(1); 
-
 }
 
-.services .text {
+.service-text {
   padding: 1rem;
 }
 
-.services .text h3 {
+.service-name {
   color: #00bfa5;
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
+  font-size: 1.25rem; 
+  margin-bottom: 0.5rem; 
 }
 
-.services .text p {
-  font-size: 0.875rem;
+.service-description {
+  font-size: 0.875rem; 
   color: #333;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .services {
-    padding: 1rem;
-    border-radius: 0.5rem;
-  }
-
-  .services .icon {
-    width: 3.5rem;
-    height: 3.5rem;
-  }
-
-  .services .icon img {
-    width: 2rem;
-    height: 2rem;
-  }
-
-  .services .text h3 {
-    font-size: 1.125rem;
-  }
-
-  .services .text p {
-    font-size: 0.75rem;
+  .service-card {
+    flex: 1 1 calc(50% - 1rem);
   }
 }
 
@@ -377,7 +428,7 @@ body {
 .how-it-works h2 {
   font-weight: 600;
   font-size: x-large;
-  color: #00bfa5;
+  color: #457B9D;
   margin-bottom: 20px;
 }
 

@@ -1,9 +1,9 @@
 @extends('landingpage.layouts.master')
 
 @section('content')
-<div style="margin: 0; padding: 0; width: 100%; position: relative;">
+<div style="margin: 0;  margin-bottom:-7px ; padding: 0; width: 100%; position: relative;">
     <video autoplay muted loop style="width: 100%; height: auto;">
-        <source src="landing/assets/images/4042.mp4" type="video/mp4">
+        <source src="{{asset('landing/assets/images/4042.mp4')}}" type="video/mp4">
         Your browser does not support the video tag.
     </video>
     <a href="{{ route('motor-link') }}" class="floating-button">BACK TO HOME PAGE</a>
@@ -17,10 +17,10 @@
         transform: translateX(-50%);
         background-color: #96c9ab;
         color: #fff; 
-        padding: 10px 20px; 
+        padding: 0.7% 1.4%; 
         border-radius: 200px 10px 200px 10px;
         text-decoration: none;
-        font-size: 16px; 
+        font-size: 100%; 
         animation: bounce 1s infinite; 
     }
     .floating-button:hover {

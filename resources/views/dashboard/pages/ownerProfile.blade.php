@@ -17,13 +17,12 @@
                 <div class="card-body">
                     <h4 class="card-title">Profile</h4>
                     <br>
-                    <!-- Profile Information -->
                     <div class="row">
                         <div class="col-md-4">
                             @if($user->image)
-                            <img id="profileImage" src="{{ asset($user->image) }}" alt="Profile Image" class="img-thumbnail profile-img" style="width: 280px; height: 280px; border-radius: 50%; object-fit: cover;">
+                                <img id="profileImage" src="{{ asset($user->image) }}" alt="Profile Image" class="img-thumbnail profile-img" style="width: 280px; height: 280px; border-radius: 50%; object-fit: cover;">
                             @else
-                            <img id="profileImage" src="{{ asset('dashboard/images/imgs/image.png') }}" alt="Default Profile Image" class="img-thumbnail profile-img" style="width: 280px; height: 280px; border-radius: 50%; object-fit: cover;">
+                                <img id="profileImage" src="{{ asset('dashboard/images/imgs/image.png') }}" alt="Default Profile Image" class="img-thumbnail profile-img" style="width: 280px; height: 280px; border-radius: 50%; object-fit: cover;">
                             @endif
                         </div>
 
@@ -33,51 +32,106 @@
                             <p><strong>Name: </strong> {{ $user->name }}</p>
                             <p><strong>Email: </strong> {{ $user->email }}</p>
                             <p><strong>Phone Number: </strong> {{ $user->phone_number ?? 'N/A' }}</p>
-                            <p><strong> Since: </strong>{{ $user->created_at->format('d M, Y') }}</p>
-                            
-                            <!-- Move the button inside this div for it to appear below the text -->
-                            <a style="background-color: #8FBBA1; border:none" href="{{ route('motor-link-dashboard-editUser', $user->id) }}" class="btn btn-primary mt-3">Edit my info</a>
+                            <p><strong>Since: </strong>{{ $user->created_at->format('d M, Y') }}</p>
+
+                            <button class="btn btn-secondary mt-3" style="background-color: #8FBBA1; color:white; border:none" data-toggle="modal" data-target="#editProfileModal">Edit Profile</button>
                         </div>
                     </div>
-                    <div id="imageModal" class="image-modal">
-                        <span class="close">&times;</span>
-                        <img class="modal-content" id="modalImage">
+
+                    <!-- Modal for Editing Profile -->
+                    <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{ route('updateProfile', $user->id) }}" method="POST" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('PUT')
+                                        <!-- Name and Current Password fields -->
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="name" class="form-label">Name</label>
+                                                <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}" required>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="old_password" class="form-label">Current Password</label>
+                                                <input type="password" class="form-control" id="old_password" name="old_password" placeholder="Enter current password">
+                                            </div>
+                                        </div>
+                                      
+                                        <!-- Email and New Password fields -->
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="email" class="form-label">Email</label>
+                                                <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}" required>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="password" class="form-label">New Password</label>
+                                                <input type="password" class="form-control" id="password" name="password" placeholder="Enter new password">
+                                            </div>
+                                        </div>
+                                      
+                                        <!-- Phone number and Confirm Password fields -->
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="phone_number" class="form-label">Phone Number</label>
+                                                <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ $user->phone_number }}">
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="password_confirmation" class="form-label">Confirm New Password</label>
+                                                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Confirm new password">
+                                            </div>
+                                        </div>
+                                      
+                                        <!-- Save Changes Button -->
+                                        <div class="d-flex justify-content-end mt-3">
+                                            <button type="submit" class="btn btn-primary" style="background-color: #457B9D;border:none">Save Changes</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <!-- End Modal -->
 
-
-
+                    <!-- Modal for Profile Image -->
+                    <div id="imageModal" class="image-modal" style="display:none;">
+                        {{-- <span class="close" style="cursor:pointer;">&times;</span> --}}
+                        <img class="modal-content" id="modalImage" style="max-width: 90%; max-height: 90%;">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-@endsection
 
+<!-- JavaScript for Image Modal -->
 <script>
-    // JavaScript for Image Modal
-document.addEventListener('DOMContentLoaded', function() {
-    var modal = document.getElementById("imageModal");
-    var img = document.getElementById("profileImage");
-    var modalImg = document.getElementById("modalImage");
-    var closeBtn = document.getElementsByClassName("close")[0];
+    document.addEventListener('DOMContentLoaded', function () {
+        const profileImage = document.getElementById('profileImage');
+        const imageModal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const closeImageModal = document.querySelector('.close');
 
-    // When the user clicks on the image, open the modal
-    img.onclick = function() {
-        modal.style.display = "flex";
-        modalImg.src = this.src; // Set the modal image to the clicked image's source
-    }
+        profileImage.addEventListener('click', function () {
+            imageModal.style.display = 'flex';
+            modalImage.src = this.src;
+        });
 
-    // When the user clicks on <span> (x), close the modal
-    closeBtn.onclick = function() {
-        modal.style.display = "none";
-    }
+        closeImageModal.addEventListener('click', function () {
+            imageModal.style.display = 'none';
+        });
 
-    // Close the modal if the user clicks outside the image
-    modal.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-});
-
+        window.addEventListener('click', function (e) {
+            if (e.target === imageModal) {
+                imageModal.style.display = 'none';
+            }
+        });
+    });
 </script>
+@endsection

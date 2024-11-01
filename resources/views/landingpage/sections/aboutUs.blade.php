@@ -23,60 +23,50 @@
     </div>
   </section>
 
-  <section class="ftco-section" id="servicesSection">
-    <div class="container">
-      <div class="row justify-content-center mb-5">
-        <div class="col-md-7 text-center heading-section ftco-animate">
-          <span class="subheading">Services</span>
-          <h2 class="mb-3">Our Latest Services</h2>
+  <section class="services-section" id="services">
+    <div class="services-container">
+        <div class="services-header">
+            <span class="services-subheading">Services</span>
+            <h2 class="services-title">Our Latest Services</h2>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-3">
-          <div class="services services-2 w-100 text-center">
-            <div class="icon d-flex align-items-center justify-content-center">
-              <img src="landing/assets/images/icons/electric-car.png" alt="Wedding Car Icon">
+        <div class="services-list">
+            <div class="service-card">
+                <div class="service-icon">
+                    <img src="landing/assets/images/icons/electric-car.png" alt="Easy Vehicle Booking Icon">
+                </div>
+                <div class="service-text">
+                    <h3 class="service-name">Easy Vehicle Booking</h3>
+                    <p class="service-description">A customized search interface allows users to rent vehicles based on location and category.</p>
+                </div>
             </div>
-            <div class="text w-100">
-              <h3 class="heading mb-2">Easy vehicle booking</h3>
-              <p>A customized search interface allows users to rent vehicles based on location and category.</p>
+            <div class="service-card">
+                <div class="service-icon">
+                    <img src="landing/assets/images/icons/electric-car.png" alt="Pick-Up and Delivery Icon">
+                </div>
+                <div class="service-text">
+                    <h3 class="service-name">Pick-Up and Delivery</h3>
+                    <p class="service-description">Users can choose to pick up the vehicle from a specific location or have it delivered to their location.</p>
+                </div>
             </div>
-          </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <img src="landing/assets/images/icons/electric-car.png" alt="Real-Time Availability Icon">
+                </div>
+                <div class="service-text">
+                    <h3 class="service-name">Real-Time Availability</h3>
+                    <p class="service-description">Users can see vehicle availability in real-time, ensuring up-to-date information when booking.</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <img src="landing/assets/images/icons/electric-car.png" alt="Customer Support Icon">
+                </div>
+                <div class="service-text">
+                    <h3 class="service-name">Customer Support 24/7</h3>
+                    <p class="service-description">Around-the-clock support via chat or phone for any issues or questions.</p>
+                </div>
+            </div>
         </div>
-        <div class="col-md-3">
-          <div class="services services-2 w-100 text-center">
-            <div class="icon d-flex align-items-center justify-content-center">
-              <img src="landing/assets/images/icons/electric-car.png" alt="City Transfer Icon">
-            </div>
-            <div class="text w-100">
-              <h3 class="heading mb-2">Vehicle pick-up and delivery</h3>
-              <p>Users can choose to pick up the vehicle from a specific location or have it delivered to their location.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="services services-2 w-100 text-center">
-            <div class="icon d-flex align-items-center justify-content-center">
-              <img src="landing/assets/images/icons/electric-car.png" alt="Airport Transfer Icon">
-            </div>
-            <div class="text w-100">
-              <h3 class="heading mb-2">Real-time availability</h3>
-              <p>Users can see vehicle availability in real-time, ensuring up-to-date information when booking.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="services services-2 w-100 text-center">
-            <div class="icon d-flex align-items-center justify-content-center">
-              <img src="landing/assets/images/icons/electric-car.png" alt="Whole City Tour Icon">
-            </div>
-            <div class="text w-100">
-              <h3 class="heading mb-2">Customer support 24/7</h3>
-              <p>Around-the-clock support via chat or phone for any issues or questions.</p>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-  </section>
+</section>
   <button id="scrollToTopBtn" class="scroll-to-top">↑</button>
