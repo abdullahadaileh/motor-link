@@ -1,8 +1,12 @@
 
-![capture_241014_212156](https://github.com/user-attachments/assets/90ce9a68-aadd-4a8a-a496-ea7ae5b1f270)
-![capture_241014_212311](https://github.com/user-attachments/assets/e7abb378-58e7-4233-9063-f69a8f55b734)
-![capture_241014_212826](https://github.com/user-attachments/assets/b18da869-5d44-4e8d-96bb-aacfbf3e07ab)![capture_241014_213339](https://github.com/user-attachments/assets/968c6869-02db-4a90-8b54-ad177da66f26)
-![capture_241014_233006](https://github.com/user-attachments/assets/0b7ef707-6715-42c8-85cc-c0029fd0e400)
+![capture_241014_212311](https://github.com/user-attachments/assets/e7abb378-58e7-4233-![capture_241102_022532](https://github.com/user-attachments/assets/c62cc755-7b9a-421e-82e0-92d642eed9e5)
+9063-f69a8f55b734) <!-- hero -->
+
+![capture_241014_212311](https://github.com/user-attachments/assets/e7abb378-58e7-4233-9063-f69a8f55b734) <!-- Fleet -->
+![capture_241014_212826](https://github.com/user-attachments/assets/b18da869-5d44-4e8d-96bb-aacfbf3e07ab) <!-- vehicle land -->
+![capture_241102_022842](https://github.com/user-attachments/assets/5b00562a-7ab3-424c-b461-4f530eaa7edf) <!-- Dashboard -->
+![capture_241102_023357](https://github.com/user-attachments/assets/6c0ab315-b973-42c6-9111-f071bec421d2) <!-- vehicle dash -->
+![capture_241102_023040](https://github.com/user-attachments/assets/3eb6c021-3eed-407b-b2e7-d91fe8ab8bc4) <!-- booking -->
 
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
