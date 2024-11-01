@@ -1,6 +1,5 @@
 
-![capture_241014_212311](https://github.com/user-attachments/assets/e7abb378-58e7-4233-![capture_241102_022532](https://github.com/user-attachments/assets/c62cc755-7b9a-421e-82e0-92d642eed9e5)
-9063-f69a8f55b734) <!-- hero -->
+![capture_241102_022532](https://github.com/user-attachments/assets/7866f110-4aea-4ccb-bdd4-b8b51c10c6cf) <!-- hero -->
 
 ![capture_241014_212311](https://github.com/user-attachments/assets/e7abb378-58e7-4233-9063-f69a8f55b734) <!-- Fleet -->
 ![capture_241014_212826](https://github.com/user-attachments/assets/b18da869-5d44-4e8d-96bb-aacfbf3e07ab) <!-- vehicle land -->
