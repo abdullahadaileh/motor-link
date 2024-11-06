@@ -49,34 +49,40 @@ class UserController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'location' => 'nullable|string|max:255',
             'password' => 'nullable|string|min:8|confirmed', // Validation for new password
-            'old_password' => 'required_with:password|string' // تأكد من أن كلمة المرور الحالية مطلوبة عند وجود كلمة مرور جديدة
         ]);
     
-        // تحقق من صحة كلمة المرور الحالية قبل تحديث كلمة المرور الجديدة
-        if ($request->filled('password')) {
-            if (!Hash::check($request->old_password, $user->password)) {
-                return redirect()->back()->withErrors(['old_password' => 'Current password is incorrect.']);
-            }
-            $user->password = Hash::make($request->password); // تحديث كلمة المرور الجديدة
-        }
-    
-        // تحديث البيانات الأخرى
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone_number = $request->phone_number;
         $user->location = $request->location;
     
-        // تحديث الصورة إذا كانت موجودة
+        // Handle image upload like in the second code
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('profile_images', 'public');
-            $user->image = '/storage/' . $imagePath;
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $path = 'dashboard/images/uploads/users';
+            $file->move($path, $filename); // Moves the file to the uploads directory
+            $imagePath = $path . '/' . $filename; // The file path to save in the database
+            
+            // Delete the old image if it exists
+            if (File::exists(public_path($user->image))) {
+                File::delete(public_path($user->image));
+            }
+            
+            $user->image = $imagePath; // Update image path
+        }
+    
+        // Update password if provided
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password); 
         }
     
         $user->save();
     
         return redirect()->route('motor-link-profile')->with('success', 'Profile updated successfully.');
-    }            
-    
+    }
+
     // Owner Profile
     public function ownerProfile()
     {
@@ -91,33 +97,32 @@ class UserController extends Controller
 
         return view('dashboard.pages.ownerProfile', compact('user'));
     }
+
     public function updateOwnerProfile(Request $request, $id)
     {
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email,' . $id,
             'phone_number' => 'nullable|string|max:15',
-            'old_password' => 'required_with:password|string', 
-            'password' => 'nullable|string|min:8|confirmed',
+            'password' => 'nullable|string|min:8|confirmed', // Validate password if provided
         ]);
     
         $user = User::findOrFail($id);
-    
-        if ($request->filled('password')) {
-            if (!Hash::check($request->old_password, $user->password)) {
-                return redirect()->back()->withErrors(['old_password' => 'Current password is incorrect.']);
-            }
-            $user->password = Hash::make($request->password); 
-        }
-    
+        
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone_number = $request->phone_number;
+    
+        // Update password if a new one is provided
+        if ($request->filled('password')) {
+            $user->password = bcrypt($request->password);
+        }
+    
         $user->save();
     
         return redirect()->route('motor-link-profile')->with('success', 'Profile updated successfully.');
     }
-            
+        
     public function create()
     {
         return view('users.create');
@@ -137,7 +142,6 @@ class UserController extends Controller
 
         $imagePath = null;
         
-
         if ($request->has('image')) {
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
@@ -157,6 +161,7 @@ class UserController extends Controller
         \Log::info('User created successfully.');
         return redirect()->route('motor-link-dashboard-users')->with('success', 'User created successfully.');
     }
+
     public function saveLocation(Request $request)
     {
         $request->validate([
@@ -207,6 +212,7 @@ class UserController extends Controller
             $file->move($path, $filename);
             $imagePath = $path . '/' . $filename;
 
+            // Delete old image if exists
             if (File::exists(public_path($user->image))) {
                 File::delete(public_path($user->image));
             }

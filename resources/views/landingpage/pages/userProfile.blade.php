@@ -37,10 +37,13 @@
                         </div>
                     </div>
 
+
+
+                    {{-- Table Bookings start --}}
                     <br><br><br>
                     <h1 class="Vehicles-title">Your Bookings</h1>
                     <br><br>
-
+                    
                     @if($bookings->isEmpty())
                         <p>You have not made any bookings yet.</p>
                     @else
@@ -54,6 +57,7 @@
                                     <th>Total Price</th>
                                     <th>Delivery Option</th>
                                     <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody style="background-color: #ffffff !important;">
@@ -66,18 +70,33 @@
                                                 @else
                                                 <img src="{{ asset('landing/assets/images/carsilhouette.jpg') }}" alt="Image" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;" />
                                                 @endif
-                                            </a>                                        </td>
+                                            </a>
+                                        </td>
                                         <td class="align-middle">{{ \Carbon\Carbon::parse($booking->start_date)->format('d M Y') }}</td>
                                         <td class="align-middle">{{ \Carbon\Carbon::parse($booking->end_date)->format('d M Y') }}</td>
                                         <td class="align-middle">{{ number_format($booking->total_price, 2) }}</td>
                                         <td class="align-middle">{{ $booking->delivery_option }}</td>
                                         <td class="align-middle">{{ $booking->status }}</td>
+                                        <td class="align-middle">
+                                            @if($booking->status === 'pending')
+                                                <form action="{{ route('bookings.cancel', $booking->id) }}" method="POST" style="display:inline;" class="cancel-form">
+                                                    @csrf
+                                                    <input type="hidden" name="status" value="Canceled"> <!-- إضافة القيمة هنا -->
+                                                    <button type="submit" style="background-color: red; color:white; border:none;width: 45%;font-size:13px" class="btn btn-warning btn-sm">Cancel</button>
+                                                </form>
+                                            @else
+                                                <span class="text-muted">N/A</span>
+                                            @endif
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
                     @endif
+                    
+                    {{-- Table Bookings end --}}
+                
                 </div>
             </div>
         </div>
@@ -252,6 +271,24 @@ document.getElementById('current-location-btn').addEventListener('click', functi
         });
     }
 });
+
+document.querySelectorAll('.cancel-form button').forEach(button => {
+        button.addEventListener('click', function(event) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'Do you really want to cancel this booking?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, cancel it!',
+                cancelButtonText: 'No, keep it',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.closest('form').submit();
+                }
+            });
+        });
+    });
 </script>
 
 @endsection

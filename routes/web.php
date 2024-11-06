@@ -10,7 +10,7 @@ use App\Http\Controllers\VehicleTypeController;
 use Illuminate\Support\Facades\Route;
 
 
-
+// Login By Google
 Route::get('auth/google', [SocialiteController::class, 'redirectToGoogle'])->name('google.login');
 Route::get('auth/google/callback', [SocialiteController::class, 'handleGoogleCallback']);
 
@@ -22,6 +22,7 @@ Route::get('auth/google/callback', [SocialiteController::class, 'handleGoogleCal
 
 // Home page - Load Fleet
 Route::get('/motor-link', [VehicleTypeController::class, 'showFleet'])->name('motor-link');
+Route::get('/', [VehicleTypeController::class, 'showFleet'])->name('motor-link');
 
 // User Profile - Requires Authentication
 Route::get('/motor-link-profile', [UserController::class, 'userProfile'])->name('motor-link-profile')->middleware('auth');
@@ -38,6 +39,7 @@ Route::get('/motor-link-about', function () {
 Route::get('/motor-link-contact', function () {
     return view('landingpage.pages.contactUs');
 })->name('motor-link-contact');
+Route::post('/motor-link-contact', [ContactController::class, 'store'])->name('motor-link-contact.store');
 
 
 // Vehicles page
@@ -51,6 +53,7 @@ Route::get('/motor-link-vehicles/{vehicle}', [VehicleController::class, 'showLan
 Route::get('/vehicles/{vehicle}/book', [BookingController::class, 'create'])->name('motor-link-vehicle-booking');
 Route::post('/vehicles/{vehicle}/book', [BookingController::class, 'store'])->name('motor-link-vehicle-booking-store');
 Route::post('/save-location', [UserController::class, 'saveLocation'])->name('save-location');
+Route::post('/bookings/{id}/cancel', [BookingController::class, 'cancelBooking'])->name('bookings.cancel');
 
 
 
@@ -166,9 +169,8 @@ Route::delete('motor-link-dashboard-bookings/{id}/delete', [BookingController::c
     ->name('motor-link-dashboard-bookings-delete')->middleware('checkAdmin');
 
 // Contacts
-Route::post('/motor-link-contact', [ContactController::class, 'store'])->name('motor-link-contact.store');
-Route::get('/dashboard/contacts', [ContactController::class, 'index'])->name('motor-link-dashboard-contacts');
-Route::delete('/contacts/{id}', [ContactController::class, 'destroy'])->name('motor-link-contacts.destroy');
+Route::get('/dashboard/contacts', [ContactController::class, 'index'])->name('motor-link-dashboard-contacts')->middleware('checkAdmin');
+Route::delete('/contacts/{id}', [ContactController::class, 'destroy'])->name('motor-link-contacts.destroy')->middleware('checkAdmin');
 
 // Logout 
 Route::post('/logout', function () {

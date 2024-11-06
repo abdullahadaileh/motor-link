@@ -26,8 +26,12 @@
                 </div>
                 <div class="header-right">
                     <ul class="clearfix">
-                        <li class="icons dropdown"><a href="{{ route('motor-link-dashboard-contacts') }}">
+                        <li class="icons dropdown">
+                            <a href="{{ route('motor-link-dashboard-contacts') }}">
                                 <i class="icon-envelope-open"></i>
+                                @if($totalContacts > 0)
+                                    <span class="badge badge-danger">{{ $totalContacts }}</span>
+                                @endif
                             </a>
                         </li>
                         <li class="icons dropdown">

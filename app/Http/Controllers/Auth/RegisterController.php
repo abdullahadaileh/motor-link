@@ -51,10 +51,18 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => [
+                'required',
+                'string',
+                'min:8',
+                'confirmed',
+                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/'
+            ],
+        ], [
+            'password.regex' => 'The password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, and one number.',
         ]);
     }
-
+        
     /**
      * Create a new user instance after a valid registration.
      *

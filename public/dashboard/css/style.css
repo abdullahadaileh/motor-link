@@ -14773,3 +14773,16 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
   }
 }
 
+.badge-danger {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: #457B9D;
+  color: white;
+  border-radius: 50%;
+  padding: 5px 8px;
+  font-size: 0.65rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

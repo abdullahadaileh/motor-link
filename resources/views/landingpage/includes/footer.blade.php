@@ -4,8 +4,9 @@
         <div class="col-md">
           <div class="ftco-footer-widget mb-4">
             <h2 class="ftco-heading-2"><a href="{{ route('motor-link') }}" class="logo">Motor<span>Link</span></a></h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-              there live the blind texts.</p>
+            <p>At MotorLink, we're passionate about providing a seamless and convenient
+              vehicle rental experience... <br>our platform
+              is designed to make the process of renting a vehicle as easy and enjoyable as possible.</p>
             <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
               <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
               <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
@@ -27,7 +28,7 @@
           <div class="ftco-footer-widget mb-4">
             <h2 class="ftco-heading-2">Customer Support</h2>
             <ul class="list-unstyled">
-              <li><a href="{{ route('motor-link-about') }}#faq-section" class="py-2 d-block">FAQ</a></li>
+              <li><a href="{{ route('motor-link-about') }}#faqSection" class="py-2 d-block">FAQ</a></li>
               <li><a href="{{ route('motor-link') }}#how-it-works" class="py-2 d-block">Booking Tips</a></li>
               <li><a href="{{ route('motor-link-contact') }}" class="py-2 d-block">Contact Us</a></li>
             </ul>
@@ -98,8 +99,8 @@ var animation = lottie.loadAnimation({
     document.addEventListener("DOMContentLoaded", function() {
     @if(session('status') === 'logged_in' || session('status') === 'google_logged_in')
         Swal.fire({
-            title: 'Success!',
-            text: 'You are logged in successfully!',
+            title: 'Welcome to MotorLink',
+            text: 'You are logged in',
             icon: 'success',
             confirmButtonText: 'OK'
         }).then((result) => {

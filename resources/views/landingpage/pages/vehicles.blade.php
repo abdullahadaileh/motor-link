@@ -16,11 +16,11 @@
 
 <div class="Vehicles-header">
   <h1 class="Vehicles-title">Vehicles</h1>
-  <div id="car-animation" style="width: 120px;"></div>
+  <div class="hiddenCar" id="car-animation"></div>
 
   <div class="Vehicles-filters">
     <form id="filterForm" method="GET" action="{{ route('motor-link-vehicles') }}">
-        <input style="width: 150px" type="text" class="Vehicles-search" id="searchInput" name="search" placeholder="Search vehicles by make..." value="{{ request('search') }}">
+        <input style="width: 150px" type="text" class="Vehicles-search" id="searchInput" name="search" placeholder="Search vehicles..." value="{{ request('search') }}">
         <select id="filterSelect" class="Vehicles-filter" name="type_id">
             <option value="all">All Types</option>
             @foreach($vehicleTypes as $id => $name)

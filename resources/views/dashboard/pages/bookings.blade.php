@@ -28,7 +28,7 @@
                                     {{-- <th>End Date</th> --}}
                                     <th>Total Price</th>
                                     <th>Status</th>
-                                    <th style="width: 26%;">Actions</th>
+                                    <th style="width: 19%;">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -50,9 +50,6 @@
                                             <a style="background-color: #8FBBA1; border:none; color:white; margin-top:10px" href="{{ route('motor-link-dashboard-bookings-show', $booking->id) }}" class="btn btn-primary" style="margin-top: 10px">
                                                 View 
                                             </a>
-                                            <button style="background-color: #457B9D; border:none; color:white; margin-top:10px" type="button" class="btn btn-info" onclick="openModal({{ $booking->id }}, '{{ $booking->status }}')">
-                                                Edit
-                                            </button>
                                             <form id="delete-form{{ $booking->id }}" action="{{ route('motor-link-dashboard-bookings-delete', $booking->id) }}" method="POST" style="display: inline;">
                                                 @csrf
                                                 @method('DELETE')

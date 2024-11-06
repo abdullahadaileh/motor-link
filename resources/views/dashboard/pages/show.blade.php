@@ -66,10 +66,11 @@
                     <input type="hidden" name="booking_id" id="booking_id">
                     <div class="form-group">
                         <label for="status">Select Status</label>
-                        <select name="status" id="status" class="form-control" required>
-                            <option value="pending">Pending</option>
-                            <option value="Approved">Approved</option>
-                            <option value="Declined">Declined</option>
+                        <select name="status" class="form-control">
+                            <option value="pending" {{ $booking->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                            <option value="Approved" {{ $booking->status == 'Approved' ? 'selected' : '' }}>Approved</option>
+                            <option value="Declined" {{ $booking->status == 'Declined' ? 'selected' : '' }}>Declined</option>
+                            <option value="Canceled" {{ $booking->status == 'Canceled' ? 'selected' : '' }}>Canceled</option> <!-- Add this option -->
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Update Status</button>

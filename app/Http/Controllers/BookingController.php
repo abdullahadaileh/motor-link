@@ -11,11 +11,13 @@ class BookingController extends Controller
 {
     public function index()
     {
-        // Eager load user and vehicle along with bookings
-        $bookings = Booking::with(['vehicle', 'user'])->get(); 
+        $bookings = Booking::with(['vehicle', 'user'])
+                    ->orderBy('id', 'asc') // ترتيب حسب الايدي من الأكبر إلى الأصغر
+                    ->get(); 
+    
         return view('dashboard.pages.bookings', compact('bookings'));
     }
-    
+        
     public function create(Vehicle $vehicle)
     {
         return view('landingpage.pages.bookings.create', compact('vehicle'));
@@ -23,25 +25,25 @@ class BookingController extends Controller
     
     public function store(Request $request, Vehicle $vehicle)
     {
-        // Validate the booking details
+
         $request->validate([
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
             'delivery_option' => 'required|string',
         ]);
     
-        // Convert the string dates to Carbon instances
+
         $startDate = Carbon::parse($request->start_date);
         $endDate = Carbon::parse($request->end_date);
     
-        // Calculate the rental days
+
         $rental_days = $endDate->diffInDays($startDate) + 1;
         $vehicle_rate_per_day = $vehicle->price_per_day;
         $calculated_total_price = $rental_days * $vehicle_rate_per_day;
     
-        // Check for additional delivery fee
+
         if ($request->delivery_option === 'delivery') {
-            $calculated_total_price += 3; // Add additional delivery fee
+            $calculated_total_price += 3;
         }
     
         // Create the booking
@@ -58,30 +60,33 @@ class BookingController extends Controller
     
         return redirect()->route('motor-link-vehicles')->with('success', 'Booking successful!');
     }
-        public function update(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $request->validate([
-            'status' => 'required|string|in:pending,Approved,Declined',
+            'status' => 'required|string|in:pending,Approved,Declined,Canceled', // Add 'Canceled' to the validation
         ]);
     
         $booking = Booking::findOrFail($id);
         $booking->status = $request->status;
     
+        $vehicle = Vehicle::findOrFail($booking->vehicle_id); // Get the associated vehicle
+    
+        // Handle the vehicle status based on booking status
         if ($request->status === 'Approved') {
-            $vehicle = Vehicle::findOrFail($booking->vehicle_id);
             $vehicle->status = 'unavailable'; 
-            $vehicle->save();
-        } elseif ($request->status === 'Pending' || $request->status === 'Declined') {
-            $vehicle = Vehicle::findOrFail($booking->vehicle_id);
-            $vehicle->status = 'available'; 
-            $vehicle->save();
+        } elseif ($request->status === 'Pending' || $request->status === 'Declined' || $request->status === 'Canceled') {
+            $vehicle->status = 'available';  
         }
             
+        // Save the updated vehicle status
+        $vehicle->save();
+    
+        // Save the booking with the new status
         $booking->save();
     
         return redirect()->back()->with('success', 'Booking status updated successfully.');
     }
-
+    
     public function show($id)
     {
         $booking = Booking::with(['vehicle', 'user'])->findOrFail($id);
@@ -95,4 +100,20 @@ class BookingController extends Controller
         return redirect()->back()->with('success', 'Booking deleted successfully.');
     }
     
+    public function cancelBooking($id)
+{
+    $booking = Booking::where('user_id', auth()->id())->findOrFail($id);
+
+    // Check if the booking is already canceled or completed
+    if (in_array($booking->status, ['canceled', 'completed'])) {
+        return redirect()->back()->with('error', 'Cannot cancel this booking.');
+    }
+
+    $booking->status = 'canceled';
+    $booking->save();
+
+    return redirect()->back()->with('success', 'Booking canceled successfully.');
+}
+
+
 }

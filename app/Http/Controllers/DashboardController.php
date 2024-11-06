@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\Contact;
 use App\Models\User;
 use App\Models\Vehicle;
 
@@ -12,9 +13,9 @@ class DashboardController extends Controller
     {
         $totalUsers = User::count(); 
         $totalVehicles = Vehicle::count();
-        $availableVehicles = Vehicle::where('status', 'available')->count(); // Adjust the condition based on your database structure
+        $availableVehicles = Vehicle::where('status', 'available')->count();
         $totalBookings = Booking::count(); 
-    
-        return view('dashboard.dashboard', compact('totalUsers', 'totalVehicles', 'availableVehicles','totalBookings'));
+        $totalContacts = Contact::count();
+        return view('dashboard.dashboard', compact('totalUsers', 'totalVehicles', 'availableVehicles','totalBookings','totalContacts'));
     }
 }

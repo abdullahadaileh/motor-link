@@ -9,13 +9,15 @@
             <span class="subheading">About us</span>
             <h2 class="mb-4">Welcome to Carbook</h2>
 
-            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a
-              paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-            <p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have
-              been rewritten a thousand times and everything that was left from its origin would be the word "and" and
-              the Little Blind Text should turn around and return to its own, safe country. A small river named Duden
-              flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in
-              which roasted parts of sentences fly into your mouth.</p>
+            <p>MotorLink is an easy-to-use vehicle rental platform designed to simplify the rental process
+               for users. It offers a wide range of vehicles, from economy cars to luxury models, to meet various
+                needs and preferences. With features like easy online booking and flexible rental periods, customers
+                 can customize their experience to fit their requirements.
+                <br>
+                <br>
+              The platform also provides 24/7 customer support to assist with any inquiries or issues, ensuring a
+               seamless rental experience. Whether you need a vehicle for a day, a week, or longer, MotorLink aims
+                to provide a hassle-free and enjoyable rental experience.</p>
             <p><a href="{{ route('motor-link-about') }}" class="btn btn-primary py-3 px-4">Show more</a></p>
           </div>
         </div>

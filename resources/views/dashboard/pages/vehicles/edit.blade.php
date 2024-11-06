@@ -118,7 +118,6 @@
                                 <option value="" disabled>Select vehicle status</option>
                                 <option value="available" {{ $vehicle->status == 'available' ? 'selected' : '' }}>Available</option>
                                 <option value="unavailable" {{ $vehicle->status == 'unavailable' ? 'selected' : '' }}>Unavailable</option>
-                                <option value="maintenance" {{ $vehicle->status == 'maintenance' ? 'selected' : '' }}>Under Maintenance</option>
                             </select>
                         </div>
 

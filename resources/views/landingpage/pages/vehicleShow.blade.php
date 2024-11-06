@@ -39,7 +39,7 @@
                             <p style="color: #6a8b9d"><strong style="color: #457B9D">Status:</strong> {{ $vehicle->status }}</p>
 
                             <br>
-                            <a style="background-color: #6a8b9d; border:none" href="{{ route('motor-link-vehicles') }}" class="btn btn-primary">&larr; Back</a>
+                            <a style="background-color: #6a8b9d; border:none" href="javascript:history.back()" class="btn btn-primary">&larr; Back</a>
                             @if($vehicle->status !== 'unavailable')
                             <a id="book-now-btn" style="background-color: #8FBBA1; border:none;" href="#" class="btn btn-success">Book Now</a>
                         @endif

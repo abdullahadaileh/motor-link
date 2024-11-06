@@ -1,3 +1,72 @@
+@media (max-width: 450px) {
+  .hiddenCar {
+    display: none;
+  }
+  .Vehicles-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px;
+    row-gap: 20px;
+  }
+  .Vehicles-search {
+    width: 150px !important; 
+  }  
+  .Vehicles-filter {
+    width: 120px;
+  }
+  .Vehicles-card {
+    flex-basis: 100% !important; /* 1 card per row */
+  }
+
+}
+@media (max-width: 420px) {
+  .Vehicles-search {
+    width: 150px !important; 
+    font-size: small !important;
+  }  
+  .Vehicles-filter {
+    width: 120px;
+    font-size: small !important;
+  }
+
+  .Vehicles-filter-button {
+    width: 80px !important;
+    font-size: small !important;
+  }
+}
+
+@media (max-width: 395px) {
+  .Vehicles-search {
+    width: 120px !important; 
+    font-size: small !important;
+  }  
+  .Vehicles-filter {
+    width: 120px;
+    font-size: small !important;
+  }
+
+  .Vehicles-filter-button {
+    width: 80px !important;
+    font-size: small !important;
+  }
+}
+@media (max-width: 321px) {
+  .Vehicles-search {
+    width: 100px !important; 
+    font-size: small !important;
+  }  
+  .Vehicles-filter {
+    width: 100px;
+    font-size: small !important;
+  }
+
+  .Vehicles-filter-button {
+    width: 70px !important;
+    font-size: small !important;
+  }
+
+}
 .Vehicles-header {
     display: flex;
     align-items: center;
@@ -108,7 +177,7 @@
   
   @media (max-width: 768px) {
     .Vehicles-card {
-      flex-basis: 100%; /* 1 card per row */
+      flex-basis: calc(50% - 20px); /* 2 cards per row */
     }
   }
   
@@ -154,3 +223,4 @@ colors
 6a8b9d
 457B9D
 */
+

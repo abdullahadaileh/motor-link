@@ -22,7 +22,7 @@
                             <table class="table table-striped table-bordered zero-configuration">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        {{-- <th>ID</th> --}}
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Subject</th>
@@ -34,11 +34,61 @@
                                 <tbody>
                                     @foreach ($contacts as $contact)
                                         <tr>
-                                            <td>{{ $contact->id }}</td>
+                                            {{-- <td>{{ $contact->id }}</td> --}}
                                             <td>{{ $contact->name }}</td>
                                             <td>{{ $contact->email }}</td>
                                             <td>{{ $contact->subject }}</td>
-                                            <td>{{ $contact->message }}</td>
+                                            <td>
+                                                @if (strlen($contact->message) > strlen('Thank you for making the rental experience easier'))
+                                                    <span data-toggle="modal" data-target="#messageModal{{ $contact->id }}" style="cursor: pointer;">
+                                                        {{ substr($contact->message, 0, strlen('Thank you for making the rental experience easier')) }}...
+                                                    </span>
+                                            
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="messageModal{{ $contact->id }}" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel{{ $contact->id }}" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="messageModalLabel{{ $contact->id }}">Full Message</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    {{ $contact->message }}
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @else
+                                                    <span data-toggle="modal" data-target="#messageModal{{ $contact->id }}">
+                                                        {{ $contact->message }}
+                                                    </span>
+                                            
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="messageModal{{ $contact->id }}" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel{{ $contact->id }}" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="messageModalLabel{{ $contact->id }}">Full Message</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    {{ $contact->message }}
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            </td>
                                             <td>{{ $contact->created_at->format('d/m/Y') }}</td>
                                             <td>
                                                 <div class="d-flex justify-content-between">

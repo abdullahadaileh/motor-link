@@ -61,30 +61,30 @@ swiper.slideTo(1, false, false);
 
 
 
-document.addEventListener('DOMContentLoaded', () => {
-  const faqItems = document.querySelectorAll('.faq-item');
+// document.addEventListener('DOMContentLoaded', () => {
+//   const faqItems = document.querySelectorAll('.faq-item');
   
-  faqItems.forEach(item => {
-      const question = item.querySelector('.faq-question');
-      const answer = item.querySelector('.faq-answer');
-      const toggleButton = question.querySelector('.toggle-button');
+//   faqItems.forEach(item => {
+//       const question = item.querySelector('.faq-question');
+//       const answer = item.querySelector('.faq-answer');
+//       const toggleButton = question.querySelector('.toggle-button');
       
-      question.addEventListener('click', () => {
-          const isActive = item.classList.contains('active');
+//       question.addEventListener('click', () => {
+//           const isActive = item.classList.contains('active');
           
-          // Close all other items
-          faqItems.forEach(i => i.classList.remove('active'));
+//           // Close all other items
+//           faqItems.forEach(i => i.classList.remove('active'));
           
-          // Toggle current item
-          if (!isActive) {
-              item.classList.add('active');
-              answer.style.maxHeight = answer.scrollHeight + 'px'; // Animate height
-              toggleButton.textContent = '-'; // Change button to minus
-          } else {
-              item.classList.remove('active');
-              answer.style.maxHeight = '0'; // Collapse height
-              toggleButton.textContent = '+'; // Change button to plus
-          }
-      });
-  });
-});
+//           // Toggle current item
+//           if (!isActive) {
+//               item.classList.add('active');
+//               answer.style.maxHeight = answer.scrollHeight + 'px'; // Animate height
+//               toggleButton.textContent = '-'; // Change button to minus
+//           } else {
+//               item.classList.remove('active');
+//               answer.style.maxHeight = '0'; // Collapse height
+//               toggleButton.textContent = '+'; // Change button to plus
+//           }
+//       });
+//   });
+// });
