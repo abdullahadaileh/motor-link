@@ -63,61 +63,61 @@
                              and enjoyable. Thank you for being a part of the MotorLink family!</p>
                     </div>
                 </div>
-
-
-    </div>
-    
-</div>
-<section id="faqSection" class="faq-container">
-  <h2 class="faq-title">Frequently Asked Questions</h2>
-  <div class="faq-content">
-    
-    <div class="faq-item">
-      <input type="checkbox" id="faq1" class="faq-toggle">
-      <label for="faq1" class="faq-question">
-        <h3>What is MotorLink?</h3>
-        <span class="faq-icon">+</span>
-      </label>
-      <div class="faq-answer">
-        <p>MotorLink is a platform that simplifies vehicle rentals with easy booking, flexible options, and 24/7 support.</p>
-      </div>
-    </div>
-    
-    <div class="faq-item">
-      <input type="checkbox" id="faq2" class="faq-toggle">
-      <label for="faq2" class="faq-question">
-        <h3>How do I book a vehicle?</h3>
-        <span class="faq-icon">+</span>
-      </label>
-      <div class="faq-answer">
-        <p>To book a vehicle, sign in, select your vehicle, choose the rental period, and confirm your booking.</p>
-      </div>
-    </div>
-        
-    <div class="faq-item">
-      <input type="checkbox" id="faq4" class="faq-toggle">
-      <label for="faq4" class="faq-question">
-        <h3>Can I modify or cancel my booking?</h3>
-        <span class="faq-icon">+</span>
-      </label>
-      <div class="faq-answer">
-        <p>Yes, you can modify or cancel your booking through your account dashboard.</p>
-      </div>
-    </div>
-    
-    <div class="faq-item">
-      <input type="checkbox" id="faq5" class="faq-toggle">
-      <label for="faq5" class="faq-question">
-        <h3>What should I do if I have issues with the vehicle?</h3>
-        <span class="faq-icon">+</span>
-      </label>
-      <div class="faq-answer">
-        <p>If you encounter any issues with the vehicle, contact our 24/7 support team for assistance.</p>
-      </div>
+        </div>
     </div>
 
-  </div>
-</section>
+
+
+        <section id="faqSection" class="faq-container">
+          <h2 class="faq-title">Frequently Asked Questions</h2>
+          <div class="faq-content">
+            
+            <div class="faq-item">
+              <input type="checkbox" id="faq1" class="faq-toggle">
+              <label for="faq1" class="faq-question">
+                <h3 class="iszef3">What is MotorLink?</h3>
+                <span class="faq-icon">+</span>
+              </label>
+              <div class="faq-answer">
+                <p>MotorLink is a platform that simplifies vehicle rentals with easy booking, flexible options, and 24/7 support.</p>
+              </div>
+            </div>
+            
+            <div class="faq-item">
+              <input type="checkbox" id="faq2" class="faq-toggle">
+              <label for="faq2" class="faq-question">
+                <h3>How do I book a vehicle?</h3>
+                <span class="faq-icon">+</span>
+              </label>
+              <div class="faq-answer">
+                <p>To book a vehicle, sign in, select your vehicle, choose the rental period, and confirm your booking.</p>
+              </div>
+            </div>
+                
+            <div class="faq-item">
+              <input type="checkbox" id="faq4" class="faq-toggle">
+              <label for="faq4" class="faq-question">
+                <h3>Can I modify or cancel my booking?</h3>
+                <span class="faq-icon">+</span>
+              </label>
+              <div class="faq-answer">
+                <p>Yes, you can modify or cancel your booking through your account dashboard.</p>
+              </div>
+            </div>
+            
+            <div class="faq-item">
+              <input type="checkbox" id="faq5" class="faq-toggle">
+              <label for="faq5" class="faq-question">
+                <h3>What should I do if I have issues with the vehicle?</h3>
+                <span class="faq-icon">+</span>
+              </label>
+              <div class="faq-answer">
+                <p>If you encounter any issues with the vehicle, contact our 24/7 support team for assistance.</p>
+              </div>
+            </div>
+          
+          </div>
+        </section>
 
 <!-- About Us End -->
 <button id="scrollToTopBtn" class="scroll-to-top"><span style="font-size: 19px">↑</span></button>

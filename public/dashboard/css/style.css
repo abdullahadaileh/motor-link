@@ -14786,3 +14786,10 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
   align-items: center;
   justify-content: center;
 }
+
+@media (max-width: 450px) {
+.showimagebooking{
+  width: 80% !important;
+  margin-left:-10px !important;
+}
+}

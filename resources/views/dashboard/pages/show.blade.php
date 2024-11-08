@@ -43,7 +43,7 @@
 
                 <!-- Col 2: Vehicle Image on the right -->
                 <div class="col-md-4 text-center">
-                    <img src="{{ asset($booking->vehicle->image) }}" alt="Vehicle Image" style="width:160%;  margin-left:-190px;margin-top:40px">
+                    <img class="showimagebooking" src="{{ asset($booking->vehicle->image) }}" alt="Vehicle Image" style="width:160%;  margin-left:-190px;margin-top:40px">
                 </div>
             </div>
         </div>
