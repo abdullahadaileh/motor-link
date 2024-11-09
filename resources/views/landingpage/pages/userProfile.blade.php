@@ -81,8 +81,7 @@
                                             @if($booking->status === 'pending')
                                                 <form action="{{ route('bookings.cancel', $booking->id) }}" method="POST" style="display:inline;" class="cancel-form">
                                                     @csrf
-                                                    <input type="hidden" name="status" value="Canceled"> <!-- إضافة القيمة هنا -->
-                                                    <button type="submit" style="background-color: red; color:white; border:none;width: 45%;font-size:13px" class="btn btn-warning btn-sm">Cancel</button>
+                                                    <button type="button" style="background-color: red; color:white; border:none;width: 45%;font-size:13px" class="btn btn-warning btn-sm">Cancel</button>
                                                 </form>
                                             @else
                                                 <span class="text-muted">N/A</span>

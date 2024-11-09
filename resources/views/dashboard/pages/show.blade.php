@@ -14,7 +14,7 @@
     <div class="card">
         <div class="card-body">
             <div class="d-flex justify-content-between">
-                <h4 class="card-title">Vehicle: {{ $booking->vehicle->make }}</h4>
+                <h4 class="card-title">Vehicle: {{ $booking->vehicle ? $booking->vehicle->make : 'N/A' }}</h4>
             
                 <button style="background-color: #8FBBA1; border:none; color:white; margin-top:10px" type="button" class="btn btn-info" onclick="openModal({{ $booking->id }}, '{{ $booking->status }}')">
                     Change Status
@@ -45,7 +45,7 @@
                 <div class="col-md-4 text-center">
                     <img class="showimagebooking" src="{{ asset($booking->vehicle->image) }}" alt="Vehicle Image" style="width:160%;  margin-left:-190px;margin-top:40px">
                 </div>
-            </div>
+            </div>ن
         </div>
     </div>
     <a style="background-color: #8FBBA1; border:none; color:white; margin-top:10px" href="{{ route('motor-link-dashboard-bookings-index') }}" class="btn btn-secondary mt-3">Back to Bookings List</a>
