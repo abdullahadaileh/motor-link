@@ -87,7 +87,33 @@
                                                 <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Confirm new password">
                                             </div>
                                         </div>
-                                      
+                                        
+                                        <!-- Image Upload -->
+                                        <div class="row">
+                                            <div class="col-md-12 mb-3">
+                                                <div class="custom-file">
+                                                    <input type="file" name="image" class="custom-file-input" id="imageUpload" accept="image/*">
+                                                    <label class="custom-file-label" for="imageUpload">Choose file</label>
+                                                    
+                                                    <!-- Image Preview Section -->
+                                                    <div id="imagePreview" class="mt-2">
+                                                        @if($user->image)
+                                                            <img src="{{ asset($user->image) }}" alt="Current Image" class="img-thumbnail" width="100" id="previewImage">
+                                                        @else
+                                                            <img src="" alt="Preview Image" class="img-thumbnail mt-2" width="100" id="previewImage" style="display: none;">
+                                                        @endif
+                                                    </div>
+                                                    <br>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+
+                                        {{-- <div class="custom-file">
+                                            <input type="file" name="image" class="custom-file-input" id="imageUpload" accept="image/*">
+                                            <label class="custom-file-label" for="imageUpload">Choose file</label>
+                                        </div> --}}
+    
                                         <!-- Save Changes Button -->
                                         <div class="d-flex justify-content-end mt-3">
                                             <button type="submit" class="btn btn-primary" style="background-color: #457B9D;border:none">Save Changes</button>
@@ -97,7 +123,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- End Modal -->
+                                        <!-- End Modal -->
 
                     <!-- Modal for Profile Image -->
                     <div id="imageModal" class="image-modal" style="display:none;">
@@ -123,6 +149,7 @@
             modalImage.src = this.src;
         });
 
+        
         closeImageModal.addEventListener('click', function () {
             imageModal.style.display = 'none';
         });
@@ -133,5 +160,19 @@
             }
         });
     });
+    document.getElementById('imageUpload').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            // Set the preview image source to the file content
+            const previewImage = document.getElementById('previewImage');
+            previewImage.src = e.target.result;
+            previewImage.style.display = 'block'; // Show the preview image
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
 </script>
 @endsection

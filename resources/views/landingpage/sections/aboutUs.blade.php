@@ -7,7 +7,7 @@
         <div class="col-md-6 wrap-about ftco-animate">
           <div class="heading-section heading-section-white pl-md-5">
             <span class="subheading">About us</span>
-            <h2 class="mb-4">Welcome to Carbook</h2>
+            <h2 class="mb-4">Welcome to MotorLink</h2>
 
             <p>MotorLink is an easy-to-use vehicle rental platform designed to simplify the rental process
                for users. It offers a wide range of vehicles, from economy cars to luxury models, to meet various

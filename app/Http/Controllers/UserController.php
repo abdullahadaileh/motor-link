@@ -104,6 +104,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email,' . $id,
             'phone_number' => 'nullable|string|max:15',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'password' => 'nullable|string|min:8|confirmed', // Validate password if provided
         ]);
     
@@ -113,6 +114,23 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->phone_number = $request->phone_number;
     
+                // Handle image upload like in the second code
+                if ($request->hasFile('image')) {
+                    $file = $request->file('image');
+                    $extension = $file->getClientOriginalExtension();
+                    $filename = time() . '.' . $extension;
+                    $path = 'dashboard/images/uploads/users';
+                    $file->move($path, $filename); // Moves the file to the uploads directory
+                    $imagePath = $path . '/' . $filename; // The file path to save in the database
+                    
+                    // Delete the old image if it exists
+                    if (File::exists(public_path($user->image))) {
+                        File::delete(public_path($user->image));
+                    }
+                    
+                    $user->image = $imagePath; // Update image path
+                }
+                
         // Update password if a new one is provided
         if ($request->filled('password')) {
             $user->password = bcrypt($request->password);
