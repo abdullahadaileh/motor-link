@@ -1,6 +1,7 @@
 @extends('landingpage.layouts.master')
 
 @section('content')
+<div class="allllogin">
 <div class="all-login">
 <section class="login-section">
     <!-- Register Form Displayed by Default -->
@@ -62,4 +63,7 @@
     </div>
 </section>
 </div>
+</div>
+<br>
+<br>
 @endsection
