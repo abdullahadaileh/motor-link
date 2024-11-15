@@ -1,3 +1,8 @@
+<p align="center">
+    <!-- <a href="https://laravel.com" target="_blank"> -->
+        <img src="{{ asset('landing/assets/images/motorlink-high-resolution-logo-transparent (1).png') }}" width="400" alt="MotorLink Logo">
+    </a>
+</p>
 
 ![capture_241102_022532](https://github.com/user-attachments/assets/7866f110-4aea-4ccb-bdd4-b8b51c10c6cf) <!-- hero -->
 
