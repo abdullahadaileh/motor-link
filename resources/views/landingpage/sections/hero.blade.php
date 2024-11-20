@@ -39,16 +39,13 @@
           if (data && data.display_name) {
             locationInput.value = data.display_name;
 
-            // التحقق من حالة المستخدم إن كان مسجلاً الدخول
             const isAuthenticated = @json(auth()->check());
 
             if (!isAuthenticated) {
-              // توجيه المستخدم مباشرةً إلى صفحة تسجيل الدخول
               window.location.href = '{{ route('login') }}';
               return;
             }
 
-            // حفظ الموقع إذا كان المستخدم مسجلاً الدخول
             const location = locationInput.value;
 
             if (location) {

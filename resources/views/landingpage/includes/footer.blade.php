@@ -50,7 +50,7 @@
       </div>
       <div class="row">
         <div class="col-md-12 text-center">
-          <p> Copyright &copy; All rights reserved | <a href="{{ route('motor-link') }}" class="linkfotermotorlink">Motor Link</a></p>
+          <p> Copyright &copy; All rights reserved | <a href="{{ route('motor-link') }}" class="linkfotermotorlink">Motor Link <br></a> Developed by:<a href="https://abdullahadaileh.github.io/Portfolio/" class="linkfotermotorlink"> Abdallah Al-Adaileh</a></p>
         </div>
       </div>
     </div>

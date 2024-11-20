@@ -12,7 +12,7 @@ class BookingController extends Controller
     public function index()
     {
         $bookings = Booking::with(['vehicle', 'user'])
-                    ->orderBy('id', 'asc') // ترتيب حسب الايدي من الأكبر إلى الأصغر
+                    ->orderBy('id', 'asc') 
                     ->get(); 
     
         return view('dashboard.pages.bookings', compact('bookings'));

@@ -120,15 +120,15 @@ class UserController extends Controller
                     $extension = $file->getClientOriginalExtension();
                     $filename = time() . '.' . $extension;
                     $path = 'dashboard/images/uploads/users';
-                    $file->move($path, $filename); // Moves the file to the uploads directory
-                    $imagePath = $path . '/' . $filename; // The file path to save in the database
+                    $file->move($path, $filename); 
+                    $imagePath = $path . '/' . $filename; 
                     
                     // Delete the old image if it exists
                     if (File::exists(public_path($user->image))) {
                         File::delete(public_path($user->image));
                     }
                     
-                    $user->image = $imagePath; // Update image path
+                    $user->image = $imagePath; 
                 }
                 
         // Update password if a new one is provided
